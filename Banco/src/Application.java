@@ -45,5 +45,11 @@ public class Application {
         System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
         System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
+
+        operacao.sacar(ccPessoaFisica, 50);
+        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
+        operacao.sacar(ccPessoaJuridica, 200);
+        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
+
     }
 }

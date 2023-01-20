@@ -4,6 +4,7 @@ import banco.Banco;
 import interfaces.IConta;
 import pessoa.PessoaFisica;
 
+
 public class ContaCorrentePessoaFisica extends Conta implements IConta {
 
     Banco operacao = new Banco();
@@ -32,6 +33,7 @@ public class ContaCorrentePessoaFisica extends Conta implements IConta {
             super.saldo -= valor;
             return true;
         }
+        System.out.println("Não é possível realizar a operação. O valor é maior do que se encontra na conta.");
         return false;
     }
 }

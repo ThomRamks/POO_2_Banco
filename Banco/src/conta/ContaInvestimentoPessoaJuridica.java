@@ -5,7 +5,7 @@ import interfaces.IConta;
 import interfaces.IContaInvestimento;
 import pessoa.PessoaJuridica;
 
-public class ContaInvestimentoPessoaJuridica extends Conta implements IConta, IContaInvestimento {
+public class ContaInvestimentoPessoaJuridica extends Conta implements IConta, IContaInvestimento<IConta> {
 
     Banco operacao = new Banco();
 
@@ -29,10 +29,12 @@ public class ContaInvestimentoPessoaJuridica extends Conta implements IConta, IC
 
     @Override
     public boolean sacar(double valor) {
-        if (super.saldo >= valor) {
-            super.saldo -= valor;
+        double valorComTaxa = valor + (valor * 0.005);
+        if (super.saldo >= valorComTaxa) {
+            super.saldo -= valorComTaxa;
             return true;
         }
+        System.out.println("Não é possível realizar a operação. O valor é maior do que se encontra na conta.");
         return false;
     }
 
