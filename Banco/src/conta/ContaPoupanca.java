@@ -1,9 +1,12 @@
 package conta;
 
+import banco.Banco;
 import interfaces.IConta;
 import pessoa.PessoaFisica;
 
 public class ContaPoupanca extends Conta implements IConta {
+
+    Banco operacao = new Banco();
 
     private PessoaFisica titular;
 
@@ -19,11 +22,20 @@ public class ContaPoupanca extends Conta implements IConta {
 
     @Override
     public boolean transferir(double valor, IConta conta) {
+        if (this.sacar(valor)) {
+            this.operacao.depositar(conta, valor);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean sacar(double valor) {
+        if (super.saldo >= valor) {
+            super.saldo -= valor;
+            return true;
+        }
+        System.out.println("Não é possível realizar a operação. O valor é maior do que se encontra na conta.");
         return false;
     }
 }

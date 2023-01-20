@@ -11,4 +11,10 @@ public class Banco {
     public boolean transferir(IConta contaOrigem, double valor, IConta contaDestino) {
         return contaOrigem.transferir(valor, contaDestino);
     }
+
+    public void sacar(IConta conta, double valor){
+        conta.sacar(valor);
+    }
+
+
 }
