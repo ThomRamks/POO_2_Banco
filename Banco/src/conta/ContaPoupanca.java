@@ -4,7 +4,7 @@ import banco.Banco;
 import interfaces.IConta;
 import pessoa.PessoaFisica;
 
-public class ContaPoupanca extends Conta implements IConta {
+public class ContaPoupanca extends Conta {
 
     Banco operacao = new Banco();
 
