@@ -6,8 +6,6 @@ import pessoa.PessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    Banco operacao = new Banco();
-
     public ContaCorrentePessoaJuridica(int agencia, int numero, PessoaJuridica titular) {
         super(agencia, numero, titular);
     }
@@ -20,7 +18,7 @@ public class ContaCorrentePessoaJuridica extends Conta {
     @Override
     public boolean transferir(double valor, IConta conta) {
         if (this.sacar(valor)) {
-            this.operacao.depositar(conta, valor);
+            Banco.getInstance().depositar(conta, valor);
             return true;
         }
         return false;

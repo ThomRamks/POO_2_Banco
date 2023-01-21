@@ -8,8 +8,6 @@ import pessoa.PessoaFisica;
 
 public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvestimento<IConta> {
 
-    Banco operacao = new Banco();
-
     public ContaInvestimentoPessoaFisica(int agencia, int numero, PessoaFisica titular) {
         super(agencia, numero, titular);
     }
@@ -22,7 +20,7 @@ public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvest
     @Override
     public boolean transferir(double valor, IConta conta) {
         if (this.sacar(valor)) {
-            this.operacao.depositar(conta, valor);
+            Banco.getInstance().depositar(conta, valor);
             return true;
         }
         return false;
