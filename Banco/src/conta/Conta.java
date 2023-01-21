@@ -18,4 +18,15 @@ public abstract class Conta implements IConta {
     public double getSaldo() {
         return saldo;
     }
+    public int getAgencia() {
+        return agencia;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public Pessoa getTitular() {
+        return titular;
+    }
 }

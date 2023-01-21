@@ -64,7 +64,7 @@ public class Application {
     }
 
     public void menuUsuario(){
-        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta(2)");
+        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
     }
 
     public void validarRequisicao(String requisicaoDoUsuario){
