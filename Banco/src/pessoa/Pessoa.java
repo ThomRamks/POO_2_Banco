@@ -1,5 +1,7 @@
 package pessoa;
 
+import banco.Banco;
+
 public class Pessoa {
     private String nome;
 
@@ -9,5 +11,28 @@ public class Pessoa {
 
     public String getNome() {
         return nome;
+    }
+
+    public void abrirConta(Pessoa novoCliente) {
+        Banco.getInstance().cadastrarConta(novoCliente);
+    }
+
+    public void sacar() {
+
+    }
+
+    public void transferir() {
+    }
+
+    public void depositar() {
+
+    }
+
+    public void consultarSaldo() {
+
+    }
+
+    public void investir() {
+
     }
 }

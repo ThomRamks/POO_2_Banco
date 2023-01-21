@@ -6,14 +6,11 @@ import pessoa.PessoaFisica;
 
 public class ContaPoupanca extends Conta {
 
-    Banco operacao = new Banco();
-
     private PessoaFisica titular;
 
     public ContaPoupanca(int agencia, int numero, PessoaFisica titular) {
         super(agencia, numero, titular);
     }
-
 
     @Override
     public void depositar(double valor) {
@@ -23,7 +20,7 @@ public class ContaPoupanca extends Conta {
     @Override
     public boolean transferir(double valor, IConta conta) {
         if (this.sacar(valor)) {
-            this.operacao.depositar(conta, valor);
+            Banco.getInstance().depositar(conta, valor);
             return true;
         }
         return false;
