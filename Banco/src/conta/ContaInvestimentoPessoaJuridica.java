@@ -4,7 +4,7 @@ import interfaces.IConta;
 import interfaces.IContaInvestimento;
 import pessoa.PessoaJuridica;
 
-public class ContaInvestimentoPessoaJuridica extends Conta implements IConta, IContaInvestimento {
+public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInvestimento<IConta> {
 
     public ContaInvestimentoPessoaJuridica(int agencia, int numero, PessoaJuridica titular) {
         super(agencia, numero, titular);
