@@ -8,8 +8,8 @@ import pessoa.PessoaFisica;
 
 public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvestimento<IConta> {
 
-    public ContaInvestimentoPessoaFisica(int agencia, int numero, PessoaFisica titular) {
-        super(agencia, numero, titular);
+    public ContaInvestimentoPessoaFisica(PessoaFisica titular) {
+        super(titular);
     }
 
     @Override

@@ -6,8 +6,8 @@ import pessoa.PessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    public ContaCorrentePessoaJuridica(int agencia, int numero, PessoaJuridica titular) {
-        super(agencia, numero, titular);
+    public ContaCorrentePessoaJuridica(PessoaJuridica titular) {
+        super(titular);
     }
 
     @Override

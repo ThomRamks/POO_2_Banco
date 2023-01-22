@@ -4,14 +4,16 @@ import interfaces.IConta;
 import pessoa.Pessoa;
 
 public abstract class Conta implements IConta {
+
     private int agencia;
-    private int numero;
+    private String numero;
     private Pessoa titular;
     protected double saldo;
+    private GeraNumeroConta geraNumeroConta = new GeraNumeroConta() ;
 
-    public Conta(int agencia, int numero, Pessoa titular) {
-        this.agencia = agencia;
-        this.numero = numero;
+    public Conta(Pessoa titular) {
+        this.agencia = 1;
+        this.numero = geraNumeroConta.getNumeroConta();
         this.titular = titular;
     }
 
@@ -22,7 +24,7 @@ public abstract class Conta implements IConta {
         return agencia;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 

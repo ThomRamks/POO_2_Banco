@@ -14,7 +14,7 @@ public class Pessoa {
     }
 
     public void abrirConta(Pessoa novoCliente) {
-        Banco.getInstance().cadastrarConta(novoCliente);
+//        Banco.getInstance().cadastrarConta(novoCliente);
     }
 
     public void sacar() {

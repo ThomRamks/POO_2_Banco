@@ -24,7 +24,7 @@ public class Banco {
         System.out.println("Conta: " + numeroConta + "cadastrada!");
     }
 
-    public void cadastrarConta(Pessoa cliente) {
+    /*public void cadastrarConta(Pessoa cliente) {
         int agencia = 913;
         int numeroConta = (int) (1000 + (9999 - 1000 + 1) * Math.random());
         Scanner sc = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class Banco {
             Conta CIPJ = new ContaInvestimentoPessoaJuridica(agencia, numeroConta, PJ);
             cadastrarCliente(cliente, numeroConta);
         }
-    }
+    }*/
 
     public void depositar(IConta conta, double valor) {
         conta.depositar(valor);

@@ -3,11 +3,12 @@ import pessoa.Pessoa;
 
 import java.util.Scanner;
 
-
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
     public static void main(String[] args) {
+        CarregaDadosIniciais dadosIniciais = new CarregaDadosIniciais();
+        dadosIniciais.criarDados();
         Application app = new Application();
         Banco.getInstance();
         app.menuUsuario();
