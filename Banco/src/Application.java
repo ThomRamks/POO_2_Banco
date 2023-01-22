@@ -1,5 +1,5 @@
 import banco.Banco;
-import pessoa.Pessoa;
+import cliente.Cliente;
 
 import java.util.Scanner;
 
@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
+
+
     public static void main(String[] args) {
         Application app = new Application();
         Banco.getInstance();
@@ -63,30 +65,49 @@ public class Application {
 
     }
 
-    public void menuUsuario(){
+    public void menuUsuario() {
         System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
     }
 
-    public void validarRequisicao(String requisicaoDoUsuario){
-        if(!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")){
+    public void validarRequisicao(String requisicaoDoUsuario) {
+        if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
             System.out.println("Não entendemos sua requisição, tente novamente!");
-        }else if(requisicaoDoUsuario.equals("1")){
+        } else if (requisicaoDoUsuario.equals("1")) {
             menuLogin();
-        }else{
+        } else {
             System.out.println("Digite seu nome: ");
-            Pessoa cliente = new Pessoa(sc.next());
+            Cliente cliente = new Cliente(sc.next());
             cliente.abrirConta(cliente);
         }
     }
 
-    public void menuLogin(){
+    public void menuLogin() {
+
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
+        validarLoginCliente(respostaLogin);
+        validarSenhaCliente();
+    }
+
+    public void validarLoginCliente(String login) {
+        if (!Banco.getInstance().contemLogin(login)) { // CPF e CNPJ precisam ter seus formatos definidos
+            System.out.println("CPF ou CNPJ inválido. Tente novamente");
+        } else {
+            validarSenhaCliente();
+        }
+    }
+
+    public void validarSenhaCliente() {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
+        if (respostaSenha.isBlank()) {
+            System.out.println("Não capturamos sua senha. Por favor, tente novamente.");
+            validarSenhaCliente();
+        } else {
+            Banco.getInstance().validarSenha(respostaSenha);
 
-        Banco.getInstance().validarLogin(respostaLogin,respostaSenha);
+        }
     }
 
 }

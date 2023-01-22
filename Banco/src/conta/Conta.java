@@ -1,15 +1,16 @@
 package conta;
 
 import interfaces.IConta;
-import pessoa.Pessoa;
+import cliente.Cliente;
 
 public abstract class Conta implements IConta {
     private int agencia;
     private int numero;
-    private Pessoa titular;
+    private String senha;
+    private Cliente titular;
     protected double saldo;
 
-    public Conta(int agencia, int numero, Pessoa titular) {
+    public Conta(int agencia, int numero, Cliente titular) {
         this.agencia = agencia;
         this.numero = numero;
         this.titular = titular;
@@ -25,8 +26,11 @@ public abstract class Conta implements IConta {
     public int getNumero() {
         return numero;
     }
+    public String getSenha(){return senha;}
+    protected void setSenha(String novaSenha){
+    }
 
-    public Pessoa getTitular() {
+    public Cliente getTitular() {
         return titular;
     }
 }
