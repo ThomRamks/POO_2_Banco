@@ -19,9 +19,9 @@ public class Banco {
 
     private Map<String, Cliente> clientes;
 
-    protected void cadastrarCliente(String login,Cliente cliente) {
+    protected void cadastrarCliente(String login, Cliente cliente) {
         clientes.put(login, cliente);
-       // System.out.println("Conta: " + numeroConta + "cadastrada!");
+        // System.out.println("Conta: " + numeroConta + "cadastrada!");
     }
 
     public void cadastrarConta(Cliente cliente) {
@@ -65,15 +65,15 @@ public class Banco {
         conta.sacar(valor);
     }
 
-    public void validarLogin(String login) {
-        if(clientes.containsValue(login)){
-//            Application.getInstance();
+    public boolean contemLogin(String login) {
+        boolean contem = false;
+        if (clientes.containsKey(login)) {
+            contem = true;
         }
+        return contem;
     }
 
-    public void validarSenha(String senha){
-        // quais os requisitos para a senha ser válida?
+    public void validarSenha(String senha) {
+
     }
-
-
 }

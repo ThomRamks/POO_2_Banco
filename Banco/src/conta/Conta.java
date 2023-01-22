@@ -6,6 +6,7 @@ import cliente.Cliente;
 public abstract class Conta implements IConta {
     private int agencia;
     private int numero;
+    private String senha;
     private Cliente titular;
     protected double saldo;
 
@@ -24,6 +25,9 @@ public abstract class Conta implements IConta {
 
     public int getNumero() {
         return numero;
+    }
+    public String getSenha(){return senha;}
+    protected void setSenha(String novaSenha){
     }
 
     public Cliente getTitular() {
