@@ -17,25 +17,22 @@ public class Pessoa {
         Banco.getInstance().cadastrarConta(novoCliente);
     }
 
-    public void sacar(){
+    public void sacar() {
 
     }
 
-    public void transferir(){
+    public void transferir() {
+    }
+
+    public void depositar() {
 
     }
 
-    public void depositar(){
+    public void consultarSaldo() {
 
     }
 
-    public void consultarSaldo(){
-
-    }
-
-    public void investir(){
+    public void investir() {
 
     }
 }
-
-

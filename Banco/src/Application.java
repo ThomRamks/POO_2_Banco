@@ -1,17 +1,18 @@
 import banco.Banco;
 import pessoa.Pessoa;
 
-import java.util.*;
+import java.util.Scanner;
+
 
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
     public static void main(String[] args) {
-            Application app = new Application();
-            Banco.getInstance();
-            app.menuUsuario();
-            respostasUsuario = sc.next();
-            app.validarRequisicao(respostasUsuario);
+        Application app = new Application();
+        Banco.getInstance();
+        app.menuUsuario();
+        respostasUsuario = sc.next();
+        app.validarRequisicao(respostasUsuario);
 
 
 //        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
@@ -21,16 +22,22 @@ public class Application {
 //        ContaPoupanca contaPoupanca = new ContaPoupanca(123,45678, pessoaFisica);
 //        ContaCorrentePessoaFisica ccPessoaFisica = new ContaCorrentePessoaFisica(321, 7898, pessoaFisica);
 //        ContaCorrentePessoaJuridica ccPessoaJuridica = new ContaCorrentePessoaJuridica(456, 445588, pessoaJuridica);
+//        ContaInvestimentoPessoaFisica ciPessoaFisica = new ContaInvestimentoPessoaFisica(321, 7898, pessoaFisica);
+//        ContaInvestimentoPessoaJuridica ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(456, 445588, pessoaJuridica);
 //
 //
 //        Banco operacao = new Banco();
 //        operacao.depositar(contaPoupanca, 100);
 //        operacao.depositar(ccPessoaFisica, 100);
 //        operacao.depositar(ccPessoaJuridica, 200);
+//        operacao.depositar(ciPessoaFisica, 100);
+//        operacao.depositar(ciPessoaJuridica, 200);
 //
 //        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
 //        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
+//        System.out.printf("Saldo da Conta de Investimento PF: %.2f%n", ciPessoaFisica.getSaldo());
+//        System.out.printf("Saldo da Conta de Investimento PJ: %.2f%n", ciPessoaJuridica.getSaldo());
 //
 //        System.out.println();
 //
@@ -47,11 +54,17 @@ public class Application {
 //        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
 //        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
+//
+//
+//        operacao.sacar(ccPessoaFisica, 50);
+//        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
+//        operacao.sacar(ccPessoaJuridica, 200);
+//        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
     }
 
-   public void menuUsuario(){
-        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta(2)");
+    public void menuUsuario(){
+        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
     }
 
     public void validarRequisicao(String requisicaoDoUsuario){
