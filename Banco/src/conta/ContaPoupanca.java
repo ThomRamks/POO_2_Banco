@@ -8,8 +8,8 @@ public class ContaPoupanca extends Conta {
 
     private ClientePessoaFisica titular;
 
-    public ContaPoupanca(int agencia, int numero, ClientePessoaFisica titular) {
-        super(agencia, numero, titular);
+    public ContaPoupanca(int numero, String senha, ClientePessoaFisica titular) {
+        super(numero, senha, titular);
     }
 
     @Override

@@ -6,8 +6,8 @@ import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    public ContaCorrentePessoaJuridica(int agencia, int numero, ClientePessoaJuridica titular) {
-        super(agencia, numero, titular);
+    public ContaCorrentePessoaJuridica(int numero, String senha, ClientePessoaJuridica titular) {
+        super(numero, senha, titular);
     }
 
     @Override
