@@ -1,18 +1,25 @@
-# POO_2_Banco
-Projeto Final do Módulo de POO-2 
 
-Aplicação que simula uma app bancária.
-Os clientes podem ser pessoa física ou jurídica, sendo que para PJ existe a cobrança de uma taxa de 0.5% para cada saque
-ou transferência.
-Além do produto conta-corrente, os clientes PF podem abrir uma conta-poupança e conta-investimento.
-Conta-poupança rende 1% e Conta-investimento 1.5% para PF.
-Clientes PJ não abrem poupança, mas seus rendimentos em conta-investimento rendem 3.5%.
-Os rendimentos ocorrem no momento do depósito.
-Deve conter as seguintes funcionalidades:
+# AdaBank 
 
-● abrir conta;
-● sacar;
-● depositar;
-● transferência;
-● investir;
-● consultar saldo.
+![](https://github.com/ThomRamks/POO_2_Banco/blob/Features/ReadMe/adabank2.png?raw=true-180x180.png)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/thomramks/poo_2_banco/badge?style=flat-square)](https://www.codefactor.io/repository/github/thomramks/poo_2_banco) ![](https://img.shields.io/github/contributors/ThomRamks/POO_2_Banco?style=flat-square) ![](https://img.shields.io/github/commit-activity/w/ThomRamks/POO_2_Banco?style=flat-square) ![](https://img.shields.io/github/languages/code-size/ThomRamks/POO_2_Banco?style=flat-square) ![](https://img.shields.io/github/issues/ThomRamks/POO_2_Banco?style=flat-square) 
+![](https://img.shields.io/github/release-date/ThomRamks/POO_2_Banco?style=flat-square)
+
+
+**Tabela de Conteúdo**
+
+[TOCM]
+
+[TOC]
+
+####Mais que um banco
+O AdaBank surgiu com a ilustre ideia dos consagrados alunos do curso [#Dev_Makers-V2](https://letscode.com.br/processos-seletivos/dev-makers), ansioso por trabalharem na gingante [SINQIA](https://sinqia.com.br), sugeriram um trabalho em grupo ao excelentíssimo mestre dos códigos Jackson Braga da disciplina de Programação Orientada a Objetos II, prontamente o grande mestre propôs a criação de uma aplicação que simulasse uma página de um banco.
+Assim, de uma obrigação surgiu uma paixão.
+AdaBank, conte conosco!
+####Funcionalidades
+O nosso banco possui um robusto e eficiênte sistema de gerenciamento de contas. Contamos com as seguintes funcionalidades.
+* Abertura de conta (Investimentos :chart: , Poupança :moneybag:, Conta-Corrente 	:credit_card:) 
+* Saques, depósitos, transferências, consultas de saldo.
+
+
