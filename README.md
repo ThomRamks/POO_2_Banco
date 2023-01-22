@@ -11,7 +11,7 @@
 
 - [AdaBank](#adabank)
 - [Funcionalidades](#Funcionalidades)
-- [Principio do desenvolvimento](#Principio-do-desenvolvimento)
+- [Principio do desenvolvimento](#Principio do desenvolvimento)
 
 ------------
 #### Mais que um banco
@@ -21,7 +21,7 @@ AdaBank, conte conosco!
 
 
 #### Funcionalidades
-O nosso banco possui um robusto e eficiênte sistema de gerenciamento de contas. Contamos com as seguintes funcionalidades.
+O nosso banco possui um robusto e eficiente sistema de gerenciamento de contas. Contamos com as seguintes funcionalidades.
 * Abertura de conta (Investimentos :chart: , Poupança :moneybag:, Conta-Corrente 	:credit_card:) 
 * Saques, depósitos, transferências, consultas de saldo.
 
@@ -31,8 +31,12 @@ O nosso banco possui um robusto e eficiênte sistema de gerenciamento de contas.
 
 ### Principio do desenvolvimento
 Inicialmente seguimos com um brainstorm para entendermos o fluxo de funcionamento da aplicação e a comunicação entre cada funcionalidade.
-Utilizamos o [Figma](https://www.figma.com/) para colocar as idéias e seguir com o processo de criação.
+Utilizamos o [Figma](https://www.figma.com/) para colocar as ideias e seguir com o processo de criação.
 ![](https://github.com/ThomRamks/POO_2_Banco/blob/Features/ReadMe/Fluxo.jpg?raw=true-180x180.png)
 
-
-
+### Histórico
+- Criação da atividade e grupo ----- 13/01/2023
+- Inserção das ideias no Figma ----- 16/01/2023
+- 1ª Reunião do grupo ------------ 19/03/2023
+- 1ª Apresentação de idéias ao Prof.  - 20/03/2023
+- Domingão da codagem -----------22/01/2023
