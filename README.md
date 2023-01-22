@@ -2,7 +2,7 @@
 Projeto Final do Módulo de POO-2 
 
 Aplicação que simula uma app bancária.
-Os clientes podem ser pessoa física ou jurídica, sendo que para PJ existe a cobrança de uma taxa de 0.5% para cada saque
+Os clientes podem ser cliente física ou jurídica, sendo que para PJ existe a cobrança de uma taxa de 0.5% para cada saque
 ou transferência.
 Além do produto conta-corrente, os clientes PF podem abrir uma conta-poupança e conta-investimento.
 Conta-poupança rende 1% e Conta-investimento 1.5% para PF.

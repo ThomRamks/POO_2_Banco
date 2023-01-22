@@ -1,10 +1,10 @@
-package pessoa;
+package cliente;
 
-public class PessoaFisica extends Pessoa {
+public class ClientePessoaFisica extends Cliente {
 
     private String cpf;
 
-    public PessoaFisica(String nome, String cpf) {
+    public ClientePessoaFisica(String nome, String cpf) {
         super(nome);
         this.cpf = cpf;
     }

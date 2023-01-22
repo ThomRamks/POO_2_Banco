@@ -2,11 +2,11 @@ package conta;
 
 import interfaces.IConta;
 import banco.Banco;
-import pessoa.PessoaJuridica;
+import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    public ContaCorrentePessoaJuridica(int agencia, int numero, PessoaJuridica titular) {
+    public ContaCorrentePessoaJuridica(int agencia, int numero, ClientePessoaJuridica titular) {
         super(agencia, numero, titular);
     }
 
