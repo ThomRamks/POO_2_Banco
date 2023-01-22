@@ -3,12 +3,17 @@ package conta;
 import banco.Banco;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import pessoa.PessoaJuridica;
+import cliente.ClientePessoaJuridica;
 
 public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInvestimento<IConta> {
 
+<<<<<<< HEAD
     public ContaInvestimentoPessoaJuridica(PessoaJuridica titular) {
         super(titular);
+=======
+    public ContaInvestimentoPessoaJuridica(int agencia, int numero, ClientePessoaJuridica titular) {
+        super(agencia, numero, titular);
+>>>>>>> a00f882b465452e38ec8ade7c7f76719f1cf53c7
     }
 
     @Override

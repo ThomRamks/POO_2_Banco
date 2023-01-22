@@ -2,9 +2,9 @@ package banco;
 
 import conta.*;
 import interfaces.IConta;
-import pessoa.Pessoa;
-import pessoa.PessoaFisica;
-import pessoa.PessoaJuridica;
+import cliente.Cliente;
+import cliente.ClientePessoaFisica;
+import cliente.ClientePessoaJuridica;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -17,16 +17,20 @@ public class Banco {
         return AdaBank;
     }
 
-    private Map<Integer, Pessoa> clientes;
+    private Map<String, Cliente> clientes;
 
-    protected void cadastrarCliente(Pessoa cliente, Integer numeroConta) {
-        clientes.put(numeroConta, cliente);
-        System.out.println("Conta: " + numeroConta + "cadastrada!");
+    protected void cadastrarCliente(String login, Cliente cliente) {
+        clientes.put(login, cliente);
+        // System.out.println("Conta: " + numeroConta + "cadastrada!");
     }
 
+<<<<<<< HEAD
     /*public void cadastrarConta(Pessoa cliente) {
+=======
+    public void cadastrarConta(Cliente cliente) {
+>>>>>>> a00f882b465452e38ec8ade7c7f76719f1cf53c7
         int agencia = 913;
-        int numeroConta = (int) (1000 + (9999 - 1000 + 1) * Math.random());
+        int login = (int) (1000 + (9999 - 1000 + 1) * Math.random());
         Scanner sc = new Scanner(System.in);
         System.out.println("Você deseja criar: \nConta de Pessoa Física  (1) \nConta de Pessoa Jurídica? (2)");
         String requisicaoDoUsuario = sc.next();
@@ -37,19 +41,19 @@ public class Banco {
             System.out.println("Criação de Conta - Pessoa Física");
             System.out.println("Digite seu CPF");
             String cpf = sc.next();
-            PessoaFisica PF = new PessoaFisica(cliente.getNome(), cpf);
-            Conta CCPF = new ContaCorrentePessoaFisica(agencia, numeroConta, PF);
-            Conta CIPF = new ContaInvestimentoPessoaFisica(agencia, numeroConta, PF);
-            Conta Poupanca = new ContaPoupanca(agencia, numeroConta, PF);
-            cadastrarCliente(cliente, numeroConta);
+            ClientePessoaFisica PF = new ClientePessoaFisica(cliente.getNome(), cpf);
+            Conta CCPF = new ContaCorrentePessoaFisica(agencia, login, PF);
+            Conta CIPF = new ContaInvestimentoPessoaFisica(agencia, login, PF);
+            Conta Poupanca = new ContaPoupanca(agencia, login, PF);
+            cadastrarCliente(cpf, cliente);
         } else {
             System.out.println("Criação de Conta - Pessoa Jurídica");
             System.out.println("Digite seu CNPJ");
             String cnpj = sc.next();
-            PessoaJuridica PJ = new PessoaJuridica(cliente.getNome(), cnpj);
-            Conta CCPJ = new ContaCorrentePessoaJuridica(agencia, numeroConta, PJ);
-            Conta CIPJ = new ContaInvestimentoPessoaJuridica(agencia, numeroConta, PJ);
-            cadastrarCliente(cliente, numeroConta);
+            ClientePessoaJuridica PJ = new ClientePessoaJuridica(cliente.getNome(), cnpj);
+            Conta CCPJ = new ContaCorrentePessoaJuridica(agencia, login, PJ);
+            Conta CIPJ = new ContaInvestimentoPessoaJuridica(agencia, login, PJ);
+            cadastrarCliente(cnpj, cliente);
         }
     }*/
 
@@ -65,9 +69,15 @@ public class Banco {
         conta.sacar(valor);
     }
 
-    public void validarLogin(String cliente, String senha) {
-
+    public boolean contemLogin(String login) {
+        boolean contem = false;
+        if (clientes.containsKey(login)) {
+            contem = true;
+        }
+        return contem;
     }
 
+    public void validarSenha(String senha) {
 
+    }
 }
