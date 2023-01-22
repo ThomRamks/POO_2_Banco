@@ -2,13 +2,13 @@ package conta;
 
 import banco.Banco;
 import interfaces.IConta;
-import pessoa.PessoaFisica;
+import cliente.ClientePessoaFisica;
 
 public class ContaPoupanca extends Conta {
 
-    private PessoaFisica titular;
+    private ClientePessoaFisica titular;
 
-    public ContaPoupanca(int agencia, int numero, PessoaFisica titular) {
+    public ContaPoupanca(int agencia, int numero, ClientePessoaFisica titular) {
         super(agencia, numero, titular);
     }
 

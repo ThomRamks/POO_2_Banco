@@ -1,5 +1,5 @@
 import banco.Banco;
-import pessoa.Pessoa;
+import cliente.Cliente;
 
 import java.util.Scanner;
 
@@ -7,8 +7,13 @@ import java.util.Scanner;
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
+
+    private static final Application app = new Application();
+
+//    public Application getInstance(){
+//        return app;
+//    }
     public static void main(String[] args) {
-        Application app = new Application();
         Banco.getInstance();
         app.menuUsuario();
         respostasUsuario = sc.next();
@@ -74,19 +79,38 @@ public class Application {
             menuLogin();
         }else{
             System.out.println("Digite seu nome: ");
-            Pessoa cliente = new Pessoa(sc.next());
+            Cliente cliente = new Cliente(sc.next());
             cliente.abrirConta(cliente);
         }
     }
 
     public void menuLogin(){
+
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
+        validarLoginCliente(respostaLogin);
+        validarSenhaCliente();
+    }
+
+    public void validarLoginCliente(String login){
+        if(login.isBlank()){ // CPF e CNPJ precisam ter seus formatos definidos
+            System.out.println("CPF ou CNPJ inválido. Tente novamente");
+        } else{
+            Banco.getInstance().validarLogin(login);
+        }
+    }
+
+    public void validarSenhaCliente(){
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
+        if(respostaSenha.isBlank()){
+            System.out.println("Não capturamos sua senha. Por favor, tente novamente.");
+            validarSenhaCliente();
+        } else{
+            Banco.getInstance().validarSenha(respostaSenha);
 
-        Banco.getInstance().validarLogin(respostaLogin,respostaSenha);
+        }
     }
 
 }

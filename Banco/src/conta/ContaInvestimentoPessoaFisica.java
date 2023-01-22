@@ -4,11 +4,11 @@ package conta;
 import banco.Banco;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import pessoa.PessoaFisica;
+import cliente.ClientePessoaFisica;
 
 public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvestimento<IConta> {
 
-    public ContaInvestimentoPessoaFisica(int agencia, int numero, PessoaFisica titular) {
+    public ContaInvestimentoPessoaFisica(int agencia, int numero, ClientePessoaFisica titular) {
         super(agencia, numero, titular);
     }
 

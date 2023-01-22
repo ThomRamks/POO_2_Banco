@@ -1,11 +1,12 @@
-package pessoa;
+package cliente;
 
 import banco.Banco;
 
-public class Pessoa {
+public class Cliente {
     private String nome;
+    private String conta;
 
-    public Pessoa(String nome) {
+    public Cliente(String nome) {
         this.nome = nome;
     }
 
@@ -13,7 +14,7 @@ public class Pessoa {
         return nome;
     }
 
-    public void abrirConta(Pessoa novoCliente) {
+    public void abrirConta(Cliente novoCliente) {
         Banco.getInstance().cadastrarConta(novoCliente);
     }
 
