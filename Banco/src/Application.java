@@ -1,7 +1,7 @@
 import banco.Banco;
 import cliente.Cliente;
-
 import java.util.Scanner;
+
 
 public class Application {
     static Scanner sc = new Scanner(System.in);
@@ -9,14 +9,9 @@ public class Application {
 
 
     public static void main(String[] args) {
-        CarregaDadosIniciais dadosIniciais = new CarregaDadosIniciais();
-        dadosIniciais.criarDados();
         Application app = new Application();
         Banco.getInstance();
         app.menuUsuario();
-        respostasUsuario = sc.next();
-        app.validarRequisicao(respostasUsuario);
-
 
 //        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
 //        PessoaJuridica pessoaJuridica = new PessoaJuridica("Ada", "12.455.455/0001-00");
@@ -68,11 +63,14 @@ public class Application {
 
     public void menuUsuario() {
         System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
+        respostasUsuario = sc.next();
+        validarRequisicao(respostasUsuario);
     }
 
     public void validarRequisicao(String requisicaoDoUsuario) {
         if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
             System.out.println("Não entendemos sua requisição, tente novamente!");
+            menuUsuario();
         } else if (requisicaoDoUsuario.equals("1")) {
             menuLogin();
         } else {
@@ -83,32 +81,35 @@ public class Application {
     }
 
     public void menuLogin() {
-
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
-        validarLoginCliente(respostaLogin);
-        validarSenhaCliente();
+        validarLoginEntrada(respostaLogin);
     }
 
-    public void validarLoginCliente(String login) {
-        if (!Banco.getInstance().contemLogin(login)) { // CPF e CNPJ precisam ter seus formatos definidos
-            System.out.println("CPF ou CNPJ inválido. Tente novamente");
+    public void validarLoginEntrada(String login) {
+        if (!Banco.getInstance().contemLogin(login)) {
+            System.out.println("CPF ou CNPJ inválido. Tente novamente.");
         } else {
-            validarSenhaCliente();
+            Cliente cliente = Banco.getInstance().getClientes().get(login);
+            validarSenhaEntrada(cliente);
         }
     }
 
-    public void validarSenhaCliente() {
+    public void validarSenhaEntrada(Cliente cliente) {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
         if (respostaSenha.isBlank()) {
             System.out.println("Não capturamos sua senha. Por favor, tente novamente.");
-            validarSenhaCliente();
+            validarSenhaEntrada(cliente);
         } else {
-            Banco.getInstance().validarSenha(respostaSenha);
-
+            if (respostaSenha.contentEquals(cliente.getConta().getSenha())) {
+                System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+                //INSERIR MENU DO CLIENTE (COM AS OPÇÕES DE SACAR, TRANSFERIR...)
+            } else {
+                System.out.println("Senha incorreta. Por favor, tente novamente.");
+                validarSenhaEntrada(cliente);
+            }
         }
     }
-
 }
