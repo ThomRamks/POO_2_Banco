@@ -11,7 +11,7 @@
 
 - [AdaBank](#adabank)
 - [Funcionalidades](#Funcionalidades)
-- [Principio do desenvolvimento](#Principio do desenvolvimento)
+- [Principio do desenvolvimento](#Principio-do-desenvolvimento)
 
 ------------
 #### Mais que um banco
@@ -35,8 +35,8 @@ Utilizamos o [Figma](https://www.figma.com/) para colocar as ideias e seguir com
 ![](https://github.com/ThomRamks/POO_2_Banco/blob/Features/ReadMe/Fluxo.jpg?raw=true-180x180.png)
 
 ### Histórico
-- Criação da atividade e grupo ----- 13/01/2023
-- Inserção das ideias no Figma ----- 16/01/2023
-- 1ª Reunião do grupo ------------ 19/03/2023
-- 1ª Apresentação de idéias ao Prof.  - 20/03/2023
-- Domingão da codagem -----------22/01/2023
+- Criação da atividade e grupo -------- 13/01/2023
+- Inserção das ideias no Figma -------- 16/01/2023
+- 1ª Reunião do grupo ----------------- 19/03/2023
+- 1ª Apresentação de idéias ao Prof.--- 20/03/2023
+- Domingão da codagem --------------22/01/2023
