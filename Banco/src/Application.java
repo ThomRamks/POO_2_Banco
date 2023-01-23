@@ -1,5 +1,6 @@
 import banco.Banco;
 import cliente.Cliente;
+
 import java.util.Scanner;
 
 
@@ -67,16 +68,19 @@ public class Application {
         validarRequisicao(respostasUsuario);
     }
 
-    public void validarRequisicao(String requisicaoDoUsuario) {
-        if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
-            System.out.println("Não entendemos sua requisição, tente novamente!");
-            menuUsuario();
-        } else if (requisicaoDoUsuario.equals("1")) {
-            menuLogin();
-        } else {
-            System.out.println("Digite seu nome: ");
-            Cliente cliente = new Cliente(sc.next());
-            cliente.abrirConta(cliente);
+    public void validarRequisicao(String respostasUsuario) {
+        switch (respostasUsuario) {
+            case "1":
+                menuLogin();
+                break;
+            case "2":
+                System.out.println("Digite seu nome: ");
+                Cliente cliente = new Cliente(sc.next());
+                cliente.abrirConta(cliente);
+                break;
+            default:
+                System.out.println("Não entendemos sua requisição, tente novamente!");
+                menuUsuario();
         }
     }
 
@@ -90,6 +94,7 @@ public class Application {
     public void validarLoginEntrada(String login) {
         if (!Banco.getInstance().contemLogin(login)) {
             System.out.println("CPF ou CNPJ inválido. Tente novamente.");
+            menuLogin();
         } else {
             Cliente cliente = Banco.getInstance().getClientes().get(login);
             validarSenhaEntrada(cliente);
@@ -104,8 +109,10 @@ public class Application {
             validarSenhaEntrada(cliente);
         } else {
             if (respostaSenha.contentEquals(cliente.getConta().getSenha())) {
-                System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+                //System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
                 //INSERIR MENU DO CLIENTE (COM AS OPÇÕES DE SACAR, TRANSFERIR...)
+                //achei melhor fazer em BANCO
+                Banco.getInstance().menuCliente(cliente);;
             } else {
                 System.out.println("Senha incorreta. Por favor, tente novamente.");
                 validarSenhaEntrada(cliente);
