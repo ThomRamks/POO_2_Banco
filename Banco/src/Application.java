@@ -1,5 +1,6 @@
 import banco.Banco;
 import cliente.Cliente;
+import interfaces.IConta;
 
 import java.util.Scanner;
 
@@ -106,8 +107,10 @@ public class Application {
             validarSenhaEntrada(cliente);
         } else {
             if (respostaSenha.contentEquals(cliente.getConta().getSenha())) {
-                System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+                //System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
                 //INSERIR MENU DO CLIENTE (COM AS OPÇÕES DE SACAR, TRANSFERIR...)
+                //achei melhor fazer em BANCO
+                Banco.getInstance().menuCliente(cliente);;
             } else {
                 System.out.println("Senha incorreta. Por favor, tente novamente.");
                 validarSenhaEntrada(cliente);
