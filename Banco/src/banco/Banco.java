@@ -18,7 +18,7 @@ public class Banco {
         return AdaBank;
     }
 
-    private HashMap<String, Cliente> clientes;
+    private HashMap<String, Cliente> clientes = new HashMap<>();
 
     public HashMap<String, Cliente> getClientes() {
         return clientes;
