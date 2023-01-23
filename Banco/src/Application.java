@@ -90,6 +90,7 @@ public class Application {
     public void validarLoginEntrada(String login) {
         if (!Banco.getInstance().contemLogin(login)) {
             System.out.println("CPF ou CNPJ inválido. Tente novamente.");
+            menuLogin();
         } else {
             Cliente cliente = Banco.getInstance().getClientes().get(login);
             validarSenhaEntrada(cliente);
