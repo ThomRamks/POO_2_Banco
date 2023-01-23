@@ -39,9 +39,9 @@ public class ContaCorrentePessoaFisica extends Conta {
             System.out.println("Saque no valor de R$ " + valor + " realizado com sucesso!");
             System.out.println("Saldo atual: R$" + saldo);
             saques++;
-                if (saques > 3) {
+            if (saques > 3) {
                 System.out.println("Voce atingiu o limite maximo de 3 saques diarios, tente novamente amanha.");
-                }
+            }
             return true;
         }
         System.out.println("Não foi possível realizar a operação. O valor é maior do que se encontra na conta.");

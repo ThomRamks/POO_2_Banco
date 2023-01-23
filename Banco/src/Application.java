@@ -1,6 +1,5 @@
 import banco.Banco;
 import cliente.Cliente;
-import interfaces.IConta;
 
 import java.util.Scanner;
 
@@ -69,16 +68,19 @@ public class Application {
         validarRequisicao(respostasUsuario);
     }
 
-    public void validarRequisicao(String requisicaoDoUsuario) {
-        if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
-            System.out.println("Não entendemos sua requisição, tente novamente!");
-            menuUsuario();
-        } else if (requisicaoDoUsuario.equals("1")) {
-            menuLogin();
-        } else {
-            System.out.println("Digite seu nome: ");
-            Cliente cliente = new Cliente(sc.next());
-            cliente.abrirConta(cliente);
+    public void validarRequisicao(String respostasUsuario) {
+        switch (respostasUsuario) {
+            case "1":
+                menuLogin();
+                break;
+            case "2":
+                System.out.println("Digite seu nome: ");
+                Cliente cliente = new Cliente(sc.next());
+                cliente.abrirConta(cliente);
+                break;
+            default:
+                System.out.println("Não entendemos sua requisição, tente novamente!");
+                menuUsuario();
         }
     }
 

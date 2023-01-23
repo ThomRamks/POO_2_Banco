@@ -92,7 +92,7 @@ public class Banco {
     public String validarSenhaCriacao() {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
-        if (respostaSenha.isBlank() || respostaSenha.length() <= 8) {
+        if (respostaSenha.isBlank() || respostaSenha.length() < 8) {
             System.out.println("Sua senha deve ter, ao menos, oito caracteres. Por favor, tente novamente.");
             validarSenhaCriacao();
         }
