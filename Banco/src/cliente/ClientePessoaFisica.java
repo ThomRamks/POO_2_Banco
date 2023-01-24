@@ -12,4 +12,9 @@ public class ClientePessoaFisica extends Cliente {
     public String getCpf() {
         return cpf;
     }
+
+    @Override
+    public String getDocumento() {
+        return this.cpf;
+    }
 }

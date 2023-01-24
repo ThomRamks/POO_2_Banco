@@ -7,8 +7,10 @@ import cliente.ClientePessoaJuridica;
 
 public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInvestimento<IConta> {
 
-    public ContaInvestimentoPessoaJuridica(int numero, String senha, ClientePessoaJuridica titular) {
-        super(numero, senha, titular);
+    private int operacao = 2;
+
+    public ContaInvestimentoPessoaJuridica(String senha, ClientePessoaJuridica titular) {
+        super(senha, titular);
     }
 
     @Override
@@ -37,7 +39,18 @@ public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInve
     }
 
     @Override
+    public String getTipoConta() {
+        return "Conta Investimento";
+    }
+
+    @Override
+    public int getOperacao() {
+        return this.operacao;
+    }
+
+    @Override
     public void investir(double valor) {
         super.saldo +=  (valor * 1.035);
     }
+
 }

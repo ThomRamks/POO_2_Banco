@@ -7,12 +7,15 @@ import java.util.Scanner;
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
+    static Banco banco = Banco.getInstance();
 
 
     public static void main(String[] args) {
-        Application app = new Application();
-        Banco.getInstance();
-        app.menuUsuario();
+        banco.listarContas();
+
+//        Application app = new Application();
+//        Banco.getInstance();
+//        app.menuUsuario();
 
 //        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
 //        PessoaJuridica pessoaJuridica = new PessoaJuridica("Ada", "12.455.455/0001-00");
@@ -60,9 +63,11 @@ public class Application {
 //        operacao.sacar(ccPessoaJuridica, 200);
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
+
+
     }
 
-    public void menuUsuario() {
+   /* public void menuUsuario() {
         System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
         respostasUsuario = sc.next();
         validarRequisicao(respostasUsuario);
@@ -113,5 +118,5 @@ public class Application {
                 validarSenhaEntrada(cliente);
             }
         }
-    }
+    }*/
 }

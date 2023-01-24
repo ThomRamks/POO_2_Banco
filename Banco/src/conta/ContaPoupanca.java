@@ -5,11 +5,12 @@ import interfaces.IConta;
 import cliente.ClientePessoaFisica;
 
 public class ContaPoupanca extends Conta {
+    private int operacao = 1;
 
     private ClientePessoaFisica titular;
 
-    public ContaPoupanca(int numero, String senha, ClientePessoaFisica titular) {
-        super(numero, senha, titular);
+    public ContaPoupanca(String senha, ClientePessoaFisica titular) {
+        super(senha, titular);
     }
 
     @Override
@@ -35,4 +36,16 @@ public class ContaPoupanca extends Conta {
         System.out.println("Não é possível realizar a operação. O valor é maior do que se encontra na conta.");
         return false;
     }
+
+    @Override
+    public String getTipoConta() {
+        return TipoConta.CONTA_POUPANCA.getDescricao();
+    }
+
+    @Override
+    public int getOperacao() {
+        return this.operacao;
+    }
+
+
 }
