@@ -1,6 +1,5 @@
 package banco;
 
-import cliente.Cliente;
 import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
@@ -13,7 +12,7 @@ public class Banco {
 
     private static final Banco AdaBank = new Banco();
     private List<IConta> contas = new ArrayList<>();
-    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
+//    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
     private int numeroDefault;
 
     public Banco() {
@@ -22,58 +21,63 @@ public class Banco {
 
     public void abrirContaPessoaFisica(ICliente cliente){
         int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
+//        getContasUsuario(cliente.getDocumento());
+        if (cliente.getContasUsuario().size() > 0) {
+            numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
             numeroDefault++;
             numero = numeroDefault;
         }
         IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
         contas.add(ccPessoaFisica);
+        cliente.getContasUsuario().add(ccPessoaFisica);
         IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
         contas.add(ciPessoaFisica);
+        cliente.getContasUsuario().add(ciPessoaFisica);
         IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
         contas.add(cpPessoaFisica);
+        cliente.getContasUsuario().add(cpPessoaFisica);
     }
 
     public void abrirContaPessoaJuridica(ICliente cliente){
         int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
+//        getContasUsuario(cliente.getDocumento());
+        if (cliente.getContasUsuario().size() > 0) {
+            numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
             numeroDefault++;
             numero = numeroDefault;
         }
         IConta ccPessoaJuridica = new ContaCorrentePessoaJuridica(numero, cliente);
         contas.add(ccPessoaJuridica);
+        cliente.getContasUsuario().add(ccPessoaJuridica);
         IConta ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(numero, cliente);
         contas.add(ciPessoaJuridica);
+        cliente.getContasUsuario().add(ciPessoaJuridica);
     }
 
-    public void getContasUsuario(String documento) {
-        contasUsuario.clear();
-        for (IConta conta : contas) {
-            if (conta.getTitular().getDocumento().equals(documento)){
-                contasUsuario.add(conta);
-            }
-        }
-    }
+//    public void getContasUsuario(String documento) {
+//        contasUsuario.clear();
+//        for (IConta conta : contas) {
+//            if (conta.getTitular().getDocumento().equals(documento)){
+//                contasUsuario.add(conta);
+//            }
+//        }
+//    }
 
-    public int getNumeroConta(String documento) {
-        return contasUsuario.get(0).getNumero();
-    }
+//    public int getNumeroConta(String documento) {
+//        return contasUsuario.get(0).getNumero();
+//    }
+//
+//    public ICliente getCliente(String documento) {
+//        getContasUsuario(documento);
+//        return contasUsuario.get(0).getTitular();
+//    }
 
-    public ICliente getCliente(String documento) {
-        getContasUsuario(documento);
-        return contasUsuario.get(0).getTitular();
-    }
-
-    public void listarContasUsuario(String documento) {
-        String nome = getCliente(documento).getNome();
+    public void listarContasUsuario(ICliente cliente) {
+        String nome = cliente.getNome();
         System.out.println("\n\t-- Conta " + nome + " --\n");
-        contasUsuario.forEach(conta -> {
+        cliente.getContasUsuario().forEach(conta -> {
             System.out.println("Tipo conta: " + conta.getTipoConta());
             System.out.println("Operação: " + conta.getOperacao());
             System.out.println("Titular: " + conta.getTitular().getNome());

@@ -1,5 +1,5 @@
 import banco.Banco;
-import cliente.Cliente;
+
 import util.GeraDadosIniciais;
 
 import java.util.Scanner;
@@ -17,17 +17,17 @@ public class Application {
         dadosIniciais.carregaDadosIniciais();
         Banco banco = Banco.getInstance();
 
-        String documentoArthur = "578.179.380-16";
-        banco.listarContasUsuario(documentoArthur);
-
-        String documentoDiego = "123.456.789-10";
-        banco.listarContasUsuario(documentoDiego);
-
-        String documentoAda = "24.861.255/0001-07";
-        banco.listarContasUsuario(documentoAda);
-
-        String documentoSinqia = "04.065.791/0001-99";
-        banco.listarContasUsuario(documentoSinqia);
+//        String documentoArthur = "578.179.380-16";
+//        banco.listarContasUsuario(documentoArthur);
+//
+//        String documentoDiego = "123.456.789-10";
+//        banco.listarContasUsuario(documentoDiego);
+//
+//        String documentoAda = "24.861.255/0001-07";
+//        banco.listarContasUsuario(documentoAda);
+//
+//        String documentoSinqia = "04.065.791/0001-99";
+//        banco.listarContasUsuario(documentoSinqia);
 
 //        Application app = new Application();
 //        Banco.getInstance();
