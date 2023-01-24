@@ -1,4 +1,3 @@
-
 package interfaces;
 
 import cliente.Cliente;
@@ -8,12 +7,9 @@ public interface IConta {
     void depositar(double valor);
     boolean transferir(double valor, IConta conta);
     boolean sacar(double valor);
-    double getSaldo();
     int getAgencia();
     int getNumero();
-    Cliente getTitular();
-    boolean validaSenha(String senha);
+    ICliente getTitular();
     String getTipoConta();
-
     int getOperacao();
 }

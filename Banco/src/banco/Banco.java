@@ -1,88 +1,79 @@
 package banco;
 
+import cliente.Cliente;
 import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
-import cliente.Cliente;
-import cliente.ClientePessoaFisica;
-import cliente.ClientePessoaJuridica;
+import interfaces.IContaInvestimento;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Banco {
 
-
-     Scanner sc = new Scanner(System.in);
-
     private static final Banco AdaBank = new Banco();
-
-    //private HashMap<String, Cliente> clientes = new HashMap<>();
-    //private HashMap<String, IConta> contas = new HashMap<>();
     private List<IConta> contas = new ArrayList<>();
-
-    /*public HashMap<String, Cliente> getClientes() {
-        return clientes;
-    }*/
+    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
+    private int numeroDefault;
 
     public Banco() {
-        carregaDadosIniciais();
+        numeroDefault = 1000;
     }
 
-    /*public void listarContas(){
-        for (IConta conta : contas.values()) {
-            System.out.println("Tipo conta: " + conta.getTipoConta());
-            System.out.println("Operação: " + conta.getOperacao());
-            System.out.println("Titular: " + conta.getTitular().getNome());
-            System.out.println("Documento: " + conta.getTitular().getDocumento());
-            System.out.println("Agência: " + conta.getAgencia());
-            System.out.println("Número: " + conta.getNumero());
-            System.out.println("\n\t --- \n");
-        }
-    }*/
-
-    public void abrirConta(ICliente cliente, IConta conta) {
-        contas.add(conta);
-    }
-
-//    public void abrirConta(ICliente cliente, IConta conta) {
-//        contas.put(cliente.getDocumento(), conta);
-//    }
-
-
-
-    /*public void cadastrarConta(Cliente cliente) {
-        int numeroConta = (int) (1000 + (9999 - 1000 + 1) * Math.random());
-        System.out.println("Você deseja criar: \nConta de Pessoa Física  (1) \nConta de Pessoa Jurídica? (2)");
-        String requisicaoDoUsuario = sc.next();
-        if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
-            System.out.println("Não entendemos sua requisição, tente novamente!");
-            cadastrarConta(cliente);
-        } else if (requisicaoDoUsuario.equals("1")) {
-            System.out.println("Criação de Conta - Pessoa Física");
-            System.out.println("Digite seu CPF");
-            String cpf = sc.next();
-            validarLoginCriacao(cpf);
-            String senha = validarSenhaCriacao();
-            ClientePessoaFisica PF = new ClientePessoaFisica(cliente.getNome(), cpf);
-            Conta CCPF = new ContaCorrentePessoaFisica(numeroConta, senha, PF);
-            Conta CIPF = new ContaInvestimentoPessoaFisica(numeroConta, senha, PF);
-            Conta Poupanca = new ContaPoupanca(numeroConta, senha, PF);
-            cadastrarCliente(cpf, cliente);
+    public void abrirContaPessoaFisica(ICliente cliente){
+        int numero = 0;
+        getContasUsuario(cliente.getDocumento());
+        if (contasUsuario.size() > 0) {
+            numero = getNumeroConta(cliente.getDocumento());
         } else {
-            System.out.println("Criação de Conta - Pessoa Jurídica");
-            System.out.println("Digite seu CNPJ");
-            String cnpj = sc.next();
-            validarLoginCriacao(cnpj);
-            String senha = validarSenhaCriacao();
-            ClientePessoaJuridica PJ = new ClientePessoaJuridica(cliente.getNome(), cnpj);
-            Conta CCPJ = new ContaCorrentePessoaJuridica(numeroConta, senha, PJ);
-            Conta CIPJ = new ContaInvestimentoPessoaJuridica(numeroConta, senha, PJ);
-            cadastrarCliente(cnpj, cliente);
+            numeroDefault++;
+            numero = numeroDefault;
         }
-    }*/
+        IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
+        contas.add(ccPessoaFisica);
+        IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
+        contas.add(ciPessoaFisica);
+        IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
+        contas.add(cpPessoaFisica);
+    }
 
-    public void listarContas() {
-        contas.forEach(conta -> {
+    public void abrirContaPessoaJuridica(ICliente cliente){
+        int numero = 0;
+        getContasUsuario(cliente.getDocumento());
+        if (contasUsuario.size() > 0) {
+            numero = getNumeroConta(cliente.getDocumento());
+        } else {
+            numeroDefault++;
+            numero = numeroDefault;
+        }
+        IConta ccPessoaJuridica = new ContaCorrentePessoaJuridica(numero, cliente);
+        contas.add(ccPessoaJuridica);
+        IConta ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(numero, cliente);
+        contas.add(ciPessoaJuridica);
+    }
+
+    public void getContasUsuario(String documento) {
+        contasUsuario.clear();
+        for (IConta conta : contas) {
+            if (conta.getTitular().getDocumento().equals(documento)){
+                contasUsuario.add(conta);
+            }
+        }
+    }
+
+    public int getNumeroConta(String documento) {
+        return contasUsuario.get(0).getNumero();
+    }
+
+    public ICliente getCliente(String documento) {
+        getContasUsuario(documento);
+        return contasUsuario.get(0).getTitular();
+    }
+
+    public void listarContasUsuario(String documento) {
+        String nome = getCliente(documento).getNome();
+        System.out.println("\n\t-- Conta " + nome + " --\n");
+        contasUsuario.forEach(conta -> {
             System.out.println("Tipo conta: " + conta.getTipoConta());
             System.out.println("Operação: " + conta.getOperacao());
             System.out.println("Titular: " + conta.getTitular().getNome());
@@ -93,11 +84,9 @@ public class Banco {
         });
     }
 
-
     public void depositar(IConta conta, double valor) {
         conta.depositar(valor);
     }
-
 
     public boolean transferir(IConta contaOrigem, double valor, IConta contaDestino) {
         return contaOrigem.transferir(valor, contaDestino);
@@ -106,6 +95,15 @@ public class Banco {
     public void sacar(IConta conta, double valor) {
         conta.sacar(valor);
     }
+
+    public void investir(IContaInvestimento conta, double valor) {
+        conta.investir(valor);
+    }
+
+    public static Banco getInstance() {
+        return AdaBank;
+    }
+
 
     /*public boolean contemLogin(String login) {
         //boolean contem = false;
@@ -124,82 +122,18 @@ public class Banco {
         return Banco.getInstance().contemLogin(login);
     }*/
 
-    public boolean validarSenhaCriacao(String respostaSenha) {
-        /*System.out.println("Digite sua senha: ");
+    /*public boolean validarSenhaCriacao(String respostaSenha) {
+        System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
         if (respostaSenha.isBlank() || respostaSenha.length() < 8) {
             System.out.println("Sua senha deve ter, ao menos, oito caracteres. Por favor, tente novamente.");
             validarSenhaCriacao();
               return false;
-        }*/
         return respostaSenha.isBlank() || respostaSenha.length() <= 8;
-    }
+    }*/
 
-    public void carregaDadosIniciais() {
 
-        ClientePessoaFisica arthur = new ClientePessoaFisica("Arthur Laureano Silva", "578.179.380-16");
-        ClientePessoaFisica bruno = new ClientePessoaFisica("Bruno Rafael Ribeiro Martins", "252.243.160-90");
-        ClientePessoaFisica diego = new ClientePessoaFisica("Diego Ruescas", "236.966.140-25");
-        ClientePessoaFisica noemi = new ClientePessoaFisica("Alice Noemi Jorge Dos Santos", "580.380.430-49");
-        ClientePessoaFisica thomas = new ClientePessoaFisica("Thomas Ramiro", "305.378.440-82");
-
-        ClientePessoaJuridica ada = new ClientePessoaJuridica("Ada Tecnologia e Educação S.A.", "24.861.255/0001-07");
-        ClientePessoaJuridica sinqia = new ClientePessoaJuridica("SINQIA S.A", "04.065.791/0001-99");
-
-        ContaCorrentePessoaFisica ccArthur = new ContaCorrentePessoaFisica("123456", arthur);
-        ContaCorrentePessoaFisica ccBruno = new ContaCorrentePessoaFisica("123456", bruno);
-        ContaCorrentePessoaFisica ccDiego = new ContaCorrentePessoaFisica("123456", diego);
-        ContaCorrentePessoaFisica ccNoemi = new ContaCorrentePessoaFisica("123456", noemi);
-        ContaCorrentePessoaFisica ccThomas = new ContaCorrentePessoaFisica("123456", thomas);
-
-        ContaPoupanca cpArthur = new ContaPoupanca("123456", arthur);
-        ContaPoupanca cpBruno = new ContaPoupanca("123456", bruno);
-        ContaPoupanca cpDiego = new ContaPoupanca( "123456", diego);
-        ContaPoupanca cpNoemi = new ContaPoupanca( "123456", noemi);
-        ContaPoupanca cpThomas = new ContaPoupanca("123456", thomas);
-
-        ContaInvestimentoPessoaFisica ciArthur = new ContaInvestimentoPessoaFisica("123456", arthur);
-        ContaInvestimentoPessoaFisica ciBruno = new ContaInvestimentoPessoaFisica("123456", bruno);
-        ContaInvestimentoPessoaFisica ciDiego = new ContaInvestimentoPessoaFisica("123456", diego);
-        ContaInvestimentoPessoaFisica ciNoemi = new ContaInvestimentoPessoaFisica("123456", noemi);
-        ContaInvestimentoPessoaFisica ciThomas = new ContaInvestimentoPessoaFisica("123456", thomas);
-
-        ContaCorrentePessoaJuridica ccAda = new ContaCorrentePessoaJuridica("123456", ada);
-        ContaCorrentePessoaJuridica ccSinqia = new ContaCorrentePessoaJuridica("123456",sinqia);
-
-        ContaInvestimentoPessoaJuridica ciAda = new ContaInvestimentoPessoaJuridica("123456", ada);
-        ContaInvestimentoPessoaJuridica ciSinqia = new ContaInvestimentoPessoaJuridica("123456", sinqia);
-
-        abrirConta(arthur, ccArthur);
-        abrirConta(bruno, ccBruno);
-        abrirConta(diego, ccDiego);
-        abrirConta(noemi, ccNoemi);
-        abrirConta(thomas, ccThomas);
-
-        abrirConta(arthur, cpArthur);
-        abrirConta(bruno, cpBruno);
-        abrirConta(diego, cpDiego);
-        abrirConta(noemi,cpNoemi);
-        abrirConta(thomas, cpThomas);
-
-        abrirConta(arthur, ciArthur);
-        abrirConta(bruno, ciBruno);
-        abrirConta(diego, ciDiego);
-        abrirConta(noemi, ciNoemi);
-        abrirConta(thomas, ciThomas);
-
-        abrirConta(ada, ccAda);
-        abrirConta(sinqia, ccSinqia);
-
-        abrirConta(ada, ciAda);
-        abrirConta(sinqia, ciSinqia);
-    }
-
-    public static Banco getInstance() {
-        return AdaBank;
-    }
-
-    public void menuCliente(Cliente cliente) {
+   /* public void menuCliente(Cliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
         System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
         //fazer separacao por tipo de cliente/conta ????
@@ -211,8 +145,7 @@ public class Banco {
                 + "4 - Investir \n"
                 + "5 - Consultar saldo \n"
                 + "6 - Sair");
-
-        String opcaoCliente = sc.next();
+        //String opcaoCliente = sc.next();
         switch (opcaoCliente) {
             case "1":
                 //sacar();
@@ -222,7 +155,6 @@ public class Banco {
                 break;
             case "3":
                 //depositar();
-
                 break;
             case "4":
                 //investir();
@@ -238,5 +170,5 @@ public class Banco {
                 menuCliente(cliente);
                 break;
         }
-    }
+    }*/
 }

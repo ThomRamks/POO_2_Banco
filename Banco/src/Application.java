@@ -1,5 +1,6 @@
 import banco.Banco;
 import cliente.Cliente;
+import util.GeraDadosIniciais;
 
 import java.util.Scanner;
 
@@ -7,12 +8,30 @@ import java.util.Scanner;
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
+    static Banco banco = Banco.getInstance();
 
 
     public static void main(String[] args) {
-        Application app = new Application();
-        Banco.getInstance();
-        app.menuUsuario();
+
+        GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
+        dadosIniciais.carregaDadosIniciais();
+        Banco banco = Banco.getInstance();
+
+        String documentoArthur = "578.179.380-16";
+        banco.listarContasUsuario(documentoArthur);
+
+        String documentoDiego = "123.456.789-10";
+        banco.listarContasUsuario(documentoDiego);
+
+        String documentoAda = "24.861.255/0001-07";
+        banco.listarContasUsuario(documentoAda);
+
+        String documentoSinqia = "04.065.791/0001-99";
+        banco.listarContasUsuario(documentoSinqia);
+
+//        Application app = new Application();
+//        Banco.getInstance();
+//        app.menuUsuario();
 
 //        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
 //        PessoaJuridica pessoaJuridica = new PessoaJuridica("Ada", "12.455.455/0001-00");
@@ -62,35 +81,29 @@ public class Application {
 
     }
 
-    public void menuUsuario() {
+   /* public void menuUsuario() {
         System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
         respostasUsuario = sc.next();
         validarRequisicao(respostasUsuario);
     }
-
-    public void validarRequisicao(String respostasUsuario) {
-        switch (respostasUsuario) {
-            case "1":
-                menuLogin();
-                break;
-            case "2":
-                System.out.println("Digite seu nome: ");
-                Cliente cliente = new Cliente(sc.next());
-                cliente.abrirConta(cliente);
-                break;
-            default:
-                System.out.println("Não entendemos sua requisição, tente novamente!");
-                menuUsuario();
+    public void validarRequisicao(String requisicaoDoUsuario) {
+        if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
+            System.out.println("Não entendemos sua requisição, tente novamente!");
+            menuUsuario();
+        } else if (requisicaoDoUsuario.equals("1")) {
+            menuLogin();
+        } else {
+            System.out.println("Digite seu nome: ");
+            Cliente cliente = new Cliente(sc.next());
+            cliente.abrirConta(cliente);
         }
     }
-
     public void menuLogin() {
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
         validarLoginEntrada(respostaLogin);
     }
-
     public void validarLoginEntrada(String login) {
         if (!Banco.getInstance().contemLogin(login)) {
             System.out.println("CPF ou CNPJ inválido. Tente novamente.");
@@ -100,7 +113,6 @@ public class Application {
             validarSenhaEntrada(cliente);
         }
     }
-
     public void validarSenhaEntrada(Cliente cliente) {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
@@ -109,14 +121,12 @@ public class Application {
             validarSenhaEntrada(cliente);
         } else {
             if (respostaSenha.contentEquals(cliente.getConta().getSenha())) {
-                //System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+                System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
                 //INSERIR MENU DO CLIENTE (COM AS OPÇÕES DE SACAR, TRANSFERIR...)
-                //achei melhor fazer em BANCO
-                Banco.getInstance().menuCliente(cliente);;
             } else {
                 System.out.println("Senha incorreta. Por favor, tente novamente.");
                 validarSenhaEntrada(cliente);
             }
         }
-    }
+    }*/
 }
