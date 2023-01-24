@@ -98,6 +98,7 @@ public class Banco {
         conta.depositar(valor);
     }
 
+
     public boolean transferir(IConta contaOrigem, double valor, IConta contaDestino) {
         return contaOrigem.transferir(valor, contaDestino);
     }
@@ -126,7 +127,7 @@ public class Banco {
     public boolean validarSenhaCriacao(String respostaSenha) {
         /*System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
-        if (respostaSenha.isBlank() || respostaSenha.length() <= 8) {
+        if (respostaSenha.isBlank() || respostaSenha.length() < 8) {
             System.out.println("Sua senha deve ter, ao menos, oito caracteres. Por favor, tente novamente.");
             validarSenhaCriacao();
               return false;
@@ -196,5 +197,46 @@ public class Banco {
 
     public static Banco getInstance() {
         return AdaBank;
+    }
+
+    public void menuCliente(Cliente cliente) {
+        System.out.println("==============    MENU CLIENTE   ================");
+        System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+        //fazer separacao por tipo de cliente/conta ????
+        // qual tipo de conta vai acessar???
+        System.out.println("Qual operação você deseja realizar:\n"
+                + "1 - Sacar \n"
+                + "2 - Transferir \n"
+                + "3 - Depositar \n"
+                + "4 - Investir \n"
+                + "5 - Consultar saldo \n"
+                + "6 - Sair");
+
+        String opcaoCliente = sc.next();
+        switch (opcaoCliente) {
+            case "1":
+                //sacar();
+                break;
+            case "2":
+                //transferir();
+                break;
+            case "3":
+                //depositar();
+
+                break;
+            case "4":
+                //investir();
+                break;
+            case "5":
+                //consultarSaldo();
+                break;
+            case "6":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuCliente(cliente);
+                break;
+        }
     }
 }

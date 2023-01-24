@@ -63,11 +63,9 @@ public class Application {
 //        operacao.sacar(ccPessoaJuridica, 200);
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
-
-
     }
 
-   /* public void menuUsuario() {
+    public void menuUsuario() {
         System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
         respostasUsuario = sc.next();
         validarRequisicao(respostasUsuario);
@@ -118,5 +116,5 @@ public class Application {
                 validarSenhaEntrada(cliente);
             }
         }
-    }*/
+    }
 }

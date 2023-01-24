@@ -14,4 +14,31 @@ public abstract class Cliente implements ICliente {
     public String getNome() {
         return nome;
     }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void abrirConta(Cliente novoCliente) {
+        Banco.getInstance().cadastrarConta(novoCliente);
+    }
+
+    public void sacar() {
+
+    }
+
+    public void transferir() {
+    }
+
+    public void depositar() {
+
+    }
+
+    public void consultarSaldo() {
+
+    }
+
+    public void investir() {
+
+    }
 }
