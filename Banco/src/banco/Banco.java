@@ -1,5 +1,6 @@
 package banco;
 
+import cliente.Cliente;
 import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
@@ -14,7 +15,6 @@ public class Banco {
     private List<IConta> contas = new ArrayList<>();
     private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
     private int numeroDefault;
-
 
     public Banco() {
         numeroDefault = 1000;
@@ -104,4 +104,73 @@ public class Banco {
         return AdaBank;
     }
 
+
+    /*public boolean contemLogin(String login) {
+        //boolean contem = false;
+        //if (clientes.containsKey(login)) {
+            //contem = true;
+        //}
+        return contas.containsKey(login);
+    }*/
+
+    /*public boolean validarLoginCriacao(String login) {
+        //if (Banco.getInstance().contemLogin(login)) { // CPF e CNPJ precisam ter seus formatos definidos
+            //System.out.println("CPF ou CNPJ já cadastrados. Tente novamente");
+        //} else {
+            validarSenhaCriacao();
+        //}
+        return Banco.getInstance().contemLogin(login);
+    }*/
+
+    /*public boolean validarSenhaCriacao(String respostaSenha) {
+        System.out.println("Digite sua senha: ");
+        String respostaSenha = sc.next();
+        if (respostaSenha.isBlank() || respostaSenha.length() < 8) {
+            System.out.println("Sua senha deve ter, ao menos, oito caracteres. Por favor, tente novamente.");
+            validarSenhaCriacao();
+              return false;
+        return respostaSenha.isBlank() || respostaSenha.length() <= 8;
+    }*/
+
+
+   /* public void menuCliente(Cliente cliente) {
+        System.out.println("==============    MENU CLIENTE   ================");
+        System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+        //fazer separacao por tipo de cliente/conta ????
+        // qual tipo de conta vai acessar???
+        System.out.println("Qual operação você deseja realizar:\n"
+                + "1 - Sacar \n"
+                + "2 - Transferir \n"
+                + "3 - Depositar \n"
+                + "4 - Investir \n"
+                + "5 - Consultar saldo \n"
+                + "6 - Sair");
+
+        //String opcaoCliente = sc.next();
+        switch (opcaoCliente) {
+            case "1":
+                //sacar();
+                break;
+            case "2":
+                //transferir();
+                break;
+            case "3":
+                //depositar();
+
+                break;
+            case "4":
+                //investir();
+                break;
+            case "5":
+                //consultarSaldo();
+                break;
+            case "6":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuCliente(cliente);
+                break;
+        }
+    }*/
 }

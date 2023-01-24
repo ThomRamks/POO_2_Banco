@@ -7,6 +7,7 @@ import interfaces.ICliente;
 
 public class GeraDadosIniciais {
     Banco banco = Banco.getInstance();
+
     public void carregaDadosIniciais() {
         ICliente arthur = new ClientePessoaFisica("Arthur Laureano Silva", "123456", "578.179.380-16");
         banco.abrirContaPessoaFisica(arthur);
@@ -14,7 +15,7 @@ public class GeraDadosIniciais {
         ICliente diego = new ClientePessoaFisica("Diego Ruescas", "123456", "123.456.789-10");
         banco.abrirContaPessoaFisica(diego);
 
-        ICliente ada = new ClientePessoaJuridica("Ada Tecnologia e Educação S.A.","123456789", "24.861.255/0001-07");
+        ICliente ada = new ClientePessoaJuridica("Ada Tecnologia e Educação S.A.", "123456789", "24.861.255/0001-07");
         banco.abrirContaPessoaJuridica(ada);
 
 
@@ -22,5 +23,4 @@ public class GeraDadosIniciais {
         banco.abrirContaPessoaJuridica(sinqia);
 
     }
-
 }

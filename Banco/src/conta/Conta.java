@@ -2,6 +2,7 @@ package conta;
 
 import interfaces.ICliente;
 import interfaces.IConta;
+import cliente.Cliente;
 
 public abstract class Conta implements IConta {
     private int agencia;
@@ -25,7 +26,9 @@ public abstract class Conta implements IConta {
     public int getNumero() {
         return this.numero;
     }
+
+    @Override
     public ICliente getTitular() {
-        return this.titular;
+        return titular;
     }
 }
