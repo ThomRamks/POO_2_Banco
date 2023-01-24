@@ -81,13 +81,67 @@ public class Application {
 
     }
 
-   /* public void menuUsuario() {
-        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
+    public void menuInicial() {
+        System.out.println("====================================================");
+        System.out.println("             Seja bem vindo(a) ao                   ");
+        System.out.println("		            ADA BANK                        ");
+        System.out.println("          Seu dinheiro, nossa renda!                ");
+        System.out.println("====================================================");
+        System.out.println("");
+        System.out.println("Digite a operação desejada:\n"
+                + "1 - Acessar sua conta \n"
+                + "2 - Abrir conta \n"
+                + "3 - Sair");
+
         respostasUsuario = sc.next();
-        validarRequisicao(respostasUsuario);
+
+        switch (respostasUsuario) {
+            case "1":
+                //fazerLogin();
+                break;
+            case "2":
+                abrirConta();
+                break;
+            case "3":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuInicial();
+                break;
+        }
+
+
+        //validarRequisicao(respostasUsuario);
     }
 
-    public void validarRequisicao(String requisicaoDoUsuario) {
+    private void abrirConta() {
+        System.out.println("Qual tipo de conta voce deseja criar:\n"
+                + "1 - Conta Pessoa Fisica \n"
+                + "2 - Conta Pessoa Juridica \n"
+                + "3 - Voltar ao Menu Inicial");
+
+        respostasUsuario = sc.next();
+
+        switch (respostasUsuario) {
+            case "1":
+                //abrircontaPF();
+                break;
+            case "2":
+                //abrirContaPJ();
+                break;
+            case "3":
+                menuInicial();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                abrirConta();
+                break;
+        }
+    }
+
+
+    /*public void validarRequisicao(String requisicaoDoUsuario) {
         if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
             System.out.println("Não entendemos sua requisição, tente novamente!");
             menuUsuario();
@@ -134,3 +188,4 @@ public class Application {
         }
     }*/
 }
+
