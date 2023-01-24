@@ -6,8 +6,10 @@ import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    public ContaCorrentePessoaJuridica(int numero, String senha, ClientePessoaJuridica titular) {
-        super(numero, senha, titular);
+    private int operacao = 0;
+
+    public ContaCorrentePessoaJuridica(String senha, ClientePessoaJuridica titular) {
+        super(senha, titular);
     }
 
     @Override
@@ -33,5 +35,16 @@ public class ContaCorrentePessoaJuridica extends Conta {
         }
         System.out.println("Não é possível realizar a operação. O valor é maior do que se encontra na conta.");
         return false;
+    }
+
+
+    @Override
+    public String getTipoConta() {
+        return TipoConta.CONTA_CORRENTE.getDescricao();
+    }
+
+    @Override
+    public int getOperacao() {
+        return this.operacao;
     }
 }

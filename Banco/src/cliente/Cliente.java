@@ -2,13 +2,15 @@ package cliente;
 
 import banco.Banco;
 import conta.Conta;
+import interfaces.ICliente;
 
-public class Cliente {
+public abstract class Cliente implements ICliente {
     private String nome;
-    private Conta conta;
+
     public Cliente(String nome) {
         this.nome = nome;
     }
+
     public String getNome() {
         return nome;
     }

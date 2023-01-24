@@ -4,14 +4,17 @@ import interfaces.IConta;
 import cliente.Cliente;
 
 public abstract class Conta implements IConta {
-    private int agencia = 913;
+    private static int numeroContaPadrao = 1000;
+    private int agencia;
     private int numero;
     private String senha;
     private Cliente titular;
     protected double saldo;
 
-    public Conta(int numero, String senha, Cliente titular) {
-        this.numero = numero;
+    public Conta(String senha, Cliente titular) {
+        numeroContaPadrao++;
+        this.agencia = 913;
+        this.numero = numeroContaPadrao;
         this.senha = senha;
         this.titular = titular;
     }
@@ -25,10 +28,10 @@ public abstract class Conta implements IConta {
     public int getNumero() {
         return numero;
     }
-    public String getSenha(){return senha;}
-    protected void setSenha(String novaSenha){
-    }
     public Cliente getTitular() {
         return titular;
+    }
+    public boolean validaSenha(String senha) {
+        return this.senha.equals(senha);
     }
 }
