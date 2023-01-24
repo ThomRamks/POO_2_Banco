@@ -12,14 +12,15 @@ public class Banco {
 
     private static final Banco AdaBank = new Banco();
     private List<IConta> contas = new ArrayList<>();
-    private List<IConta> contasUsuario = new ArrayList<>();
+    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
     private int numeroDefault;
 
 
     public Banco() {
         numeroDefault = 1000;
     }
-    public void abrirContaCorrentePessoaFisica(ICliente cliente){
+
+    public void abrirContaPessoaFisica(ICliente cliente){
         int numero = 0;
         getContasUsuario(cliente.getDocumento());
         if (contasUsuario.size() > 0) {
@@ -28,11 +29,15 @@ public class Banco {
             numeroDefault++;
             numero = numeroDefault;
         }
-        IConta conta = new ContaCorrentePessoaFisica(numero, cliente);
-        contas.add(conta);
+        IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
+        contas.add(ccPessoaFisica);
+        IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
+        contas.add(ciPessoaFisica);
+        IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
+        contas.add(cpPessoaFisica);
     }
 
-    public void abrirContaCorrentePessoaJuridica(ICliente cliente){
+    public void abrirContaPessoaJuridica(ICliente cliente){
         int numero = 0;
         getContasUsuario(cliente.getDocumento());
         if (contasUsuario.size() > 0) {
@@ -41,47 +46,10 @@ public class Banco {
             numeroDefault++;
             numero = numeroDefault;
         }
-        IConta conta = new ContaCorrentePessoaJuridica(numero, cliente);
-        contas.add(conta);
-    }
-
-    public void abrirContaInvestimentoPessoaFisica(ICliente cliente){
-        int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
-        } else {
-            numeroDefault++;
-            numero = numeroDefault;
-        }
-        IConta conta = new ContaInvestimentoPessoaFisica(numero, cliente);
-        contas.add(conta);
-    }
-
-    public void abrirContaInvestimentoPessoaJuridica(ICliente cliente){
-        int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
-        } else {
-            numeroDefault++;
-            numero = numeroDefault;
-        }
-        IConta conta = new ContaInvestimentoPessoaJuridica(numero, cliente);
-        contas.add(conta);
-    }
-
-    public void abrirContaPoupanca(ICliente cliente){
-        int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
-        } else {
-            numeroDefault++;
-            numero = numeroDefault;
-        }
-        IConta conta = new ContaPoupanca(numero, cliente);
-        contas.add(conta);
+        IConta ccPessoaJuridica = new ContaCorrentePessoaJuridica(numero, cliente);
+        contas.add(ccPessoaJuridica);
+        IConta ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(numero, cliente);
+        contas.add(ciPessoaJuridica);
     }
 
     public void getContasUsuario(String documento) {
@@ -104,8 +72,8 @@ public class Banco {
 
     public void listarContasUsuario(String documento) {
         String nome = getCliente(documento).getNome();
-        System.out.println("\n\t-- Conta " + nome + " --");
-        contas.forEach(conta -> {
+        System.out.println("\n\t-- Conta " + nome + " --\n");
+        contasUsuario.forEach(conta -> {
             System.out.println("Tipo conta: " + conta.getTipoConta());
             System.out.println("Operação: " + conta.getOperacao());
             System.out.println("Titular: " + conta.getTitular().getNome());

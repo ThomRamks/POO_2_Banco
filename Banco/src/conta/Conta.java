@@ -1,6 +1,5 @@
 package conta;
 
-import cliente.Cliente;
 import interfaces.ICliente;
 import interfaces.IConta;
 

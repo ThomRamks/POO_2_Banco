@@ -1,5 +1,5 @@
 ```mermaid
-graph LR
+graph
 A["abrirContaCorrentePessoaFisica(ICliente)"] --> F["getContasUsuario(ICliente.getDocumento())"]
 B["abrirContaPoupanca(ICliente)"] -->F["getContasUsuario(ICliente.getDocumento())"]
 C["abrirContaInvestimentoPessoaFisica(ICliente)"] -->F["getContasUsuario(ICliente.getDocumento())"]
@@ -17,3 +17,4 @@ H["numero = getNumeroConta(cliente.getDocumento())"] --> K("new ContaCorresposnd
 J["numero = numeroDefault;"] --> K("new ContaCorresposndente(cliente, numero)")   
 ```
 
+Colocar lista de contas no Cliente.
