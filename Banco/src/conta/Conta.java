@@ -1,37 +1,31 @@
 package conta;
 
+import interfaces.ICliente;
 import interfaces.IConta;
-import cliente.Cliente;
 
 public abstract class Conta implements IConta {
-    private static int numeroContaPadrao = 1000;
     private int agencia;
     private int numero;
-    private String senha;
-    private Cliente titular;
+    private ICliente titular;
     protected double saldo;
 
-    public Conta(String senha, Cliente titular) {
-        numeroContaPadrao++;
+    public Conta(int numero, ICliente titular) {
         this.agencia = 913;
-        this.numero = numeroContaPadrao;
-        this.senha = senha;
+        this.numero = numero;
         this.titular = titular;
     }
 
     public double getSaldo() {
         return saldo;
     }
+
     public int getAgencia() {
-        return agencia;
+        return this.agencia;
     }
     public int getNumero() {
-        return numero;
+        return this.numero;
     }
-    public Cliente getTitular() {
-        return titular;
-    }
-    public boolean validaSenha(String senha) {
-        return this.senha.equals(senha);
+    public ICliente getTitular() {
+        return this.titular;
     }
 }
