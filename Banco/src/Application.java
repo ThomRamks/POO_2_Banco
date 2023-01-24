@@ -2,44 +2,26 @@ import conta.ContaCorrentePessoaFisica;
 import conta.ContaCorrentePessoaJuridica;
 import conta.ContaPoupanca;
 import banco.Banco;
-import pessoa.PessoaFisica;
-import pessoa.PessoaJuridica;
+import cliente.ClientePessoaFisica;
+import cliente.ClientePessoaJuridica;
+import util.GeraDadosIniciais;
 
 public class Application {
     public static void main(String[] args) {
-        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
-        PessoaJuridica pessoaJuridica = new PessoaJuridica("Ada", "12.455.455/0001-00");
+        GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
+        dadosIniciais.carregaDadosIniciais();
+        Banco banco = Banco.getInstance();
 
+        String documentoArthur = "578.179.380-16";
+        banco.listarContasUsuario(documentoArthur);
 
-        ContaPoupanca contaPoupanca = new ContaPoupanca(123,45678, pessoaFisica);
-        ContaCorrentePessoaFisica ccPessoaFisica = new ContaCorrentePessoaFisica(321, 7898, pessoaFisica);
-        ContaCorrentePessoaJuridica ccPessoaJuridica = new ContaCorrentePessoaJuridica(456, 445588, pessoaJuridica);
+        String documentoDiego = "123.456.789-10";
+        banco.listarContasUsuario(documentoDiego);
 
+        String documentoAda = "24.861.255/0001-07";
+        banco.listarContasUsuario(documentoAda);
 
-        Banco operacao = new Banco();
-        operacao.depositar(contaPoupanca, 100);
-        operacao.depositar(ccPessoaFisica, 100);
-        operacao.depositar(ccPessoaJuridica, 200);
-
-        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
-        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
-        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
-
-        System.out.println();
-
-        boolean transferiu  = operacao.transferir(ccPessoaJuridica, 100, ccPessoaFisica);
-
-        if (transferiu) {
-            System.out.println("Transferência realizada com sucesso!");
-        } else {
-            System.out.println("Transferência não realizada!");
-        }
-
-        System.out.println();
-
-        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
-        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
-        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
-
+        String documentoSinqia = "04.065.791/0001-99";
+        banco.listarContasUsuario(documentoSinqia);
     }
 }

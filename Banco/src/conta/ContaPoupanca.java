@@ -1,16 +1,16 @@
 package conta;
 
+import banco.Banco;
+import interfaces.ICliente;
 import interfaces.IConta;
-import pessoa.PessoaFisica;
+import cliente.ClientePessoaFisica;
 
-public class ContaPoupanca extends Conta implements IConta {
+public class ContaPoupanca extends Conta {
+    private int operacao = 1;
 
-    private PessoaFisica titular;
-
-    public ContaPoupanca(int agencia, int numero, PessoaFisica titular) {
-        super(agencia, numero, titular);
+    public ContaPoupanca(int numero, ICliente titular) {
+        super(numero, titular);
     }
-
 
     @Override
     public void depositar(double valor) {
@@ -19,11 +19,29 @@ public class ContaPoupanca extends Conta implements IConta {
 
     @Override
     public boolean transferir(double valor, IConta conta) {
+        if (this.sacar(valor)) {
+            Banco.getInstance().depositar(conta, valor);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean sacar(double valor) {
+        if (super.saldo >= valor) {
+            super.saldo -= valor;
+            return true;
+        }
         return false;
+    }
+
+    @Override
+    public String getTipoConta() {
+        return TipoConta.CONTA_POUPANCA.getDescricao();
+    }
+
+    @Override
+    public int getOperacao() {
+        return this.operacao;
     }
 }
