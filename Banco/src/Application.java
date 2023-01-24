@@ -116,6 +116,7 @@ public class Application {
     }
 
     private void abrirConta() {
+        System.out.println("========== ABERTURA DE CONTA ==========");
         System.out.println("Qual tipo de conta voce deseja criar:\n"
                 + "1 - Conta Pessoa Fisica \n"
                 + "2 - Conta Pessoa Juridica \n"
