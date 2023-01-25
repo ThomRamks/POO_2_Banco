@@ -6,13 +6,19 @@ import interfaces.IConta;
 import interfaces.IContaInvestimento;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Banco {
 
     private static final Banco AdaBank = new Banco();
+
+    public List<IConta> getContas() {
+        return contas;
+    }
+
     private List<IConta> contas = new ArrayList<>();
-//    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
+    //    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
     private int numeroDefault;
 
     public Banco() {
@@ -29,14 +35,16 @@ public class Banco {
             numero = numeroDefault;
         }
         IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
-        contas.add(ccPessoaFisica);
-        cliente.getContasUsuario().add(ccPessoaFisica);
+//        contas.add(ccPessoaFisica);
+//        cliente.getContasUsuario().add(ccPessoaFisica);
         IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
-        contas.add(ciPessoaFisica);
-        cliente.getContasUsuario().add(ciPessoaFisica);
+//        contas.add(ciPessoaFisica);
+//        cliente.getContasUsuario().add(ciPessoaFisica);
         IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
-        contas.add(cpPessoaFisica);
-        cliente.getContasUsuario().add(cpPessoaFisica);
+//        contas.add(cpPessoaFisica);
+//        cliente.getContasUsuario().add(cpPessoaFisica);
+        Collections.addAll(cliente.getContasUsuario(),ccPessoaFisica,ciPessoaFisica, cpPessoaFisica);
+        Collections.addAll(contas, ccPessoaFisica,ciPessoaFisica, cpPessoaFisica);
     }
 
     public void abrirContaPessoaJuridica(ICliente cliente){
@@ -49,11 +57,13 @@ public class Banco {
             numero = numeroDefault;
         }
         IConta ccPessoaJuridica = new ContaCorrentePessoaJuridica(numero, cliente);
-        contas.add(ccPessoaJuridica);
+//        contas.add(ccPessoaJuridica);
         cliente.getContasUsuario().add(ccPessoaJuridica);
         IConta ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(numero, cliente);
-        contas.add(ciPessoaJuridica);
+//        contas.add(ciPessoaJuridica);
         cliente.getContasUsuario().add(ciPessoaJuridica);
+        Collections.addAll(cliente.getContasUsuario(),ccPessoaJuridica,ciPessoaJuridica);
+        Collections.addAll(contas, ccPessoaJuridica,ciPessoaJuridica);
     }
 
 //    public void getContasUsuario(String documento) {
