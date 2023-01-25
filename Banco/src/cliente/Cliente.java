@@ -1,15 +1,16 @@
 package cliente;
 
-import banco.Banco;
-import conta.Conta;
+
 import interfaces.ICliente;
 import interfaces.IConta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Cliente implements ICliente {
     private String nome;
     private String senha;
+    private List<IConta> contasUsuario = new ArrayList<>();
 
 
     public Cliente(String nome, String senha) {
@@ -19,6 +20,10 @@ public abstract class Cliente implements ICliente {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<IConta> getContasUsuario() {
+        return contasUsuario;
     }
 
     public boolean validaSenha(String senha) {
