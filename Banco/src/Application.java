@@ -7,6 +7,7 @@ import conta.Conta;
 import interfaces.ICliente;
 import interfaces.IConta;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -276,13 +277,13 @@ public class Application {
 
         switch (opcaoCliente) {
             case "1":
-                //menuOperacoes
+                menuOperacoes(cliente.getContasUsuario().get(0));
                 break;
             case "2":
-                //ContaPoupanca
+                menuOperacoesInvestir(cliente.getContasUsuario().get(1));
                 break;
             case "3":
-                //investimento;
+                menuOperacoes(cliente.getContasUsuario().get(2));
                 break;
             case "4":
                 menuInicial();
@@ -334,7 +335,8 @@ public class Application {
                 menuTransferir(conta);
                 break;
             case "3":
-                //depositar();
+                menuDepositar(conta);
+                menuOperacoes(conta);
                 break;
             case "4":
                 //consultarSaldo();
@@ -366,7 +368,8 @@ public class Application {
                 menuTransferir(conta);
                 break;
             case "3":
-                //depositar();
+                menuDepositar(conta);
+                menuOperacoesInvestir(conta);
                 break;
             case "4":
               //investir
@@ -396,7 +399,7 @@ public class Application {
             System.out.println("Para qual tipo conta voce deseja transferir?");
             if (banco.getTipoPessoa(contaDestino).equals("PF")){
                 //menu opcoes cc, ci, cp
-            } else if (banco.getTipoPessoa(contaDestino).equals("PF")){
+            } else if (banco.getTipoPessoa(contaDestino).equals("PJ")){
                 //menu opcoes cc, ci
             }
         }
@@ -445,6 +448,18 @@ public class Application {
         System.out.println("ADA BANK agradece sua preferencia.");
         System.out.println("Esperamos de te ver em breve! o/");
         System.exit(0);
+    }
+
+    public void menuDepositar(IConta conta){
+        try {
+            System.out.println("Digite a quantia que você deseja depositar: ");
+            double valorDesejado = sc.nextDouble();
+            banco.depositar(conta, valorDesejado);
+            System.out.println("Depósito efetuado!");
+        } catch (InputMismatchException e){
+            System.out.println("Valor inválido! Tente novamente.");
+            menuDepositar(conta);
+        }
     }
 
 
