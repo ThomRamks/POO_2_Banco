@@ -16,18 +16,19 @@ public class Application {
         GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
         dadosIniciais.carregaDadosIniciais();
         Banco banco = Banco.getInstance();
+    }
 
-        String documentoArthur = "578.179.380-16";
-        banco.listarContasUsuario(documentoArthur);
-
-        String documentoDiego = "123.456.789-10";
-        banco.listarContasUsuario(documentoDiego);
-
-        String documentoAda = "24.861.255/0001-07";
-        banco.listarContasUsuario(documentoAda);
-
-        String documentoSinqia = "04.065.791/0001-99";
-        banco.listarContasUsuario(documentoSinqia);
+//        String documentoArthur = "578.179.380-16";
+//        banco.listarContasUsuario(documentoArthur);
+//
+//        String documentoDiego = "123.456.789-10";
+//        banco.listarContasUsuario(documentoDiego);
+//
+//        String documentoAda = "24.861.255/0001-07";
+//        banco.listarContasUsuario(documentoAda);
+//
+//        String documentoSinqia = "04.065.791/0001-99";
+//        banco.listarContasUsuario(documentoSinqia);
 
 //        Application app = new Application();
 //        Banco.getInstance();
@@ -79,7 +80,6 @@ public class Application {
 //        operacao.sacar(ccPessoaJuridica, 200);
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
-    }
 
     public void menuInicial() {
         System.out.println("====================================================");
@@ -116,7 +116,6 @@ public class Application {
     }
 
     private void abrirConta() {
-        System.out.println("========== ABERTURA DE CONTA ==========");
         System.out.println("Qual tipo de conta voce deseja criar:\n"
                 + "1 - Conta Pessoa Fisica \n"
                 + "2 - Conta Pessoa Juridica \n"
@@ -154,14 +153,12 @@ public class Application {
             cliente.abrirConta(cliente);
         }
     }
-
     public void menuLogin() {
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
         validarLoginEntrada(respostaLogin);
     }
-
     public void validarLoginEntrada(String login) {
         if (!Banco.getInstance().contemLogin(login)) {
             System.out.println("CPF ou CNPJ inválido. Tente novamente.");
@@ -171,7 +168,6 @@ public class Application {
             validarSenhaEntrada(cliente);
         }
     }
-
     public void validarSenhaEntrada(Cliente cliente) {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
@@ -189,4 +185,3 @@ public class Application {
         }
     }*/
 }
-

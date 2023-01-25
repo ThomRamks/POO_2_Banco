@@ -1,79 +1,208 @@
 package banco;
 
-import cliente.Cliente;
 import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Banco {
 
     private static final Banco AdaBank = new Banco();
-    private List<IConta> contas = new ArrayList<>();
-    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
+
+
+//    public List<IConta> getContas() {
+//        return contas;
+//    }
+
+    //    private List<IConta> contas = new ArrayList<>();
+    private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
+    //    private List<IConta> contasUsuario = new ArrayList<>(); // passar para o cliente
     private int numeroDefault;
 
     public Banco() {
         numeroDefault = 1000;
     }
 
-    public void abrirContaPessoaFisica(ICliente cliente){
+    public static Banco getInstance() {
+        return AdaBank;
+    }
+
+    public void abrirContaPessoaFisica(ICliente cliente) {
         int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
+//        getContasUsuario(cliente.getDocumento());
+        if (cliente.getContasUsuario().size() > 0) {
+            numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
             numeroDefault++;
             numero = numeroDefault;
         }
         IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
-        contas.add(ccPessoaFisica);
+//        contas.add(ccPessoaFisica);
+//        cliente.getContasUsuario().add(ccPessoaFisica);
         IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
-        contas.add(ciPessoaFisica);
+//        contas.add(ciPessoaFisica);
+//        cliente.getContasUsuario().add(ciPessoaFisica);
         IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
-        contas.add(cpPessoaFisica);
+//        contas.add(cpPessoaFisica);
+//        cliente.getContasUsuario().add(cpPessoaFisica);
+        Collections.addAll(cliente.getContasUsuario(), ccPessoaFisica, ciPessoaFisica, cpPessoaFisica);
+//        Collections.addAll(contas, ccPessoaFisica, ciPessoaFisica, cpPessoaFisica);
+        contasNoBanco.put(ccPessoaFisica, cliente);
+        contasNoBanco.put(ciPessoaFisica, cliente);
+        contasNoBanco.put(cpPessoaFisica, cliente);
     }
 
-    public void abrirContaPessoaJuridica(ICliente cliente){
+    public void abrirContaPessoaJuridica(ICliente cliente) {
         int numero = 0;
-        getContasUsuario(cliente.getDocumento());
-        if (contasUsuario.size() > 0) {
-            numero = getNumeroConta(cliente.getDocumento());
+//        getContasUsuario(cliente.getDocumento());
+        if (cliente.getContasUsuario().size() > 0) {
+            numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
             numeroDefault++;
             numero = numeroDefault;
         }
         IConta ccPessoaJuridica = new ContaCorrentePessoaJuridica(numero, cliente);
-        contas.add(ccPessoaJuridica);
+//        contas.add(ccPessoaJuridica);
+        cliente.getContasUsuario().add(ccPessoaJuridica);
         IConta ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(numero, cliente);
-        contas.add(ciPessoaJuridica);
+//        contas.add(ciPessoaJuridica);
+        cliente.getContasUsuario().add(ciPessoaJuridica);
+        Collections.addAll(cliente.getContasUsuario(), ccPessoaJuridica, ciPessoaJuridica);
+//        Collections.addAll(contas, ccPessoaJuridica, ciPessoaJuridica);
+        contasNoBanco.put(ccPessoaJuridica, cliente);
+        contasNoBanco.put(ciPessoaJuridica, cliente);
     }
 
-    public void getContasUsuario(String documento) {
-        contasUsuario.clear();
-        for (IConta conta : contas) {
-            if (conta.getTitular().getDocumento().equals(documento)){
-                contasUsuario.add(conta);
+
+    public boolean contemLogin(String login) {
+        boolean contem = false;
+        for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
+            if (contaS.getValue().getDocumento().equals(login)) {
+                contem = true;
+            }
+
+        }
+        return contem;
+    }
+
+//                        CASO USEMOS LIST AO INVÉS DE HASHMAP:
+//    public boolean contemLogin(String login) {
+//        boolean contem = false;
+//        for (IConta conta : contas) {
+//            if (conta.getTitular().getDocumento().equals(login)) {
+//                contem = true;
+//            }
+//        }
+//        return contem;
+//    }
+
+
+    public boolean cadastrarSenha(String senha) {
+        boolean tamanhoCorreto;
+        if (senha.length() < 8 || senha.isBlank()) {
+            tamanhoCorreto = false;
+        } else {
+            tamanhoCorreto = true;
+        }
+        return tamanhoCorreto;
+    }
+
+    public ICliente getCliente(String login) {
+        ICliente cliente = null;
+        for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
+            if (contaS.getValue().getDocumento().equals(login)) {
+                cliente = contaS.getValue();
             }
         }
+        return cliente;
     }
 
-    public int getNumeroConta(String documento) {
-        return contasUsuario.get(0).getNumero();
+    //                        CASO USEMOS LIST AO INVÉS DE HASHMAP:
+//    public ICliente getCliente(String login){
+//        ICliente cliente = null;
+//        for(IConta conta : contas){
+//            if(conta.getTitular().getDocumento().equals(login)){
+//                cliente = conta.getTitular();
+//            }
+//        }
+//        return cliente;
+//    }
+
+    public boolean checarSenha(ICliente cliente, String senha) {
+        return cliente.validaSenha(senha);
     }
 
-    public ICliente getCliente(String documento) {
-        getContasUsuario(documento);
-        return contasUsuario.get(0).getTitular();
+    public boolean contemConta(int numeroConta) {
+        boolean contem = false;
+        for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
+            if (contaS.getKey().getNumero() == numeroConta) {
+                contem = true;
+            }
+        }
+        return contem;
     }
 
-    public void listarContasUsuario(String documento) {
-        String nome = getCliente(documento).getNome();
+
+//                        CASO USEMOS LIST AO INVÉS DE HASHMAP:
+//    public boolean contemConta(int numeroConta){
+//        boolean contem = false;
+//        for (IConta conta: contas){
+//            if(conta.getNumero() == numeroConta){
+//                contem = true;
+//            }
+//        }
+//        return contem;
+//    }
+
+    public String getTipoPessoa(int numeroConta) {
+        String tipoPessoa = null;
+        for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
+            if (contaS.getKey().getNumero() == numeroConta) {
+                if (contaS.getValue().getDocumento().length() == 14) {
+                    tipoPessoa = "PF";
+                } else if (contaS.getValue().getDocumento().length() == 18){
+                    tipoPessoa = "PJ";
+                }
+            }
+        }
+        return tipoPessoa;
+    }
+
+    public IConta getSubTipoConta(int numeroConta, int operacao) {
+        IConta conta = null;
+        for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
+            if(contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao() == operacao) {
+                conta = contaS.getKey();
+            }
+        }
+        return conta;
+    }
+
+
+//    public void getContasUsuario(String documento) {
+//        contasUsuario.clear();
+//        for (IConta conta : contas) {
+//            if (conta.getTitular().getDocumento().equals(documento)){
+//                contasUsuario.add(conta);
+//            }
+//        }
+//    }
+
+//    public int getNumeroConta(String documento) {
+//        return contasUsuario.get(0).getNumero();
+//    }
+//
+//    public ICliente getCliente(String documento) {
+//        getContasUsuario(documento);
+//        return contasUsuario.get(0).getTitular();
+//    }
+
+    public void listarContasUsuario(ICliente cliente) {
+        String nome = cliente.getNome();
         System.out.println("\n\t-- Conta " + nome + " --\n");
-        contasUsuario.forEach(conta -> {
+        cliente.getContasUsuario().forEach(conta -> {
             System.out.println("Tipo conta: " + conta.getTipoConta());
             System.out.println("Operação: " + conta.getOperacao());
             System.out.println("Titular: " + conta.getTitular().getNome());
@@ -100,9 +229,7 @@ public class Banco {
         conta.investir(valor);
     }
 
-    public static Banco getInstance() {
-        return AdaBank;
-    }
+
 
 
     /*public boolean contemLogin(String login) {
@@ -145,7 +272,6 @@ public class Banco {
                 + "4 - Investir \n"
                 + "5 - Consultar saldo \n"
                 + "6 - Sair");
-
         //String opcaoCliente = sc.next();
         switch (opcaoCliente) {
             case "1":
@@ -156,7 +282,6 @@ public class Banco {
                 break;
             case "3":
                 //depositar();
-
                 break;
             case "4":
                 //investir();
