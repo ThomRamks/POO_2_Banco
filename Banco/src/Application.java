@@ -1,3 +1,5 @@
+import Exceptions.InvalidPasswordException;
+import Exceptions.UserNotFoundException;
 import banco.Banco;
 import cliente.Cliente;
 import cliente.ClientePessoaFisica;
@@ -17,53 +19,55 @@ public class Application {
 
 
     public static void main(String[] args) {
-
-        GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
-        dadosIniciais.carregaDadosIniciais();
-        Banco banco = Banco.getInstance();
-
-        String cpf = "578179380-16";
-        System.out.printf("CPF %s válido? %b%n", cpf, ValidaDocumento.isCpf(cpf));
-        System.out.println("CPF: " + ValidaDocumento.formataCpf(cpf));
-
-
-        String cnpj = "24.861.255/0001-07";
-        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
-
-        cnpj = "24861255000107";
-        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
-
-        cnpj = "24861255/0001-07";
-        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
-
-        cnpj = "01.234.567/0001-11";
-        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-
-        String nome = "Di3go Ruescas";
-        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
-
-        nome = "Diego Ruescas";
-        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
-
-        nome = "dIeGo rUesCAS";
-        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-
-        nome = "Ada Tecnologia e Educação S.A.";
-        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-
-        nome = "aDaBAnK ltDa";
-        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-
-        String senha = "12 34 56";
-        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
-
-        senha = "123456";
-        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
+        Application app = new Application();
+        app.menuInicial();
 
     }
+
+//        GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
+//        dadosIniciais.carregaDadosIniciais();
+//        Banco banco = Banco.getInstance();
+//
+//        String cpf = "578.179.380-16";
+//        System.out.printf("CPF %s válido? %b%n", cpf, ValidaDocumento.isCpf(cpf));
+//
+//        String cnpj = "24.861.255/0001-07";
+//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+//
+//        cnpj = "24861255000107";
+//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+//
+//        cnpj = "24861255/0001-07";
+//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+//
+//        cnpj = "01.234.567/0001-11";
+//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+//
+//        String nome = "Di3go Ruescas";
+//        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
+//
+//        nome = "Diego Ruescas";
+//        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
+//
+//        nome = "dIeGo rUesCAS";
+//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
+//
+//        nome = "Ada Tecnologia e Educação S.A.";
+//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
+//
+//        nome = "aDaBAnK ltDa";
+//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
+//
+//        String senha = "12 34 56";
+//        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
+//
+//        senha = "123456";
+//        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
+//
+//    }
+
+
+
 
 //        String documentoArthur = "578.179.380-16";
 //        banco.listarContasUsuario(documentoArthur);
@@ -162,21 +166,26 @@ public class Application {
     }
 
     private void fazerLogin() {
-        System.out.println("==============    LOGIN   ================");
-        System.out.println("Digite seu documento:");
-        String login = sc.next();
-        if(banco.contemLogin(login)){
-            ICliente cliente = banco.getCliente(login);
-            System.out.println("Digite sua senha:");
-            String senha = sc.next();
-            if (banco.checarSenha(cliente, senha)){
-                System.out.println("");
-                menuCliente(cliente);
+        try {
+            System.out.println("==============    LOGIN   ================");
+            System.out.println("Digite seu documento:");
+            String login = sc.next();
+            if (banco.contemLogin(login)) {
+                ICliente cliente = banco.getCliente(login);
+                System.out.println("Digite sua senha:");
+                String senha = sc.next();
+                if (banco.checarSenha(cliente, senha)) {
+                    System.out.println("");
+                    menuCliente(cliente);
+                } else {
+                    throw new InvalidPasswordException("Senha Inválida!");
+                }
             } else {
-                //criar exception InvalidPassword
+                throw new UserNotFoundException("Usuario não encontrado!");
             }
-        } else {
-            // criar exception UserNotFound
+        } catch (UserNotFoundException | InvalidPasswordException e){
+            System.out.println(e.getMessage());
+            fazerLogin();
         }
     }
 
@@ -196,7 +205,7 @@ public class Application {
     }
 
     public Cliente cadastrarPJ(){
-        System.out.println("Qual seu nome?");
+        System.out.println("Digite sua razão sua social:");
         String nome = sc.next();
         //validacaonome
         System.out.println("Digite seu CNPJ:");
@@ -206,6 +215,7 @@ public class Application {
         String senha = sc.next();
         //validacao senha
 
+
         Cliente cliente = new ClientePessoaFisica(nome, senha, cnpj);
         return cliente;
     }
@@ -214,9 +224,9 @@ public class Application {
         System.out.println("==============   ABERTURA DE CONTA   ================");
         System.out.println(
                 "Qual tipo de conta voce deseja criar:\n"
-                + "1 - Conta Pessoa Fisica \n"
-                + "2 - Conta Pessoa Juridica \n"
-                + "3 - Voltar ao Menu Inicial");
+                        + "1 - Conta Pessoa Fisica \n"
+                        + "2 - Conta Pessoa Juridica \n"
+                        + "3 - Voltar ao Menu Inicial");
 
         respostasUsuario = sc.next();
 
@@ -358,7 +368,6 @@ public class Application {
                 + "5 - Consultar saldo \n"
                 + "6 - Sair");
         String opcaoCliente = sc.next();
-
         switch (opcaoCliente) {
             case "1":
                 //sacar();
