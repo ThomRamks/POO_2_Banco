@@ -16,18 +16,19 @@ public class Application {
         GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
         dadosIniciais.carregaDadosIniciais();
         Banco banco = Banco.getInstance();
+    }
 
-        String documentoArthur = "578.179.380-16";
-        banco.listarContasUsuario(documentoArthur);
-
-        String documentoDiego = "123.456.789-10";
-        banco.listarContasUsuario(documentoDiego);
-
-        String documentoAda = "24.861.255/0001-07";
-        banco.listarContasUsuario(documentoAda);
-
-        String documentoSinqia = "04.065.791/0001-99";
-        banco.listarContasUsuario(documentoSinqia);
+//        String documentoArthur = "578.179.380-16";
+//        banco.listarContasUsuario(documentoArthur);
+//
+//        String documentoDiego = "123.456.789-10";
+//        banco.listarContasUsuario(documentoDiego);
+//
+//        String documentoAda = "24.861.255/0001-07";
+//        banco.listarContasUsuario(documentoAda);
+//
+//        String documentoSinqia = "04.065.791/0001-99";
+//        banco.listarContasUsuario(documentoSinqia);
 
 //        Application app = new Application();
 //        Banco.getInstance();
@@ -79,15 +80,68 @@ public class Application {
 //        operacao.sacar(ccPessoaJuridica, 200);
 //        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
 
-    }
 
-   /* public void menuUsuario() {
-        System.out.println("Seja Bem-Vindo ao AdaBank! Acesse sua conta ou abra uma!\n Acessar sua conta (1)\n Abertura de Conta (2)");
+    public void menuInicial() {
+        System.out.println("====================================================");
+        System.out.println("             Seja bem vindo(a) ao                   ");
+        System.out.println("		            ADA BANK                        ");
+        System.out.println("          Seu dinheiro, nossa renda!                ");
+        System.out.println("====================================================");
+        System.out.println("");
+        System.out.println("Digite a operação desejada:\n"
+                + "1 - Acessar sua conta \n"
+                + "2 - Abrir conta \n"
+                + "3 - Sair");
+
         respostasUsuario = sc.next();
-        validarRequisicao(respostasUsuario);
+
+        switch (respostasUsuario) {
+            case "1":
+                //fazerLogin();
+                break;
+            case "2":
+                abrirConta();
+                break;
+            case "3":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuInicial();
+                break;
+        }
+
+
+        //validarRequisicao(respostasUsuario);
     }
 
-    public void validarRequisicao(String requisicaoDoUsuario) {
+    private void abrirConta() {
+        System.out.println("Qual tipo de conta voce deseja criar:\n"
+                + "1 - Conta Pessoa Fisica \n"
+                + "2 - Conta Pessoa Juridica \n"
+                + "3 - Voltar ao Menu Inicial");
+
+        respostasUsuario = sc.next();
+
+        switch (respostasUsuario) {
+            case "1":
+                //abrircontaPF();
+                break;
+            case "2":
+                //abrirContaPJ();
+                break;
+            case "3":
+                menuInicial();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                abrirConta();
+                break;
+        }
+    }
+
+
+    /*public void validarRequisicao(String requisicaoDoUsuario) {
         if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
             System.out.println("Não entendemos sua requisição, tente novamente!");
             menuUsuario();
@@ -99,14 +153,12 @@ public class Application {
             cliente.abrirConta(cliente);
         }
     }
-
     public void menuLogin() {
         System.out.println("Digite o seu CPF ou CNPJ: ");
         respostasUsuario = sc.next();
         String respostaLogin = respostasUsuario;
         validarLoginEntrada(respostaLogin);
     }
-
     public void validarLoginEntrada(String login) {
         if (!Banco.getInstance().contemLogin(login)) {
             System.out.println("CPF ou CNPJ inválido. Tente novamente.");
@@ -116,7 +168,6 @@ public class Application {
             validarSenhaEntrada(cliente);
         }
     }
-
     public void validarSenhaEntrada(Cliente cliente) {
         System.out.println("Digite sua senha: ");
         String respostaSenha = sc.next();
