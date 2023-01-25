@@ -5,17 +5,22 @@ public class Teste {
 
     public static void main(String[] args) {
 
-        String cpf = "578.179.380-16";
+        String cpf = "578179380-16";
         System.out.printf("CPF %s válido? %b%n", cpf, ValidaDocumento.isCpf(cpf));
+        System.out.println("CPF: " + ValidaDocumento.formataCpf(cpf));
+
 
         String cnpj = "24.861.255/0001-07";
         System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
 
         cnpj = "24861255000107";
         System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
 
         cnpj = "24861255/0001-07";
         System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
+        System.out.println("CNPJ: " + ValidaDocumento.formataCnpj(cnpj));
 
         cnpj = "01.234.567/0001-11";
         System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
