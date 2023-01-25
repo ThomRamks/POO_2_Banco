@@ -259,6 +259,10 @@ public class Banco {
               return false;
         return respostaSenha.isBlank() || respostaSenha.length() <= 8;
     }*/
-
-
-
+//<<<<<<< HEAD
+//
+//
+//
+//=======
+//}
+//>>>>>>> Developing

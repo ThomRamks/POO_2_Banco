@@ -140,3 +140,8 @@ public class ValidaDocumento {
         return doc;
     }
 }
+//<<<<<<< HEAD
+//}
+//=======
+//}
+//>>>>>>> Developing
