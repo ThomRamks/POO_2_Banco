@@ -162,7 +162,7 @@ public class Banco {
             if (contaS.getKey().getNumero() == numeroConta) {
                 if (contaS.getValue().getDocumento().length() == 14) {
                     tipoPessoa = "PF";
-                } else if (contaS.getValue().getDocumento().length() == 18){
+                } else if (contaS.getValue().getDocumento().length() == 18) {
                     tipoPessoa = "PJ";
                 }
             }
@@ -173,7 +173,7 @@ public class Banco {
     public IConta getSubTipoConta(int numeroConta, int operacao) {
         IConta conta = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
-            if(contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao() == operacao) {
+            if (contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao() == operacao) {
                 conta = contaS.getKey();
             }
         }
@@ -228,6 +228,7 @@ public class Banco {
     public void investir(IContaInvestimento conta, double valor) {
         conta.investir(valor);
     }
+}
 
 
 
@@ -260,5 +261,4 @@ public class Banco {
     }*/
 
 
-   /*
-}
+

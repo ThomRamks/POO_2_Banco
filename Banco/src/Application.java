@@ -2,6 +2,7 @@ import banco.Banco;
 import cliente.Cliente;
 import cliente.ClientePessoaFisica;
 import interfaces.ICliente;
+import interfaces.IConta;
 import util.GeraDadosIniciais;
 
 import java.util.Scanner;
@@ -117,7 +118,7 @@ public class Application {
     }
 
     private void fazerLogin() {
-        System.out.printf("");
+        System.out.println("==============    LOGIN   ================");
         System.out.println("Digite seu documento:");
         String login = sc.next();
         if(banco.contemLogin(login)){
@@ -125,19 +126,15 @@ public class Application {
             System.out.println("Digite sua senha:");
             String senha = sc.next();
             if (banco.checarSenha(cliente, senha)){
-
+                System.out.println("");
+                menuCliente(cliente);
             } else {
                 //criar exception InvalidPassword
             }
         } else {
             // criar exception UserNotFound
         }
-
-
-        //validacao senha
-
     }
-
 
     public Cliente cadastrarPF(){
         System.out.println("Qual seu nome?");
@@ -170,6 +167,7 @@ public class Application {
     }
 
     private void abrirConta() {
+        System.out.println("==============   ABERTURA DE CONTA   ================");
         System.out.println(
                 "Qual tipo de conta voce deseja criar:\n"
                 + "1 - Conta Pessoa Fisica \n"
@@ -208,11 +206,106 @@ public class Application {
         // fazer if/else
     }
 
-    public void menuCliente(Cliente cliente) {
+    public void menuCliente(ICliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
-        System.out.println("Seja bem vindo(a) " + cliente.getConta().getTitular());
+        System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular());
+
+        if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PF")){
+            menuPF();
+        } else if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PJ")) {
+            //menuPJ();
+        }
+
         //fazer separacao por tipo de cliente/conta ????
         // qual tipo de conta vai acessar???
+    }
+
+    public void menuPF(){
+        System.out.println("Qual conta voce deseja acessar:\n"
+                + "1 - Conta Corrente \n"
+                + "2 - Conta Poupança \n"
+                + "3 - Conta Investimento \n"
+                + "4 - Voltar");
+        String opcaoCliente = sc.next();
+
+        switch (opcaoCliente) {
+            case "1":
+                //menuOperacoes
+                break;
+            case "2":
+                //ContaPoupanca
+                break;
+            case "3":
+                //investimento;
+                break;
+            case "4":
+                menuInicial();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuPF();
+                break;
+        }
+    }
+
+    public void operacoes(IConta conta) {
+        System.out.println("Qual operação você deseja realizar:\n"
+                + "1 - Sacar \n"
+                + "2 - Transferir \n"
+                + "3 - Depositar \n"
+                + "4 - Consultar saldo \n"
+                + "5 - Sair");
+        String opcaoCliente = sc.next();
+        switch (opcaoCliente) {
+            case "1":
+                menuSacar(conta);
+                break;
+            case "2":
+                menuTransferir(conta);
+                break;
+            case "3":
+                //depositar();
+                break;
+            case "4":
+                //investir();
+                break;
+            case "5":
+                //consultarSaldo();
+                break;
+            case "6":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                //menuCliente();
+                break;
+        }
+    }
+
+    private void menuSacar(IConta conta) {
+        System.out.println("Qual valor voce deseja sacar?");
+        double valor = sc.nextDouble();
+        banco.sacar(conta, valor);
+    }
+
+    public void menuTransferir(IConta conta){
+        System.out.println("Para qual conta voce deseja transferir?");
+        int contaDestino = sc.nextInt();
+        if (banco.contemConta(contaDestino)) {
+            System.out.println("Para qual tipo conta voce deseja transferir?");
+            if (banco.getTipoPessoa(contaDestino).equals("PF")){
+                //menu opcoes cc, ci, cp
+            } else if (banco.getTipoPessoa(contaDestino).equals("PF")){
+                //menu opcoes cc, ci
+            }
+        }
+
+        System.out.println("Qual valor voce deseja transferir?");
+        double valor = sc.nextDouble();
+        banco.sacar(conta, valor);
+    }
+
+    /* public void operacoesInvestir(){
         System.out.println("Qual operação você deseja realizar:\n"
                 + "1 - Sacar \n"
                 + "2 - Transferir \n"
@@ -220,7 +313,8 @@ public class Application {
                 + "4 - Investir \n"
                 + "5 - Consultar saldo \n"
                 + "6 - Sair");
-        //String opcaoCliente = sc.next();
+        String opcaoCliente = sc.next();
+
         switch (opcaoCliente) {
             case "1":
                 //sacar();
@@ -244,8 +338,8 @@ public class Application {
                 System.out.println("Operação inválida. Tente novamente.");
                 menuCliente(cliente);
                 break;
-        }
-    }
+    }*/
+
     public void sair(){
         System.out.println("ADA BANK agradece sua preferencia.");
         System.out.println("Esperamos de te ver em breve! o/");
