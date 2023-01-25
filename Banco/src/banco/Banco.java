@@ -170,10 +170,10 @@ public class Banco {
         return tipoPessoa;
     }
 
-    public IConta getSubTipoConta(int numeroConta, int operacao) {
+    public IConta getSubTipoConta(int numeroConta, String operacao) {
         IConta conta = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
-            if (contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao() == operacao) {
+            if (contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao().equals(operacao)) {
                 conta = contaS.getKey();
             }
         }

@@ -6,7 +6,7 @@ import interfaces.IConta;
 import interfaces.IContaInvestimento;
 
 public class ContaInvestimentoPessoaJuridica extends Conta implements  IContaInvestimento {
-    private int operacao = 2;
+    private String operacao = "2";
 
     public ContaInvestimentoPessoaJuridica(int numero, ICliente titular) {
         super(numero, titular);
@@ -42,7 +42,7 @@ public class ContaInvestimentoPessoaJuridica extends Conta implements  IContaInv
     }
 
     @Override
-    public int getOperacao() {
+    public String getOperacao() {
        return this.operacao;
     }
 

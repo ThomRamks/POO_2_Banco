@@ -3,11 +3,9 @@ import Exceptions.UserNotFoundException;
 import banco.Banco;
 import cliente.Cliente;
 import cliente.ClientePessoaFisica;
+import conta.Conta;
 import interfaces.ICliente;
 import interfaces.IConta;
-import util.GeraDadosIniciais;
-import util.valida.ValidaDocumento;
-import util.valida.ValidaTexto;
 
 import java.util.Scanner;
 
@@ -185,7 +183,7 @@ public class Application {
             }
         } catch (UserNotFoundException | InvalidPasswordException e){
             System.out.println(e.getMessage());
-            fazerLogin();
+            menuInicial();
         }
     }
 
@@ -254,31 +252,25 @@ public class Application {
                 break;
         }
     }
-
-    public void inputDocumento(){
-        //validacao documento
-        // fazer if/else
-    }
-
     public void menuCliente(ICliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
         System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular());
 
         if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PF")){
-            menuPF();
+            menuPF(cliente);
         } else if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PJ")) {
-            //menuPJ();
+            menuPJ(cliente);
         }
 
         //fazer separacao por tipo de cliente/conta ????
         // qual tipo de conta vai acessar???
     }
 
-    public void menuPF(){
+    public void menuPF(ICliente cliente){
         System.out.println("Qual conta voce deseja acessar:\n"
                 + "1 - Conta Corrente \n"
-                + "2 - Conta Poupança \n"
-                + "3 - Conta Investimento \n"
+                + "2 - Conta Investimento \n"
+                + "3 - Conta Poupança \n"
                 + "4 - Voltar");
         String opcaoCliente = sc.next();
 
@@ -297,17 +289,41 @@ public class Application {
                 break;
             default:
                 System.out.println("Operação inválida. Tente novamente.");
-                menuPF();
+                menuPF(cliente);
+                break;
+        }
+    }
+    public void menuPJ(ICliente cliente){
+        System.out.println("Qual conta voce deseja acessar:\n"
+                + "1 - Conta Corrente \n"
+                + "2 - Conta Investimento \n"
+                + "3 - Voltar");
+        String opcaoCliente = sc.next();
+
+        switch (opcaoCliente) {
+            case "1":
+                menuOperacoes(cliente.getContasUsuario().get(0));
+                break;
+            case "2":
+                menuOperacoesInvestir(cliente.getContasUsuario().get(1));
+                break;
+
+            case "3":
+                menuInicial();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                menuPJ(cliente);
                 break;
         }
     }
 
-    public void operacoes(IConta conta) {
+    public void menuOperacoes(IConta conta) {
         System.out.println("Qual operação você deseja realizar:\n"
                 + "1 - Sacar \n"
                 + "2 - Transferir \n"
                 + "3 - Depositar \n"
-                + "4 - Consultar saldo \n"
+                + "4 - Consultar Saldo\n"
                 + "5 - Sair");
         String opcaoCliente = sc.next();
         switch (opcaoCliente) {
@@ -321,8 +337,39 @@ public class Application {
                 //depositar();
                 break;
             case "4":
-                //investir();
+                //consultarSaldo();
                 break;
+            case "5":
+                //sair();
+                break;
+            default:
+                System.out.println("Operação inválida. Tente novamente.");
+                //menuCliente();
+                break;
+        }
+    }
+
+    public void menuOperacoesInvestir(IConta conta) {
+        System.out.println("Qual operação você deseja realizar:\n"
+                + "1 - Sacar \n"
+                + "2 - Transferir \n"
+                + "3 - Depositar \n"
+                + "4 - Investir \n"
+                + "5 - Consultar Saldo\n"
+                + "6 - Sair");
+        String opcaoCliente = sc.next();
+        switch (opcaoCliente) {
+            case "1":
+                menuSacar(conta);
+                break;
+            case "2":
+                menuTransferir(conta);
+                break;
+            case "3":
+                //depositar();
+                break;
+            case "4":
+              //investir
             case "5":
                 //consultarSaldo();
                 break;
