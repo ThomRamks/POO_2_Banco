@@ -189,7 +189,7 @@ public class Application {
         }
     }
 
-    public Cliente cadastrarPF(){
+    public ICliente cadastrarPF(){
         System.out.println("Qual seu nome?");
         String nome = sc.next();
         //validacaonome
@@ -200,11 +200,10 @@ public class Application {
         String senha = sc.next();
         //validacao senha
 
-        Cliente cliente = new ClientePessoaFisica(nome, senha, cpf);
-        return cliente;
+        return banco.registrarConta(nome, cpf, senha);
     }
 
-    public Cliente cadastrarPJ(){
+    public ICliente cadastrarPJ(){
         System.out.println("Digite sua razão sua social:");
         String nome = sc.next();
         //validacaonome
@@ -215,9 +214,7 @@ public class Application {
         String senha = sc.next();
         //validacao senha
 
-
-        Cliente cliente = new ClientePessoaFisica(nome, senha, cnpj);
-        return cliente;
+        return banco.registrarConta(nome, cnpj, senha);
     }
 
     private void abrirConta() {
@@ -232,14 +229,14 @@ public class Application {
 
         switch (respostasUsuario) {
             case "1":
-                Cliente cliente = cadastrarPF();
+                ICliente cliente = cadastrarPF();
                 banco.abrirContaPessoaFisica(cliente);
                 System.out.println("Conta criada com sucesso!");
                 System.out.println("Voce sera redirecionado ao Menu Inicial!");
                 menuInicial();
                 break;
             case "2":
-                Cliente clientePJ = cadastrarPJ();
+                ICliente clientePJ = cadastrarPJ();
                 banco.abrirContaPessoaJuridica(clientePJ);
                 System.out.println("Conta criada com sucesso!");
                 System.out.println("Voce sera redirecionado ao Menu Inicial!");
@@ -262,7 +259,7 @@ public class Application {
 
     public void menuCliente(ICliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
-        System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular());
+        System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular().getNome());
 
         if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PF")){
             menuPF();

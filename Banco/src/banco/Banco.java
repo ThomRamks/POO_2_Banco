@@ -1,5 +1,8 @@
 package banco;
 
+import cliente.Cliente;
+import cliente.ClientePessoaFisica;
+import cliente.ClientePessoaJuridica;
 import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
@@ -27,6 +30,16 @@ public class Banco {
 
     public static Banco getInstance() {
         return AdaBank;
+    }
+
+    public ICliente registrarConta(String nome, String documento, String senha){
+        ICliente cliente = null;
+        if(documento.length() == 14){
+            cliente = new ClientePessoaFisica(nome, senha, documento);
+        } else if (documento.length() == 18){
+            cliente = new ClientePessoaJuridica(nome, senha, documento);
+        }
+        return cliente;
     }
 
     public void abrirContaPessoaFisica(ICliente cliente) {
@@ -170,10 +183,10 @@ public class Banco {
         return tipoPessoa;
     }
 
-    public IConta getSubTipoConta(int numeroConta, int operacao) {
+    public IConta getSubTipoConta(int numeroConta, String operacao) {
         IConta conta = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
-            if(contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao() == operacao) {
+            if(contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao().equals(operacao)) {
                 conta = contaS.getKey();
             }
         }

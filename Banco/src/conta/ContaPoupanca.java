@@ -6,7 +6,7 @@ import interfaces.IConta;
 import cliente.ClientePessoaFisica;
 
 public class ContaPoupanca extends Conta {
-    private int operacao = 1;
+    private String operacao = "3";
 
     public ContaPoupanca(int numero, ICliente titular) {
         super(numero, titular);
@@ -41,7 +41,7 @@ public class ContaPoupanca extends Conta {
     }
 
     @Override
-    public int getOperacao() {
+    public String getOperacao() {
         return this.operacao;
     }
 

@@ -11,5 +11,5 @@ public interface IConta {
     int getNumero();
     ICliente getTitular();
     String getTipoConta();
-    int getOperacao();
+    String getOperacao();
 }

@@ -7,7 +7,7 @@ import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
-    private int operacao = 0;
+    private String operacao = "1";
 
     public ContaCorrentePessoaJuridica(int numero, ICliente titular) {
         super(numero, titular);
@@ -43,7 +43,7 @@ public class ContaCorrentePessoaJuridica extends Conta {
     }
 
     @Override
-    public int getOperacao() {
+    public String getOperacao() {
         return this.operacao;
     }
 }
