@@ -325,28 +325,31 @@ public class Application {
                 + "2 - Transferir \n"
                 + "3 - Depositar \n"
                 + "4 - Consultar Saldo\n"
-                + "5 - Sair");
+                + "5 - Voltar");
         String opcaoCliente = sc.next();
         switch (opcaoCliente) {
             case "1":
                 menuSacar(conta);
+                menuOperacoes(conta);
                 break;
             case "2":
                 menuTransferir(conta);
+                menuOperacoes(conta);
                 break;
             case "3":
                 menuDepositar(conta);
                 menuOperacoes(conta);
                 break;
             case "4":
-                //consultarSaldo();
+                System.out.println("Seu saldo atual é: " + conta.getSaldo());
+                menuOperacoes(conta);
                 break;
             case "5":
-                //sair();
+                menuCliente(conta.getTitular());
                 break;
             default:
                 System.out.println("Operação inválida. Tente novamente.");
-                //menuCliente();
+                menuOperacoes(conta);
                 break;
         }
     }
@@ -358,30 +361,34 @@ public class Application {
                 + "3 - Depositar \n"
                 + "4 - Investir \n"
                 + "5 - Consultar Saldo\n"
-                + "6 - Sair");
+                + "6 - Voltar");
         String opcaoCliente = sc.next();
         switch (opcaoCliente) {
             case "1":
                 menuSacar(conta);
+                menuOperacoesInvestir(conta);
                 break;
             case "2":
                 menuTransferir(conta);
+                menuOperacoesInvestir(conta);
                 break;
             case "3":
                 menuDepositar(conta);
                 menuOperacoesInvestir(conta);
                 break;
             case "4":
-              //investir
+                menuInvestir(conta);
+                menuOperacoesInvestir(conta);
             case "5":
-                //consultarSaldo();
+                System.out.println("Seu saldo atual é: " + conta.getSaldo());
+                menuOperacoesInvestir(conta);
                 break;
             case "6":
-                //sair();
+                menuCliente(conta.getTitular());
                 break;
             default:
                 System.out.println("Operação inválida. Tente novamente.");
-                //menuCliente();
+                menuOperacoesInvestir(conta);
                 break;
         }
     }
@@ -462,6 +469,17 @@ public class Application {
         }
     }
 
+    public void menuInvestir(IConta conta){
+        try {
+            System.out.println("Digite a quantia que você deseja investir: ");
+            double valorDesejado = sc.nextDouble();
+            banco.depositar(conta, valorDesejado);
+            System.out.println("Investimento efetuado!");
+        } catch (InputMismatchException e){
+            System.out.println("Valor inválido! Tente novamente.");
+            menuDepositar(conta);
+        }
+    }
 
     /*public void validarRequisicao(String requisicaoDoUsuario) {
         if (!requisicaoDoUsuario.equals("1") & !requisicaoDoUsuario.equals("2")) {
