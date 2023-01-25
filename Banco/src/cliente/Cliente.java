@@ -11,10 +11,6 @@ public abstract class Cliente implements ICliente {
     private String senha;
     private List<IConta> contasUsuario = new ArrayList<>();
 
-    public List<IConta> getContasUsuario() {
-        return contasUsuario;
-    }
-
     public Cliente(String nome, String senha) {
         this.nome = nome;
         this.senha = senha;
@@ -22,6 +18,9 @@ public abstract class Cliente implements ICliente {
 
     public String getNome() {
         return nome;
+    }
+    public List<IConta> getContasUsuario() {
+        return contasUsuario;
     }
 
     public boolean validaSenha(String senha) {
