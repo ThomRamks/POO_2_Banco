@@ -69,13 +69,16 @@ public class Application {
             System.out.println("==============    LOGIN   ================");
             System.out.println("Digite seu documento:");
             String login = sc.next();
-            login = ValidaDocumento.formataDocumento(login);
+            login = ValidaDocumento.formataDocumento(login); // implementar a IValidator aqui tambem?
             if (banco.contemLogin(login)) {
                 ICliente cliente = banco.getCliente(login);
                 System.out.println("Digite sua senha:");
                 String senha = sc.next();
                 validatorSenha.valida(cliente,senha); // interface de validação
                 menuCliente(cliente);
+            } else{
+                System.out.println("Usuário não encontrado!");
+                fazerLogin();
             }
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
