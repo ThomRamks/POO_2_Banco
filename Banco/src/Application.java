@@ -19,7 +19,6 @@ public class Application {
         app.menuInicial();
 
     }
-
     public void menuInicial() {
         System.out.println("====================================================");
         System.out.println("             Seja bem vindo(a) ao                   ");
@@ -225,7 +224,7 @@ public class Application {
                 menuOperacoes(conta);
                 break;
             case "4":
-                System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
+                System.out.printf("Seu saldo atual é: R$ %.2f \n ",conta.getSaldo());
                 menuOperacoes(conta);
                 break;
             case "5":
@@ -280,9 +279,9 @@ public class Application {
     private void menuSacar(IConta conta) {
         System.out.println("Qual valor voce deseja sacar?");
         double valor = sc.nextDouble();
-        if (banco.sacar(conta, valor)) {
+        if(banco.sacar(conta, valor)){
             System.out.println("Saque efetuado!");
-        } else {
+        } else{
             System.out.println("Saldo insuficiente!");
         }
 
@@ -298,7 +297,7 @@ public class Application {
             } else if (banco.getTipoPessoa(contaDestino).equals("PJ")) {
                 menuSubtipoPJ(conta, contaDestino);
             }
-        } else {
+        } else{
             System.out.println("Conta não encontrada. Tente novamente!");
         }
     }

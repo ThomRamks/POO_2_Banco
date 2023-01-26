@@ -6,7 +6,7 @@ import conta.*;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import util.formata.FormataDocumento;
+import util.valida.ValidaDocumento;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,11 +28,11 @@ public class Banco {
 
     public ICliente registrarConta(String nome, String documento, String senha){
         ICliente cliente = null;
-        if(ValidaCpf.isCpf(documento)){
-            documento = FormataDocumento.formataCpf(documento);
+        if(ValidaDocumento.isCpf(documento)){
+            documento = ValidaDocumento.formataCpf(documento);
             cliente = new ClientePessoaFisica(nome, senha, documento);
-        } else if (ValidaCnpj.isCnpj(documento)){
-            documento = FormataDocumento.formataCnpj(documento);
+        } else if (ValidaDocumento.isCNPJ(documento)){
+            documento = ValidaDocumento.formataCnpj(documento);
             cliente = new ClientePessoaJuridica(nome, senha, documento);
         }
         return cliente;
@@ -40,7 +40,7 @@ public class Banco {
 
     public void abrirContaPessoaFisica(ICliente cliente) {
         int numero = 0;
-        if (cliente != null && cliente.getContasUsuario().size() > 0) {
+        if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
             numeroDefault++;
@@ -49,7 +49,7 @@ public class Banco {
         IConta ccPessoaFisica = new ContaCorrentePessoaFisica(numero, cliente);
         IConta ciPessoaFisica = new ContaInvestimentoPessoaFisica(numero, cliente);
         IConta cpPessoaFisica = new ContaPoupanca(numero, cliente);
-        //Collections.addAll(cliente.getContasUsuario(), ccPessoaFisica, ciPessoaFisica, cpPessoaFisica);
+        Collections.addAll(cliente.getContasUsuario(), ccPessoaFisica, ciPessoaFisica, cpPessoaFisica);
         contasNoBanco.put(ccPessoaFisica, cliente);
         contasNoBanco.put(ciPessoaFisica, cliente);
         contasNoBanco.put(cpPessoaFisica, cliente);
@@ -122,9 +122,9 @@ public class Banco {
         String tipoPessoa = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
             if (contaS.getKey().getNumero() == numeroConta) {
-                if (ValidaCpf.isCpf(contaS.getValue().getDocumento())) {
+                if (ValidaDocumento.isCpf(contaS.getValue().getDocumento())) {
                     tipoPessoa = "PF";
-                } else if (ValidaCnpj.isCnpj(contaS.getValue().getDocumento())){
+                } else if (ValidaDocumento.isCNPJ(contaS.getValue().getDocumento())){
                     tipoPessoa = "PJ";
                 }
             }
@@ -157,5 +157,4 @@ public class Banco {
     public void investir(IContaInvestimento conta, double valor) {
         conta.investir(valor);
     }
-
 }
