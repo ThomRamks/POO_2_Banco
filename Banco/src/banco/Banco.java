@@ -221,8 +221,8 @@ public class Banco {
         return contaOrigem.transferir(valor, contaDestino);
     }
 
-    public void sacar(IConta conta, double valor) {
-        conta.sacar(valor);
+    public boolean sacar(IConta conta, double valor) {
+        return conta.sacar(valor);
     }
 
     public void investir(IContaInvestimento conta, double valor) {
