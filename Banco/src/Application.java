@@ -204,7 +204,7 @@ public class Application {
     }
 
     public ICliente cadastrarPJ(){
-        System.out.println("Digite sua razão sua social:");
+        System.out.println("Digite sua razão social:");
         String nome = sc.next();
         //validacaonome
         System.out.println("Digite seu CNPJ:");

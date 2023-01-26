@@ -1,7 +1,6 @@
 package cliente;
 
 public class ClientePessoaJuridica extends Cliente {
-
     private String cnpj;
 
     public ClientePessoaJuridica(String nome, String senha, String cnpj) {
