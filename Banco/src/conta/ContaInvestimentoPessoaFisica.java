@@ -5,11 +5,10 @@ import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import cliente.ClientePessoaFisica;
 
 public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvestimento<IConta> {
 
-    private int operacao = 2;
+    private String operacao = "2";
 
     public ContaInvestimentoPessoaFisica(int numero, ICliente titular) {
         super(numero, titular);
@@ -44,7 +43,7 @@ public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvest
     }
 
     @Override
-    public int getOperacao() {
+    public String getOperacao() {
         return this.operacao;
     }
 

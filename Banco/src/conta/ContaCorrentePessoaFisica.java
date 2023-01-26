@@ -3,11 +3,10 @@ package conta;
 import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
-import cliente.ClientePessoaFisica;
 
 
 public class ContaCorrentePessoaFisica extends Conta {
-    private int operacao = 0;
+    private String operacao = "1";
 
     public ContaCorrentePessoaFisica(int numero, ICliente titular) {
         super(numero, titular);
@@ -42,7 +41,7 @@ public class ContaCorrentePessoaFisica extends Conta {
     }
 
     @Override
-    public int getOperacao() {
+    public String getOperacao() {
         return this.operacao;
     }
 }
