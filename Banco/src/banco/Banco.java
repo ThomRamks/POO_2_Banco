@@ -18,7 +18,7 @@ public class Banco {
     private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
     private int numeroDefault;
 
-    public Banco() {
+    private Banco() {
         numeroDefault = 1000;
     }
 
@@ -39,7 +39,11 @@ public class Banco {
     }
 
     public void abrirContaPessoaFisica(ICliente cliente) {
+<<<<<<< HEAD
         int numero = 0;
+=======
+        int numero;
+>>>>>>> 16404dcfe8a7e909266e384898277760c553b313
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
@@ -56,7 +60,11 @@ public class Banco {
     }
 
     public void abrirContaPessoaJuridica(ICliente cliente) {
+<<<<<<< HEAD
         int numero = 0;
+=======
+        int numero;
+>>>>>>> 16404dcfe8a7e909266e384898277760c553b313
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {

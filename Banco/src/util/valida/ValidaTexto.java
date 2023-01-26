@@ -1,4 +1,4 @@
-package valida;
+package util.valida;
 
 public class ValidaTexto {
     public static boolean somenteLetras(String texto) {
