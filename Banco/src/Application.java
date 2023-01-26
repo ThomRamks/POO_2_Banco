@@ -1,6 +1,8 @@
+import Classes_De_Validacao.Validacao_Senha;
 import exceptions.InvalidPasswordException;
 import exceptions.UserNotFoundException;
 import banco.Banco;
+import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
 import util.GeraDadosIniciais;
@@ -8,7 +10,6 @@ import util.valida.ValidaDocumento;
 import util.valida.ValidaTexto;
 import util.valida.ValidaDouble;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -16,10 +17,15 @@ public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
     static Banco banco = Banco.getInstance();
+    static Validacao_Senha validatorSenha = Validacao_Senha.getInstance();
     static GeraDadosIniciais dadosIniciais = GeraDadosIniciais.getInstance();
+    private static final Application app = new Application();
+    public static Application getInstance(){
+        return app;
+    }
 
     public static void main(String[] args) {
-        Application app = new Application();
+
         dadosIniciais.carregaDadosIniciais();
         app.menuInicial();
 
@@ -68,18 +74,12 @@ public class Application {
                 ICliente cliente = banco.getCliente(login);
                 System.out.println("Digite sua senha:");
                 String senha = sc.next();
-                if (banco.checarSenha(cliente, senha)) {
-                    System.out.println("");
-                    menuCliente(cliente);
-                } else {
-                    throw new InvalidPasswordException("Senha Inválida!");
-                }
-            } else {
-                throw new UserNotFoundException("Usuario não encontrado!");
+                validatorSenha.valida(cliente,senha); // interface de validação
+                menuCliente(cliente);
             }
-        } catch (UserNotFoundException | InvalidPasswordException e) {
+        } catch (ValidatorException e) {
             System.out.println(e.getMessage());
-            menuInicial();
+            fazerLogin();
         }
     }
 
@@ -175,7 +175,7 @@ public class Application {
         }
     }
 
-    private void menuCliente(ICliente cliente) {
+    public void menuCliente(ICliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
         System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular().getNome());
         if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PF")) {
