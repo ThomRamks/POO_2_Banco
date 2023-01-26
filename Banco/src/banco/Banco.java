@@ -13,11 +13,14 @@ import java.util.*;
 public class Banco {
 
     private static final Banco AdaBank = new Banco();
+
     private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
     private int numeroDefault;
+
     public Banco() {
         numeroDefault = 1000;
     }
+
     public static Banco getInstance() {
         return AdaBank;
     }
@@ -67,6 +70,7 @@ public class Banco {
         contasNoBanco.put(ccPessoaJuridica, cliente);
         contasNoBanco.put(ciPessoaJuridica, cliente);
     }
+
 
     public boolean contemLogin(String login) {
         boolean contem = false;
@@ -130,25 +134,11 @@ public class Banco {
     public IConta getSubTipoConta(int numeroConta, String operacao) {
         IConta conta = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
-            if(contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao().equals(operacao)) {
+            if (contaS.getKey().getNumero() == numeroConta && contaS.getKey().getOperacao().equals(operacao)) {
                 conta = contaS.getKey();
             }
         }
         return conta;
-    }
-
-    public void listarContasUsuario(ICliente cliente) {
-        String nome = cliente.getNome();
-        System.out.println("\n\t-- Conta " + nome + " --\n");
-        cliente.getContasUsuario().forEach(conta -> {
-            System.out.println("Tipo conta: " + conta.getTipoConta());
-            System.out.println("Operação: " + conta.getOperacao());
-            System.out.println("Titular: " + conta.getTitular().getNome());
-            System.out.println("Documento: " + conta.getTitular().getDocumento());
-            System.out.println("Agência: " + conta.getAgencia());
-            System.out.println("Número: " + conta.getNumero());
-            System.out.println("\n\t --- \n");
-        });
     }
 
     public void depositar(IConta conta, double valor) {
@@ -159,12 +149,11 @@ public class Banco {
         return contaOrigem.transferir(valor, contaDestino);
     }
 
-    public void sacar(IConta conta, double valor) {
-        conta.sacar(valor);
+    public boolean sacar(IConta conta, double valor) {
+        return conta.sacar(valor);
     }
 
     public void investir(IContaInvestimento conta, double valor) {
         conta.investir(valor);
     }
-
 }

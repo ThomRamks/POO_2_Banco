@@ -3,7 +3,6 @@ package conta;
 import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
-import cliente.ClientePessoaFisica;
 
 public class ContaPoupanca extends Conta {
     private String operacao = "3";
