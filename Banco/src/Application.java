@@ -1,13 +1,10 @@
 import Exceptions.InvalidPasswordException;
 import Exceptions.UserNotFoundException;
 import banco.Banco;
-import cliente.Cliente;
-import cliente.ClientePessoaFisica;
 import interfaces.ICliente;
 import interfaces.IConta;
-import util.GeraDadosIniciais;
-import util.valida.ValidaDocumento;
-import util.valida.ValidaTexto;
+import ValidaDocumento;
+import ValidaTexto;
 
 import java.util.Scanner;
 
@@ -23,114 +20,6 @@ public class Application {
         app.menuInicial();
 
     }
-
-//        GeraDadosIniciais dadosIniciais = new GeraDadosIniciais();
-//        dadosIniciais.carregaDadosIniciais();
-//        Banco banco = Banco.getInstance();
-//
-//        String cpf = "578.179.380-16";
-//        System.out.printf("CPF %s válido? %b%n", cpf, ValidaDocumento.isCpf(cpf));
-//
-//        String cnpj = "24.861.255/0001-07";
-//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-//
-//        cnpj = "24861255000107";
-//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-//
-//        cnpj = "24861255/0001-07";
-//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-//
-//        cnpj = "01.234.567/0001-11";
-//        System.out.printf("CNPJ %s válido? %b%n", cnpj, ValidaDocumento.isCNPJ(cnpj));
-//
-//        String nome = "Di3go Ruescas";
-//        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
-//
-//        nome = "Diego Ruescas";
-//        System.out.printf("Nome %s é válido? %b%n", nome, ValidaTexto.somenteLetras(nome));
-//
-//        nome = "dIeGo rUesCAS";
-//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-//
-//        nome = "Ada Tecnologia e Educação S.A.";
-//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-//
-//        nome = "aDaBAnK ltDa";
-//        System.out.printf("Nome %s = %s%n", nome, ValidaTexto.upperfirstCase(nome));
-//
-//        String senha = "12 34 56";
-//        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
-//
-//        senha = "123456";
-//        System.out.printf("Senha %s tem espaço? %b%n", senha, ValidaTexto.temEspaco(senha));
-//
-//    }
-
-
-
-
-//        String documentoArthur = "578.179.380-16";
-//        banco.listarContasUsuario(documentoArthur);
-//
-//        String documentoDiego = "123.456.789-10";
-//        banco.listarContasUsuario(documentoDiego);
-//
-//        String documentoAda = "24.861.255/0001-07";
-//        banco.listarContasUsuario(documentoAda);
-//
-//        String documentoSinqia = "04.065.791/0001-99";
-//        banco.listarContasUsuario(documentoSinqia);
-
-//        Application app = new Application();
-//        Banco.getInstance();
-//        app.menuUsuario();
-
-//        PessoaFisica pessoaFisica = new PessoaFisica("Diego", "123.456.789-10");
-//        PessoaJuridica pessoaJuridica = new PessoaJuridica("Ada", "12.455.455/0001-00");
-//
-//
-//        ContaPoupanca contaPoupanca = new ContaPoupanca(123,45678, pessoaFisica);
-//        ContaCorrentePessoaFisica ccPessoaFisica = new ContaCorrentePessoaFisica(321, 7898, pessoaFisica);
-//        ContaCorrentePessoaJuridica ccPessoaJuridica = new ContaCorrentePessoaJuridica(456, 445588, pessoaJuridica);
-//        ContaInvestimentoPessoaFisica ciPessoaFisica = new ContaInvestimentoPessoaFisica(321, 7898, pessoaFisica);
-//        ContaInvestimentoPessoaJuridica ciPessoaJuridica = new ContaInvestimentoPessoaJuridica(456, 445588, pessoaJuridica);
-//
-//
-//        Banco operacao = new Banco();
-//        operacao.depositar(contaPoupanca, 100);
-//        operacao.depositar(ccPessoaFisica, 100);
-//        operacao.depositar(ccPessoaJuridica, 200);
-//        operacao.depositar(ciPessoaFisica, 100);
-//        operacao.depositar(ciPessoaJuridica, 200);
-//
-//        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
-//        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
-//        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
-//        System.out.printf("Saldo da Conta de Investimento PF: %.2f%n", ciPessoaFisica.getSaldo());
-//        System.out.printf("Saldo da Conta de Investimento PJ: %.2f%n", ciPessoaJuridica.getSaldo());
-//
-//        System.out.println();
-//
-//        boolean transferiu  = operacao.transferir(ccPessoaJuridica, 100, ccPessoaFisica);
-//
-//        if (transferiu) {
-//            System.out.println("Transferência realizada com sucesso!");
-//        } else {
-//            System.out.println("Transferência não realizada!");
-//        }
-//
-//        System.out.println();
-//
-//        System.out.printf("Saldo Poupança: %.2f%n",contaPoupanca.getSaldo());
-//        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
-//        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
-//
-//
-//        operacao.sacar(ccPessoaFisica, 50);
-//        System.out.printf("Saldo Conta Corrente PF: %.2f%n",ccPessoaFisica.getSaldo());
-//        operacao.sacar(ccPessoaJuridica, 200);
-//        System.out.printf("Saldo Conta Corrente PJ: %.2f%n",ccPessoaJuridica.getSaldo());
-
 
     public void menuInicial() {
         System.out.println("====================================================");
@@ -175,7 +64,7 @@ public class Application {
                 System.out.println("Digite sua senha:");
                 String senha = sc.next();
                 if (banco.checarSenha(cliente, senha)) {
-                    System.out.println("");
+                    System.out.println();
                     menuCliente(cliente);
                 } else {
                     throw new InvalidPasswordException("Senha Inválida!");
