@@ -17,7 +17,7 @@ public class Banco {
     private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
     private int numeroDefault;
 
-    public Banco() {
+    private Banco() {
         numeroDefault = 1000;
     }
 
