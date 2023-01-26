@@ -311,16 +311,20 @@ public class Application {
         }
     }
 
-    private void menuSacar(IConta conta) {
-        System.out.println("Qual valor voce deseja sacar?");
-        String valor = sc.next();
-        double valorDesejado = ValidaDouble.validaDouble(valor);
-        if (banco.sacar(conta, valorDesejado)) {
-            System.out.println("Saque efetuado!");
-        } else {
-            System.out.println("Saldo insuficiente!");
+private void menuSacar(IConta conta) {
+        try {
+            System.out.println("Qual valor voce deseja sacar?");
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
+            if (banco.sacar(conta, valorDesejado)) {
+                System.out.println("Saque efetuado!");
+            } else {
+                System.out.println("Saldo insuficiente!");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Tente novamente.");
+            menuSacar(conta);
         }
-
     }
 
     private void menuTransferir(IConta conta) { // filtrar transferencia para mesma conta
@@ -338,13 +342,45 @@ public class Application {
         }
     }
 
-    private double requisitarValorTransferencia() {
-        System.out.println("Digite o valor a ser transferido: ");
-        String valor = sc.next();
-        double valorDesejado = ValidaDouble.validaDouble(valor);
-        return valorDesejado;
+   private double requisitarValorTransferencia() {
+        try {
+            System.out.println("Digite o valor a ser transferido: ");
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
+            return valorDesejado;
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Tente novamente.");
+            requisitarValorTransferencia();
+        }
+        return 0;
+    }
+    
+   private void menuDepositar(IConta conta) {
+        try {
+            System.out.println("Digite a quantia que você deseja depositar: ");
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
+            banco.depositar(conta, valorDesejado);
+            System.out.println("Depósito efetuado!");
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Tente novamente.");
+            menuDepositar(conta);
+        }
     }
 
+    private void menuInvestir(IConta conta) {
+        try {
+            System.out.println("Digite a quantia que você deseja investir: ");
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
+            banco.depositar(conta, valorDesejado);
+            System.out.println("Investimento efetuado!");
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Tente novamente.");
+            menuDepositar(conta);
+        }
+    }
+    
     private void menuSubtipoPF(IConta contaOrigem, int numeroContaDestino) {
         String contaDesejada;
         System.out.println(
@@ -391,33 +427,7 @@ public class Application {
                 menuCliente(contaOrigem.getTitular());
                 break;
             default:
-                menuSubtipoPF(contaOrigem, numeroContaDestino);
-        }
-    }
-
-    private void menuDepositar(IConta conta) {
-        try {
-            System.out.println("Digite a quantia que você deseja depositar: ");
-            String valor = sc.next();
-            double valorDesejado = ValidaDouble.validaDouble(valor);
-            banco.depositar(conta, valorDesejado);
-            System.out.println("Depósito efetuado!");
-        } catch (InputMismatchException e) {
-            System.out.println("Valor inválido! Tente novamente.");
-            menuDepositar(conta);
-        }
-    }
-
-    private void menuInvestir(IConta conta) {
-        try {
-            System.out.println("Digite a quantia que você deseja investir: ");
-            String valor = sc.next();
-            double valorDesejado = ValidaDouble.validaDouble(valor);
-            banco.depositar(conta, valorDesejado);
-            System.out.println("Investimento efetuado!");
-        } catch (InputMismatchException e) {
-            System.out.println("Valor inválido! Tente novamente.");
-            menuDepositar(conta);
+                menuSubtipoPJ(contaOrigem, numeroContaDestino);
         }
     }
 
