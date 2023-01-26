@@ -148,6 +148,16 @@ public class ValidaDocumento {
 
     public static String formataCnpj(String cnpj) {
         cnpj = removeCaracteresEspeciais(cnpj);
-        return (cnpj.substring(0, 2) + "." + cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "." + cnpj.substring(8, 12) + "-" + cnpj.substring(12, 14));
+        return (cnpj.substring(0, 2) + "." + cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/" + cnpj.substring(8, 12) + "-" + cnpj.substring(12, 14));
     }
+
+    public static String formataDocumento(String documento){
+        if(ValidaDocumento.isCpf(documento)){
+            documento = formataCpf(documento);
+        } else if(ValidaDocumento.isCNPJ(documento)){
+            documento = formataCnpj(documento);
+        }
+        return documento;
+    }
+
 }

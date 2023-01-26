@@ -1,5 +1,6 @@
 package banco;
 
+import cliente.Cliente;
 import cliente.ClientePessoaFisica;
 import cliente.ClientePessoaJuridica;
 import conta.*;
