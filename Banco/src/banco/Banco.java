@@ -38,7 +38,7 @@ public class Banco {
     }
 
     public void abrirContaPessoaFisica(ICliente cliente) {
-        int numero = 0;
+        int numero;
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
@@ -55,7 +55,7 @@ public class Banco {
     }
 
     public void abrirContaPessoaJuridica(ICliente cliente) {
-        int numero = 0;
+        int numero;
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {

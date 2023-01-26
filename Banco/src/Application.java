@@ -1,8 +1,12 @@
-import Exceptions.InvalidPasswordException;
-import Exceptions.UserNotFoundException;
+import exceptions.InvalidPasswordException;
+import exceptions.UserNotFoundException;
 import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
+import util.GeraDadosIniciais;
+import util.valida.ValidaDocumento;
+import util.valida.ValidaTexto;
+import util.valida.ValidaDouble;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -12,14 +16,16 @@ public class Application {
     static Scanner sc = new Scanner(System.in);
     static String respostasUsuario;
     static Banco banco = Banco.getInstance();
-
+    static GeraDadosIniciais dadosIniciais = GeraDadosIniciais.getInstance();
 
     public static void main(String[] args) {
         Application app = new Application();
+        dadosIniciais.carregaDadosIniciais();
         app.menuInicial();
 
     }
-    public void menuInicial() {
+
+    private void menuInicial() {
         System.out.println("====================================================");
         System.out.println("             Seja bem vindo(a) ao                   ");
         System.out.println("		            ADA BANK                        ");
@@ -57,6 +63,7 @@ public class Application {
             System.out.println("==============    LOGIN   ================");
             System.out.println("Digite seu documento:");
             String login = sc.next();
+            login = ValidaDocumento.formataDocumento(login);
             if (banco.contemLogin(login)) {
                 ICliente cliente = banco.getCliente(login);
                 System.out.println("Digite sua senha:");
@@ -76,33 +83,62 @@ public class Application {
         }
     }
 
-    public ICliente cadastrarPF() {
+    private ICliente cadastrarPF() {
         System.out.println("Qual seu nome?");
         String nome = sc.next();
-        //validacaonome
-        System.out.println("Digite seu CPF:");
-        String cpf = sc.next();
-        //validacao cpf
-        System.out.println("Digite uma senha:");
-        String senha = sc.next();
-        //validacao senha
-
-        return banco.registrarConta(nome, cpf, senha);
+        nome = ValidaTexto.upperfirstCase(nome);
+        if (ValidaTexto.somenteLetras(nome)) {
+            System.out.println("Digite seu CPF:");
+            String cpf = sc.next();
+            cpf = ValidaDocumento.formataCpf(cpf);
+            if (ValidaDocumento.isCpf(cpf) & !banco.contemLogin(cpf)) {
+                System.out.println("Digite uma senha:");
+                String senha = sc.next();
+                if (banco.cadastrarSenha(senha)) {
+                    return banco.registrarConta(nome, cpf, senha);
+                } else {
+                    System.out.println("Sua senha deve conter, no mínimo, oito caracteres. Por favor, tente novamente.");
+                    abrirConta();
+                }
+            } else {
+                System.out.println("Documento inválido. Por favor, tente novamente.");
+                abrirConta();
+            }
+        } else {
+            System.out.println("Digite seu nome. Por favor, tente novamente.");
+            abrirConta();
+        }
+        return null;
     }
 
-    public ICliente cadastrarPJ() {
+    private ICliente cadastrarPJ() {
         System.out.println("Digite sua razão social:");
         String nome = sc.next();
-        //validacaonome
-        System.out.println("Digite seu CNPJ:");
-        String cnpj = sc.next();
-        //validacao documento
-        System.out.println("Digite uma senha:");
-        String senha = sc.next();
-        //validacao senha
-
-        return banco.registrarConta(nome, cnpj, senha);
+        nome = ValidaTexto.upperfirstCase(nome);
+        if (!nome.isBlank()) {
+            System.out.println("Digite seu CNPJ:");
+            String cnpj = sc.next();
+            cnpj = ValidaDocumento.formataCnpj(cnpj);
+            if (ValidaDocumento.isCNPJ(cnpj) & !banco.contemLogin(cnpj)) {
+                System.out.println("Digite uma senha:");
+                String senha = sc.next();
+                if (banco.cadastrarSenha(senha)) {
+                    return banco.registrarConta(nome, cnpj, senha);
+                } else {
+                    System.out.println("Sua senha deve conter, no mínimo, oito caracteres. Por favor, tente novamente.");
+                    abrirConta();
+                }
+            } else {
+                System.out.println("Documento inválido. Por favor, tente novamente.");
+                abrirConta();
+            }
+        } else {
+            System.out.println("Digite sua Razão Social. Por favor, tente novamente.");
+            abrirConta();
+        }
+        return null;
     }
+
 
     private void abrirConta() {
         System.out.println("==============   ABERTURA DE CONTA   ================");
@@ -139,7 +175,7 @@ public class Application {
         }
     }
 
-    public void menuCliente(ICliente cliente) {
+    private void menuCliente(ICliente cliente) {
         System.out.println("==============    MENU CLIENTE   ================");
         System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular().getNome());
         if (banco.getTipoPessoa(cliente.getContasUsuario().get(0).getNumero()).equals("PF")) {
@@ -149,7 +185,7 @@ public class Application {
         }
     }
 
-    public void menuPF(ICliente cliente) {
+    private void menuPF(ICliente cliente) {
         System.out.println("Qual conta voce deseja acessar:\n"
                 + "1 - Conta Corrente \n"
                 + "2 - Conta Investimento \n"
@@ -177,7 +213,7 @@ public class Application {
         }
     }
 
-    public void menuPJ(ICliente cliente) {
+    private void menuPJ(ICliente cliente) {
         System.out.println("Qual conta voce deseja acessar:\n"
                 + "1 - Conta Corrente \n"
                 + "2 - Conta Investimento \n"
@@ -191,7 +227,6 @@ public class Application {
             case "2":
                 menuOperacoesInvestir(cliente.getContasUsuario().get(1));
                 break;
-
             case "3":
                 menuInicial();
                 break;
@@ -202,7 +237,7 @@ public class Application {
         }
     }
 
-    public void menuOperacoes(IConta conta) {
+    private void menuOperacoes(IConta conta) {
         System.out.println("Qual operação você deseja realizar:\n"
                 + "1 - Sacar \n"
                 + "2 - Transferir \n"
@@ -224,7 +259,7 @@ public class Application {
                 menuOperacoes(conta);
                 break;
             case "4":
-                System.out.printf("Seu saldo atual é: R$ %.2f \n ",conta.getSaldo());
+                System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
                 menuOperacoes(conta);
                 break;
             case "5":
@@ -237,7 +272,7 @@ public class Application {
         }
     }
 
-    public void menuOperacoesInvestir(IConta conta) {
+    private void menuOperacoesInvestir(IConta conta) {
         System.out.println("Qual operação você deseja realizar:\n"
                 + "1 - Sacar \n"
                 + "2 - Transferir \n"
@@ -263,7 +298,7 @@ public class Application {
                 menuInvestir(conta);
                 menuOperacoesInvestir(conta);
             case "5":
-                System.out.printf("Seu saldo atual é: R$ %.2f", conta.getSaldo());
+                System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
                 menuOperacoesInvestir(conta);
                 break;
             case "6":
@@ -278,16 +313,17 @@ public class Application {
 
     private void menuSacar(IConta conta) {
         System.out.println("Qual valor voce deseja sacar?");
-        double valor = sc.nextDouble();
-        if(banco.sacar(conta, valor)){
+        String valor = sc.next();
+        double valorDesejado = ValidaDouble.validaDouble(valor);
+        if (banco.sacar(conta, valorDesejado)) {
             System.out.println("Saque efetuado!");
-        } else{
+        } else {
             System.out.println("Saldo insuficiente!");
         }
 
     }
 
-    public void menuTransferir(IConta conta) { // filtrar transferencia para mesma conta
+    private void menuTransferir(IConta conta) { // filtrar transferencia para mesma conta
         System.out.println("Informe o número da conta de destino:");
         int contaDestino = sc.nextInt();
         if (banco.contemConta(contaDestino)) {
@@ -297,18 +333,19 @@ public class Application {
             } else if (banco.getTipoPessoa(contaDestino).equals("PJ")) {
                 menuSubtipoPJ(conta, contaDestino);
             }
-        } else{
+        } else {
             System.out.println("Conta não encontrada. Tente novamente!");
         }
     }
 
-    public double requisitarValorTransferencia() {
+    private double requisitarValorTransferencia() {
         System.out.println("Digite o valor a ser transferido: ");
-        double valorDesejado = sc.nextDouble();
+        String valor = sc.next();
+        double valorDesejado = ValidaDouble.validaDouble(valor);
         return valorDesejado;
     }
 
-    public void menuSubtipoPF(IConta contaOrigem, int numeroContaDestino) {
+    private void menuSubtipoPF(IConta contaOrigem, int numeroContaDestino) {
         String contaDesejada;
         System.out.println(
                 "1 - Conta Corrente\n" +
@@ -322,8 +359,11 @@ public class Application {
             case "3":
                 double valorDesejado = requisitarValorTransferencia();
                 IConta contaDestino = banco.getSubTipoConta(numeroContaDestino, contaDesejada);
-                banco.transferir(contaOrigem, valorDesejado, contaDestino);
-                System.out.println("Transferência realizada com sucesso!");
+                if (banco.transferir(contaOrigem, valorDesejado, contaDestino)) {
+                    System.out.println("Transferência realizada com sucesso!");
+                } else {
+                    System.out.println("Saldo insuficiente para transferência!");
+                }
                 menuCliente(contaOrigem.getTitular());
                 break;
             default:
@@ -331,7 +371,7 @@ public class Application {
         }
     }
 
-    public void menuSubtipoPJ(IConta contaOrigem, int numeroContaDestino) {
+    private void menuSubtipoPJ(IConta contaOrigem, int numeroContaDestino) {
         String contaDesejada;
         System.out.println(
                 "1 - Conta Corrente\n" +
@@ -343,8 +383,11 @@ public class Application {
             case "2":
                 double valorDesejado = requisitarValorTransferencia();
                 IConta contaDestino = banco.getSubTipoConta(numeroContaDestino, contaDesejada);
-                banco.transferir(contaOrigem, valorDesejado, contaDestino);
-                System.out.println("Transferência realizada com sucesso!");
+                if (banco.transferir(contaOrigem, valorDesejado, contaDestino)) {
+                    System.out.println("Transferência realizada com sucesso!");
+                } else {
+                    System.out.println("Saldo insuficiente para transferência!");
+                }
                 menuCliente(contaOrigem.getTitular());
                 break;
             default:
@@ -352,16 +395,11 @@ public class Application {
         }
     }
 
-    public void sair() {
-        System.out.println("ADA BANK agradece sua preferencia.");
-        System.out.println("Esperamos de te ver em breve! o/");
-        System.exit(0);
-    }
-
-    public void menuDepositar(IConta conta) {
+    private void menuDepositar(IConta conta) {
         try {
             System.out.println("Digite a quantia que você deseja depositar: ");
-            double valorDesejado = sc.nextDouble();
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
             banco.depositar(conta, valorDesejado);
             System.out.println("Depósito efetuado!");
         } catch (InputMismatchException e) {
@@ -370,15 +408,22 @@ public class Application {
         }
     }
 
-    public void menuInvestir(IConta conta) {
+    private void menuInvestir(IConta conta) {
         try {
             System.out.println("Digite a quantia que você deseja investir: ");
-            double valorDesejado = sc.nextDouble();
+            String valor = sc.next();
+            double valorDesejado = ValidaDouble.validaDouble(valor);
             banco.depositar(conta, valorDesejado);
             System.out.println("Investimento efetuado!");
         } catch (InputMismatchException e) {
             System.out.println("Valor inválido! Tente novamente.");
             menuDepositar(conta);
         }
+    }
+
+    private void sair() {
+        System.out.println("ADA BANK agradece sua preferencia.");
+        System.out.println("Esperamos de te ver em breve! o/");
+        System.exit(0);
     }
 }
