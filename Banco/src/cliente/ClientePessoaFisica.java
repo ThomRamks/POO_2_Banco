@@ -1,7 +1,6 @@
 package cliente;
 
 public class ClientePessoaFisica extends Cliente {
-
     private String cpf;
 
     public ClientePessoaFisica(String nome, String senha, String cpf) {

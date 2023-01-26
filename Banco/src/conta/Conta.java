@@ -2,7 +2,6 @@ package conta;
 
 import interfaces.ICliente;
 import interfaces.IConta;
-import cliente.Cliente;
 
 public abstract class Conta implements IConta {
     private int agencia;
