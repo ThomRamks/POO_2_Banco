@@ -2,7 +2,6 @@ package validator;
 
 import banco.Banco;
 import exceptions.ValidatorException;
-import interfaces.ICliente;
 import interfaces.IValidator;
 
 public class SenhaLoginValidator implements IValidator<String> {
