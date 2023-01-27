@@ -72,7 +72,7 @@ public class CNPJValidator implements IValidator<String> {
 
     @Override
     public void valida(String cnpj) throws ValidatorException {
-        if (!ValidaDocumento.isCNPJ(cnpj)) {
+        if (!isCNPJ(cnpj)) {
             throw new ValidatorException("CNPJ inválido.");
         }
     }

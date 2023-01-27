@@ -9,6 +9,8 @@ import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
 import interfaces.IValidator;
+import util.formata.FormataDocumento;
+import util.formata.FormataTexto;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ public class Banco {
 
     private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
     private int numeroDefault;
+    private String clienteLogin;
 
     private Banco() {
         numeroDefault = 1000;
@@ -30,12 +33,16 @@ public class Banco {
 
     public ICliente registrarConta(String nome, String documento, String senha, String tipoCliente) {
         ICliente cliente = null;
+        nome = FormataTexto.upperfirstCase(nome);
         if (tipoCliente.equals("1")) { // parametro NullPointer
+            documento = FormataDocumento.formataCpf(documento);
             cliente = new ClientePessoaFisica(nome, senha, documento);
         }
         if (tipoCliente.equals("2")) {
+            documento = FormataDocumento.formataCnpj(documento);
             cliente = new ClientePessoaJuridica(nome, senha, documento);
         }
+
         return cliente;
     }
 
@@ -75,14 +82,14 @@ public class Banco {
 
 
     public boolean contemLogin(String login) {
-        boolean contem = false;
+        login = FormataDocumento.tipoDocumento(login);
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
             if (contaS.getValue().getDocumento().equals(login)) {
-                contem = true;
+                clienteLogin = contaS.getValue().getDocumento();
+                return true;
             }
-
         }
-        return contem;
+        return false;
     }
 
     public boolean cadastrarSenha(String senha) {
@@ -105,7 +112,9 @@ public class Banco {
         return cliente;
     }
 
-    public boolean checarSenha(ICliente cliente, String senha) {
+    public boolean checarSenha(String senha) {
+        ICliente cliente = getCliente(clienteLogin);
+        System.out.println(cliente.getNome());
         return cliente.validaSenha(senha);
     }
 
@@ -117,6 +126,10 @@ public class Banco {
             }
         }
         return contem;
+    }
+
+    public String getClienteLogin() {
+        return clienteLogin;
     }
 
     public String getTipoPessoa(int numeroConta) {

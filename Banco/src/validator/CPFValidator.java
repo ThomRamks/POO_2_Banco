@@ -71,7 +71,7 @@ public class CPFValidator implements IValidator<String> {
 
     @Override
     public void valida(String cpf) throws ValidatorException {
-        if (isCPF(cpf)) {
+        if (!isCPF(cpf)) {
             throw new ValidatorException("CPF inválido.");
         }
     }

@@ -1,6 +1,4 @@
 import banco.Banco;
-import exceptions.InvalidPasswordException;
-import exceptions.UserNotFoundException;
 import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
@@ -36,7 +34,7 @@ public class Application {
                 + "2 - Abrir conta \n"
                 + "3 - Sair");
 
-        respostasUsuario = sc.next();
+        respostasUsuario = sc.nextLine();
 
         switch (respostasUsuario) {
             case "1":
@@ -58,84 +56,62 @@ public class Application {
     }
 
     private void fazerLogin() {
+        System.out.println("==============    LOGIN   ================");
+
+        System.out.println("Digite seu documento:");
+        String login = sc.nextLine();
         try {
-            System.out.println("==============    LOGIN   ================");
-            System.out.println("Digite seu documento:");
-            String login = sc.next();
-            if (banco.contemLogin(login)) {
-                ICliente cliente = banco.getCliente(login);
-                System.out.println("Digite sua senha:");
-                String senha = sc.next();
-                if (banco.checarSenha(cliente, senha)) {
-                    System.out.println("");
-                    menuCliente(cliente);
-                } else {
-                    throw new InvalidPasswordException("Senha Inválida!");
-                }
-            } else {
-                throw new UserNotFoundException("Usuario não encontrado!");
-            }
-        } catch (UserNotFoundException | InvalidPasswordException e) {
+            banco.valida(new LoginValidator(), login);
+        } catch (ValidatorException e) {
             System.out.println(e.getMessage());
-            menuInicial();
+            fazerLogin();
         }
+
+        System.out.println("Digite sua senha:");
+        String senha = sc.nextLine();
+        try {
+            banco.valida(new SenhaLoginValidator(), senha);
+        } catch (ValidatorException e) {
+            System.out.println(e.getMessage());
+            fazerLogin();
+        }
+        System.out.println();
+        menuCliente(banco.getCliente(banco.getClienteLogin()));
     }
 
     public ICliente cadastrarPF(String tipoCliente) {
+
         System.out.println("Qual seu nome?");
-        String nome = FormataTexto.upperfirstCase(sc.nextLine());
-        try {
-            banco.valida(new NomeValidator(), nome);
-        } catch (ValidatorException e) {
-            System.err.println(e.getMessage());
-            cadastrarPF(tipoCliente);
-        }
-
+        String nome = sc.nextLine();
         System.out.println("Digite seu CPF:");
-        String cpf = FormataDocumento.formataCpf(sc.nextLine());
-        try {
-            banco.valida(new CPFValidator(), cpf);
-        }  catch (ValidatorException e) {
-            System.err.println(e.getMessage());
-            cadastrarPF(tipoCliente);
-        }
-
+        String cpf = sc.nextLine();
         System.out.println("Digite uma senha:");
         String senha = sc.nextLine();
         try {
+            banco.valida(new NomeValidator(), nome);
+            banco.valida(new CPFValidator(), cpf);
             banco.valida(new SenhaValidator(), senha);
-        }  catch (ValidatorException e) {
-            System.err.println(e.getMessage());
+        } catch (ValidatorException e) {
+            System.out.println(e.getMessage());
             cadastrarPF(tipoCliente);
         }
+
         return banco.registrarConta(nome, cpf, senha, tipoCliente);
     }
 
     public ICliente cadastrarPJ(String tipoCliente) {
         System.out.println("Digite sua razão social:");
         String nome = FormataTexto.upperfirstCase(sc.nextLine());
-        try {
-            banco.valida(new NomeEmpresaValidator(), nome);
-        }  catch (ValidatorException e) {
-            System.err.println(e.getMessage());
-            cadastrarPJ(tipoCliente);
-        }
-
         System.out.println("Digite seu CNPJ:");
-        String cnpj = FormataDocumento.formataCnpj(sc.nextLine());
-        try {
-            banco.valida(new CNPJValidator(), cnpj);
-        }  catch (ValidatorException e) {
-            System.err.println(e.getMessage());
-            cadastrarPJ(tipoCliente);
-        }
-
+        String cnpj = sc.nextLine();
         System.out.println("Digite uma senha:");
         String senha = sc.next();
         try {
+            banco.valida(new NomeEmpresaValidator(), nome);
+            banco.valida(new CNPJValidator(), cnpj);
             banco.valida(new SenhaValidator(), senha);
-        }  catch (ValidatorException e) {
-            System.err.println(e.getMessage());
+        } catch (ValidatorException e) {
+            System.out.println(e.getMessage());
             cadastrarPJ(tipoCliente);
         }
 
