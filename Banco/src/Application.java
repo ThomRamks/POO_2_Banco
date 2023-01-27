@@ -93,7 +93,7 @@ public class Application {
             banco.valida(new CriarSenhaValidator(), senha);
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
-            cadastrarPF(tipoCliente);
+            menuInicial();
         }
         return banco.registrarConta(nome, cpf, senha, tipoCliente);
     }
@@ -112,7 +112,7 @@ public class Application {
             banco.valida(new CriarSenhaValidator(), senha);
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
-            cadastrarPJ(tipoCliente);
+            menuInicial();
         }
 
         return banco.registrarConta(nome, cnpj, senha, tipoCliente);
