@@ -99,7 +99,6 @@ public class Banco {
 
     public boolean checarSenha(String senha) {
         ICliente cliente = getCliente(clienteLogin);
-        System.out.println(cliente.getNome());
         return cliente.validaSenha(senha);
     }
 
