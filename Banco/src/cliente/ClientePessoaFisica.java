@@ -1,7 +1,6 @@
 package cliente;
 
 public class ClientePessoaFisica extends Cliente {
-
     private String cpf;
 
     public ClientePessoaFisica(String nome, String senha, String cpf) {
@@ -12,5 +11,10 @@ public class ClientePessoaFisica extends Cliente {
     @Override
     public String getDocumento() {
         return this.cpf;
+    }
+
+    @Override
+    public String getTipoPessoa() {
+        return TipoPessoa.PESSOA_FISICA.getDescricao();
     }
 }
