@@ -12,4 +12,9 @@ public class ClientePessoaJuridica extends Cliente {
     public String getDocumento() {
         return this.cnpj;
     }
+
+    @Override
+    public String getTipoPessoa() {
+        return TipoPessoa.PESSOA_JURIDICA.getDescricao();
+    }
 }
