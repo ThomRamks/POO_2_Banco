@@ -6,7 +6,6 @@ import util.GeraDadosIniciais;
 import util.formata.FormataDouble;
 import util.formata.FormataTexto;
 import validator.*;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -91,7 +90,7 @@ public class Application {
             banco.valida(new NomeValidator(), nome);
             banco.valida(new CPFValidator(), cpf);
             banco.valida(new CriarLoginValidator(), cpf);
-            banco.valida(new SenhaValidator(), senha);
+            banco.valida(new CriarSenhaValidator(), senha);
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
             cadastrarPF(tipoCliente);
@@ -110,7 +109,7 @@ public class Application {
             banco.valida(new NomeEmpresaValidator(), nome);
             banco.valida(new CNPJValidator(), cnpj);
             banco.valida(new CriarLoginValidator(), cnpj);
-            banco.valida(new SenhaValidator(), senha);
+            banco.valida(new CriarSenhaValidator(), senha);
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
             cadastrarPJ(tipoCliente);
@@ -279,7 +278,7 @@ public class Application {
                 menuInvestir(conta);
                 menuOperacoesInvestir(conta);
             case "5":
-                System.out.printf("Seu saldo atual é: R$ %.2f", conta.getSaldo());
+                System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
                 menuOperacoesInvestir(conta);
                 break;
             case "6":
@@ -416,5 +415,4 @@ public class Application {
         System.out.println("Esperamos de te ver em breve! o/");
         System.exit(0);
     }
-
 }
