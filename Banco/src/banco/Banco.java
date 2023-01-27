@@ -8,7 +8,7 @@ import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import interfaces.Validator;
+import interfaces.IValidator;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -159,7 +159,7 @@ public class Banco {
         conta.investir(valor);
     }
 
-    public <T> void valida(Validator<T> validator, T objeto) throws ValidatorException {
+    public <T> void valida(IValidator<T> validator, T objeto) throws ValidatorException {
             validator.valida(objeto);
     }
 }

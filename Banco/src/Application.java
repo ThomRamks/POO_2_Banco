@@ -6,9 +6,7 @@ import interfaces.ICliente;
 import interfaces.IConta;
 import util.formata.FormataDocumento;
 import util.formata.FormataTexto;
-import validator.CPFValidator;
-import validator.NomeValidator;
-import validator.SenhaValidator;
+import validator.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -115,14 +113,31 @@ public class Application {
 
     public ICliente cadastrarPJ(String tipoCliente) {
         System.out.println("Digite sua razão social:");
-        String nome = sc.next();
-        //validacaonome
+        String nome = FormataTexto.upperfirstCase(sc.nextLine());
+        try {
+            banco.valida(new NomeEmpresaValidator(), nome);
+        }  catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPJ(tipoCliente);
+        }
+
         System.out.println("Digite seu CNPJ:");
-        String cnpj = sc.next();
-        //validacao documento
+        String cnpj = FormataDocumento.formataCnpj(sc.nextLine());
+        try {
+            banco.valida(new CNPJValidator(), cnpj);
+        }  catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPJ(tipoCliente);
+        }
+
         System.out.println("Digite uma senha:");
         String senha = sc.next();
-        //validacao senha
+        try {
+            banco.valida(new SenhaValidator(), senha);
+        }  catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPJ(tipoCliente);
+        }
 
         return banco.registrarConta(nome, cnpj, senha, tipoCliente);
     }

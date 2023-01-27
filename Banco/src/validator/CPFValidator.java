@@ -1,12 +1,12 @@
 package validator;
 
 import exceptions.ValidatorException;
-import interfaces.Validator;
+import interfaces.IValidator;
 import util.formata.FormataDocumento;
 
 import java.util.InputMismatchException;
 
-public class CPFValidator implements Validator<String> {
+public class CPFValidator implements IValidator<String> {
 
     public static boolean isCPF(String cpf) {
         cpf = FormataDocumento.removeCaracteresEspeciais(cpf);

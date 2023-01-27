@@ -2,6 +2,6 @@ package interfaces;
 
 import exceptions.ValidatorException;
 
-public interface Validator<T> {
+public interface IValidator<T> {
     void valida(T objeto) throws ValidatorException;
 }
