@@ -308,7 +308,7 @@ public class Application {
 
     }
 
-    private void menuTransferir(IConta conta) { // filtrar transferencia para mesma conta
+    private void menuTransferir(IConta conta) { // filtrar transferencia para mesma conta?
         try {
             System.out.println("Informe o número da conta de destino:");
             int contaDestino = sc.nextInt();
@@ -412,7 +412,7 @@ public class Application {
 
     private void sair() {
         System.out.println("ADA BANK agradece sua preferencia.");
-        System.out.println("Esperamos de te ver em breve! o/");
+        System.out.println("Esperamos te ver em breve! o/");
         System.exit(0);
     }
 }
