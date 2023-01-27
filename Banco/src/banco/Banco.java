@@ -7,22 +7,18 @@ import conta.*;
 import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
-import interfaces.IContaInvestimento;
 import interfaces.IValidator;
 import util.formata.FormataDocumento;
 import util.formata.FormataTexto;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Banco {
     private static final Banco AdaBank = new Banco();
-
     private HashMap<IConta, ICliente> contasNoBanco = new HashMap<>();
     private int numeroDefault;
     private String clienteLogin;
-
     private Banco() {
         numeroDefault = 1000;
     }
@@ -42,7 +38,6 @@ public class Banco {
             documento = FormataDocumento.formataCnpj(documento);
             cliente = new ClientePessoaJuridica(nome, senha, documento);
         }
-
         return cliente;
     }
 
@@ -90,16 +85,6 @@ public class Banco {
             }
         }
         return false;
-    }
-
-    public boolean cadastrarSenha(String senha) {
-        boolean tamanhoCorreto;
-        if (senha.length() < 8 || senha.isBlank()) {
-            tamanhoCorreto = false;
-        } else {
-            tamanhoCorreto = true;
-        }
-        return tamanhoCorreto;
     }
 
     public ICliente getCliente(String login) {
@@ -168,11 +153,7 @@ public class Banco {
         return conta.sacar(valor);
     }
 
-    public void investir(IContaInvestimento conta, double valor) {
-        conta.investir(valor);
-    }
-
     public <T> void valida(IValidator<T> validator, T objeto) throws ValidatorException {
-            validator.valida(objeto);
+        validator.valida(objeto);
     }
 }
