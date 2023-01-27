@@ -7,5 +7,6 @@ public interface ICliente {
     String getDocumento();
     List<IConta> getContasUsuario();
     boolean validaSenha(String senha);
+    String getTipoPessoa();
 
 }

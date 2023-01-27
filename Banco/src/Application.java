@@ -1,8 +1,14 @@
 import banco.Banco;
 import exceptions.InvalidPasswordException;
 import exceptions.UserNotFoundException;
+import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
+import util.formata.FormataDocumento;
+import util.formata.FormataTexto;
+import validator.CPFValidator;
+import validator.NomeValidator;
+import validator.SenhaValidator;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -19,6 +25,7 @@ public class Application {
         app.menuInicial();
 
     }
+
     public void menuInicial() {
         System.out.println("====================================================");
         System.out.println("             Seja bem vindo(a) ao                   ");
@@ -76,21 +83,37 @@ public class Application {
         }
     }
 
-    public ICliente cadastrarPF() {
+    public ICliente cadastrarPF(String tipoCliente) {
         System.out.println("Qual seu nome?");
-        String nome = sc.next();
-        //validacaonome
-        System.out.println("Digite seu CPF:");
-        String cpf = sc.next();
-        //validacao cpf
-        System.out.println("Digite uma senha:");
-        String senha = sc.next();
-        //validacao senha
+        String nome = FormataTexto.upperfirstCase(sc.nextLine());
+        try {
+            banco.valida(new NomeValidator(), nome);
+        } catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPF(tipoCliente);
+        }
 
-        return banco.registrarConta(nome, cpf, senha);
+        System.out.println("Digite seu CPF:");
+        String cpf = FormataDocumento.formataCpf(sc.nextLine());
+        try {
+            banco.valida(new CPFValidator(), cpf);
+        }  catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPF(tipoCliente);
+        }
+
+        System.out.println("Digite uma senha:");
+        String senha = sc.nextLine();
+        try {
+            banco.valida(new SenhaValidator(), senha);
+        }  catch (ValidatorException e) {
+            System.err.println(e.getMessage());
+            cadastrarPF(tipoCliente);
+        }
+        return banco.registrarConta(nome, cpf, senha, tipoCliente);
     }
 
-    public ICliente cadastrarPJ() {
+    public ICliente cadastrarPJ(String tipoCliente) {
         System.out.println("Digite sua razão social:");
         String nome = sc.next();
         //validacaonome
@@ -101,7 +124,7 @@ public class Application {
         String senha = sc.next();
         //validacao senha
 
-        return banco.registrarConta(nome, cnpj, senha);
+        return banco.registrarConta(nome, cnpj, senha, tipoCliente);
     }
 
     private void abrirConta() {
@@ -113,17 +136,18 @@ public class Application {
                         + "3 - Voltar ao Menu Inicial");
 
         respostasUsuario = sc.next();
+        sc.nextLine();
 
         switch (respostasUsuario) {
             case "1":
-                ICliente cliente = cadastrarPF();
+                ICliente cliente = cadastrarPF(respostasUsuario);
                 banco.abrirContaPessoaFisica(cliente);
                 System.out.println("Conta criada com sucesso!");
                 System.out.println("Voce sera redirecionado ao Menu Inicial!");
                 menuInicial();
                 break;
             case "2":
-                ICliente clientePJ = cadastrarPJ();
+                ICliente clientePJ = cadastrarPJ(respostasUsuario);
                 banco.abrirContaPessoaJuridica(clientePJ);
                 System.out.println("Conta criada com sucesso!");
                 System.out.println("Voce sera redirecionado ao Menu Inicial!");
@@ -224,7 +248,7 @@ public class Application {
                 menuOperacoes(conta);
                 break;
             case "4":
-                System.out.printf("Seu saldo atual é: R$ %.2f \n ",conta.getSaldo());
+                System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
                 menuOperacoes(conta);
                 break;
             case "5":
@@ -279,9 +303,9 @@ public class Application {
     private void menuSacar(IConta conta) {
         System.out.println("Qual valor voce deseja sacar?");
         double valor = sc.nextDouble();
-        if(banco.sacar(conta, valor)){
+        if (banco.sacar(conta, valor)) {
             System.out.println("Saque efetuado!");
-        } else{
+        } else {
             System.out.println("Saldo insuficiente!");
         }
 
@@ -297,7 +321,7 @@ public class Application {
             } else if (banco.getTipoPessoa(contaDestino).equals("PJ")) {
                 menuSubtipoPJ(conta, contaDestino);
             }
-        } else{
+        } else {
             System.out.println("Conta não encontrada. Tente novamente!");
         }
     }

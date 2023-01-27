@@ -1,13 +1,14 @@
 package banco;
 
-import cliente.Cliente;
 import cliente.ClientePessoaFisica;
 import cliente.ClientePessoaJuridica;
+import cliente.TipoPessoa;
 import conta.*;
+import exceptions.ValidatorException;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import util.valida.ValidaDocumento;
+import interfaces.Validator;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,24 +28,19 @@ public class Banco {
         return AdaBank;
     }
 
-    public ICliente registrarConta(String nome, String documento, String senha){
+    public ICliente registrarConta(String nome, String documento, String senha, String tipoCliente) {
         ICliente cliente = null;
-        if(ValidaDocumento.isCpf(documento)){
-            documento = ValidaDocumento.formataCpf(documento);
+        if (tipoCliente.equals("1")) { // parametro NullPointer
             cliente = new ClientePessoaFisica(nome, senha, documento);
-        } else if (ValidaDocumento.isCNPJ(documento)){
-            documento = ValidaDocumento.formataCnpj(documento);
+        }
+        if (tipoCliente.equals("2")) {
             cliente = new ClientePessoaJuridica(nome, senha, documento);
         }
         return cliente;
     }
 
     public void abrirContaPessoaFisica(ICliente cliente) {
-<<<<<<< HEAD
         int numero = 0;
-=======
-        int numero;
->>>>>>> 16404dcfe8a7e909266e384898277760c553b313
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
@@ -61,11 +57,7 @@ public class Banco {
     }
 
     public void abrirContaPessoaJuridica(ICliente cliente) {
-<<<<<<< HEAD
         int numero = 0;
-=======
-        int numero;
->>>>>>> 16404dcfe8a7e909266e384898277760c553b313
         if (cliente.getContasUsuario().size() > 0) {
             numero = cliente.getContasUsuario().get(0).getNumero();
         } else {
@@ -131,9 +123,9 @@ public class Banco {
         String tipoPessoa = null;
         for (Map.Entry<IConta, ICliente> contaS : contasNoBanco.entrySet()) {
             if (contaS.getKey().getNumero() == numeroConta) {
-                if (ValidaDocumento.isCpf(contaS.getValue().getDocumento())) {
+                if (contaS.getValue().getTipoPessoa().equals(TipoPessoa.PESSOA_FISICA.getDescricao())) {
                     tipoPessoa = "PF";
-                } else if (ValidaDocumento.isCNPJ(contaS.getValue().getDocumento())){
+                } else if (contaS.getValue().getTipoPessoa().equals(TipoPessoa.PESSOA_JURIDICA.getDescricao())) {
                     tipoPessoa = "PJ";
                 }
             }
@@ -165,5 +157,9 @@ public class Banco {
 
     public void investir(IContaInvestimento conta, double valor) {
         conta.investir(valor);
+    }
+
+    public <T> void valida(Validator<T> validator, T objeto) throws ValidatorException {
+            validator.valida(objeto);
     }
 }
