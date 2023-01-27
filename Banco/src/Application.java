@@ -64,7 +64,7 @@ public class Application {
             banco.valida(new LoginValidator(), login);
         } catch (ValidatorException e) {
             System.out.println(e.getMessage());
-            menuInicial()
+            menuInicial();
         }
         System.out.println("Digite sua senha:");
         String senha = sc.nextLine();
