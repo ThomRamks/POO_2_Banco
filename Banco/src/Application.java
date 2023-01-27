@@ -367,8 +367,11 @@ public class Application {
             case "3":
                 double valorDesejado = requisitarValorTransferencia();
                 IConta contaDestino = banco.getSubTipoConta(numeroContaDestino, contaDesejada);
-                banco.transferir(contaOrigem, valorDesejado, contaDestino);
-                System.out.println("Transferência realizada com sucesso!");
+                if (banco.transferir(contaOrigem, valorDesejado, contaDestino)) {
+                    System.out.println("Transferência realizada com sucesso!");
+                } else {
+                    System.out.println("Saldo insuficiente para transferência!");
+                }
                 menuCliente(contaOrigem.getTitular());
                 break;
             default:
@@ -388,8 +391,11 @@ public class Application {
             case "2":
                 double valorDesejado = requisitarValorTransferencia();
                 IConta contaDestino = banco.getSubTipoConta(numeroContaDestino, contaDesejada);
-                banco.transferir(contaOrigem, valorDesejado, contaDestino);
-                System.out.println("Transferência realizada com sucesso!");
+                if (banco.transferir(contaOrigem, valorDesejado, contaDestino)) {
+                    System.out.println("Transferência realizada com sucesso!");
+                } else {
+                    System.out.println("Saldo insuficiente para transferência!");
+                }
                 menuCliente(contaOrigem.getTitular());
                 break;
             default:
