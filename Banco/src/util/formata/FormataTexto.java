@@ -1,6 +1,6 @@
-package util.valida;
+package util.formata;
 
-public class ValidaTexto {
+public class FormataTexto {
     public static boolean somenteLetras(String texto) {
         for (Character letra : texto.toCharArray()) {
             if (!Character.isLetter(letra) && !Character.isWhitespace(letra)) {

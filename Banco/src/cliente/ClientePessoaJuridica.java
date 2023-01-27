@@ -1,7 +1,6 @@
 package cliente;
 
 public class ClientePessoaJuridica extends Cliente {
-
     private String cnpj;
 
     public ClientePessoaJuridica(String nome, String senha, String cnpj) {
@@ -12,5 +11,10 @@ public class ClientePessoaJuridica extends Cliente {
     @Override
     public String getDocumento() {
         return this.cnpj;
+    }
+
+    @Override
+    public String getTipoPessoa() {
+        return TipoPessoa.PESSOA_JURIDICA.getDescricao();
     }
 }

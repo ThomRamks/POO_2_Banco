@@ -6,6 +6,7 @@ import banco.Banco;
 import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
+
     private String operacao = "1";
 
     public ContaCorrentePessoaJuridica(int numero, ICliente titular) {

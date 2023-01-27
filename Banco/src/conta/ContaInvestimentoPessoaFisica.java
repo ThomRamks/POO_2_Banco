@@ -1,5 +1,6 @@
 package conta;
 
+
 import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
@@ -7,6 +8,7 @@ import interfaces.IContaInvestimento;
 import cliente.ClientePessoaFisica;
 
 public class ContaInvestimentoPessoaFisica extends Conta implements IContaInvestimento<IConta> {
+
     private String operacao = "2";
 
     public ContaInvestimentoPessoaFisica(int numero, ICliente titular) {

@@ -4,8 +4,10 @@ import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
+import cliente.ClientePessoaJuridica;
 
-public class ContaInvestimentoPessoaJuridica extends Conta implements  IContaInvestimento {
+public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInvestimento<IConta> {
+
     private String operacao = "2";
 
     public ContaInvestimentoPessoaJuridica(int numero, ICliente titular) {
@@ -43,11 +45,12 @@ public class ContaInvestimentoPessoaJuridica extends Conta implements  IContaInv
 
     @Override
     public String getOperacao() {
-       return this.operacao;
+        return this.operacao;
     }
 
     @Override
     public void investir(double valor) {
-
+        super.saldo +=  (valor * 1.035);
     }
+
 }
