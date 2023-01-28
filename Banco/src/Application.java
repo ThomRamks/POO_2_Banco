@@ -19,6 +19,14 @@ public class Application {
     public static void main(String[] args) {
         Application app = new Application();
         GeraDadosIniciais.getInstance().carregaDadosIniciais();
+
+        System.out.println("====================================================");
+        System.out.println("             Seja bem vindo(a) ao                   ");
+        System.out.println("		            ADA BANK                        ");
+        System.out.println("          Seu dinheiro, nossa renda!                ");
+        System.out.println("====================================================\n");
+
+
         app.menuInicial();
 
     }
