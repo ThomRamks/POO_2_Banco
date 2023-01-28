@@ -40,6 +40,6 @@ Utilizamos o [Figma](https://www.figma.com/) para colocar as ideias e seguir com
 - 1ª Reunião do grupo ---------------------------------- 19/03/2023
 - 1ª Apresentação de idéias ao Prof.-------------------- 20/03/2023
 - Domingão da codagem (muitos bugs)---------------- 22/01/2023
-- Não lembro -------------------------------------------- 23/01/2023
+- Codagem sem limites -------------------------------------------- 23/01/2023
 - Não teve aula mas teve reunião ----------------------- 25/01/2023
-- Acertando poucas coisa e tira duvidas com o Prof.---- 27/01/2023
+- Acertando poucas coisas e tirando duvidas com o Prof.---- 27/01/2023
