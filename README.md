@@ -41,5 +41,6 @@ Utilizamos o [Figma](https://www.figma.com/) para colocar as ideias e seguir com
 - 1ª Apresentação de idéias ao Prof.-------------------- 20/03/2023
 - Domingão da codagem (muitos bugs)---------------- 22/01/2023
 - Codagem sem limites -------------------------------------------- 23/01/2023
-- Não teve aula mas teve reunião ----------------------- 25/01/2023
+- Reunião para ajustar a modelagem da aplicação ----------------------- 25/01/2023
+- Reunião para subir a primeira versão pronta da aplicação ------------ 26/01/2023
 - Acertando poucas coisas e tirando duvidas com o Prof.---- 27/01/2023
