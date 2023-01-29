@@ -15,7 +15,7 @@
 
 ------------
 #### Mais que um banco
-O AdaBank surgiu com a ilustre ideia dos consagrados alunos do curso [#Dev_Makers-V2](https://letscode.com.br/processos-seletivos/dev-makers), ansioso por trabalharem na gingante [SINQIA](https://sinqia.com.br), sugeriram um trabalho em grupo ao excelentíssimo mestre dos códigos Jackson Braga da disciplina de Programação Orientada a Objetos II, prontamente o grande mestre propôs a criação de uma aplicação que simulasse uma página de um banco.
+O AdaBank surgiu com a ilustre ideia dos consagrados alunos do curso [#Dev_Makers-V2](https://letscode.com.br/processos-seletivos/dev-makers), ansioso por trabalharem na gigante [SINQIA](https://sinqia.com.br), sugeriram um trabalho em grupo ao excelentíssimo mestre dos códigos Jackson Braga da disciplina de Programação Orientada a Objetos II, prontamente o grande mestre propôs a criação de uma aplicação que simulasse uma página de um banco.
 Assim, de uma obrigação surgiu uma paixão.
 AdaBank, conte conosco!
 
