@@ -43,6 +43,4 @@ public class ContaPoupanca extends Conta {
     public String getOperacao() {
         return this.operacao;
     }
-
-
 }

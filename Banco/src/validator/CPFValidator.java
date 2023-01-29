@@ -10,14 +10,9 @@ public class CPFValidator implements IValidator<String> {
 
     public static boolean isCPF(String cpf) {
         cpf = FormataDocumento.removeCaracteresEspeciais(cpf);
-
-        if (cpf.equals("00000000000") || cpf.equals("11111111111")
-                || cpf.equals("22222222222") || cpf.equals("33333333333")
-                || cpf.equals("44444444444") || cpf.equals("55555555555")
-                || cpf.equals("66666666666") || cpf.equals("77777777777")
-                || cpf.equals("88888888888") || cpf.equals("99999999999")
-                || (cpf.length() != 11)) {
-            return (false);
+        String invalid = "00000000000111111111112222222222233333333333444444444445555555555566666666666777777777778888888888899999999999";
+        if (invalid.contains(cpf) || (cpf.length() != 11)) {
+            return false;
         }
 
         char dig10;
