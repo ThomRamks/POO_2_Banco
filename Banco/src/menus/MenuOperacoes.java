@@ -4,9 +4,10 @@ import interfaces.IConta;
 import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 
-import java.util.Scanner;
+import java.util.*;
 
-public class MenuOperacoes<String, T> implements IMenuParametrizado<String, T> {
+public class MenuOperacoes implements IMenuParametrizado<String, IConta> {
+    private static final MenuOperacoes menuOperacoes = new MenuOperacoes();
     Scanner sc = new Scanner(System.in);
 
     @Override
@@ -24,29 +25,32 @@ public class MenuOperacoes<String, T> implements IMenuParametrizado<String, T> {
     public void processarOpcao(String opcaoCliente, IConta conta) {
         switch (opcaoCliente) {
             case "1":
-                menuSacar(conta);
-                menuOperacoes(conta);
+                MenuSacar.getInstance().exibir(conta);
+                MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
             case "2":
-                menuTransferir(conta);
-                menuOperacoes(conta);
+                MenuTransferir.getInstance().exibir(conta);
+                MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
             case "3":
-                menuDepositar(conta);
-                menuOperacoes(conta);
+                MenuDepositar.getInstance().exibir(conta);
+                MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
             case "4":
                 System.out.printf("Seu saldo atual é: R$ %.2f \n ", conta.getSaldo());
-                menuOperacoes(conta);
+                MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
             case "5":
-                menuCliente(conta.getTitular());
+                MenuCliente.getInstance().exibir(conta.getTitular());
                 break;
             default:
                 System.out.println("Operação inválida. Tente novamente.");
-                menuOperacoes(conta);
+                MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
         }
     }
 
+    public static MenuOperacoes getInstance(){
+        return menuOperacoes;
+    }
 }

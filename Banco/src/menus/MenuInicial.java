@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class MenuInicial implements IMenu<String> {
     Scanner sc = new Scanner(System.in);
     MenuLogin menuLogin = new MenuLogin();
+    private static final MenuInicial menuInicial = new MenuInicial();
+
+    public static MenuInicial getInstance(){
+        return menuInicial;
+    }
     @Override
     public void exibir() {
         System.out.println("Digite a operação desejada:\n"
@@ -24,15 +29,15 @@ public class MenuInicial implements IMenu<String> {
                 menuLogin.exibir();
                 break;
             case "2":
-                abrirConta();
-                menuInicial();
+
+                MenuInicial.getInstance().exibir();
                 break;
             case "3":
                 sair();
                 break;
             default:
                 System.out.println("Operação inválida. Tente novamente.");
-                menuInicial();
+                MenuInicial.getInstance().exibir();
                 break;
         }
     }
