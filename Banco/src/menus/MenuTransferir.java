@@ -28,9 +28,9 @@ public class MenuTransferir implements IMenuParametrizado<Integer, IConta> {
             if (Banco.getInstance().contemConta(contaDestino)) {
                 System.out.println("Para qual tipo conta você deseja transferir?");
                 if (Banco.getInstance().getTipoPessoa(contaDestino).equals("PF")) {
-                    menuSubtipoPF(conta, contaDestino);
+                    MenuSubtipoPF.getInstance().exibir(conta, contaDestino);
                 } else if (Banco.getInstance().getTipoPessoa(contaDestino).equals("PJ")) {
-                    menuSubtipoPJ(conta, contaDestino);
+                    MenuSubtipoPJ.getInstance().exibir(conta, contaDestino);
                 }
             } else {
                 System.out.println("Conta não encontrada. Tente novamente!");

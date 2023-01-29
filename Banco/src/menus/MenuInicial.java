@@ -29,7 +29,7 @@ public class MenuInicial implements IMenu<String> {
                 menuLogin.exibir();
                 break;
             case "2":
-
+                MenuAberturaConta.getInstance().exibir();
                 MenuInicial.getInstance().exibir();
                 break;
             case "3":

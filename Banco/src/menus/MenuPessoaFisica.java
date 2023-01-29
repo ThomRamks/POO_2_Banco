@@ -32,7 +32,7 @@ public class MenuPessoaFisica implements IMenuParametrizado<String, ICliente> {
                 MenuOperacoes.getInstance().exibir(cliente.getContasUsuario().get(0));
                 break;
             case "2":
-                menuOperacoesInvestir(cliente.getContasUsuario().get(1));
+                MenuOperacoesInvestir.getInstance().exibir(cliente.getContasUsuario().get(1));
                 break;
             case "3":
                 MenuOperacoes.getInstance().exibir(cliente.getContasUsuario().get(2));

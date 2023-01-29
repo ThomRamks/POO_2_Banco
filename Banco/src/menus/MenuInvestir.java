@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
     Scanner sc = new Scanner(System.in);
+    private static final MenuInvestir menuInvestir = new MenuInvestir();
+    public static MenuInvestir getInstance(){
+        return menuInvestir;
+    }
 
     @Override
     public void exibir(IConta conta) {
@@ -20,7 +24,7 @@ public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
             processarOpcao(valorDesejado,conta);
         } catch (NumberFormatException e){
             System.out.println("Valor inválido! Tente novamente.");
-            menuDepositar(conta);
+            MenuDepositar.getInstance().exibir(conta);
         }
     }
 
@@ -28,6 +32,6 @@ public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
     public void processarOpcao(Double valorDesejado, IConta conta) {
         Banco.getInstance().depositar(conta, valorDesejado);
         System.out.println("Investimento efetuado!");
-        MenuOperacoesInvestir.exibir();
+        MenuOperacoesInvestir.getInstance().exibir(conta);
     }
 }
