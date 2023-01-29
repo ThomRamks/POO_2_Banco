@@ -31,8 +31,14 @@ public class MenuDepositar implements IMenuParametrizado<Double, IConta> {
 
     @Override
     public void processarOpcao(Double valor, IConta conta) {
-        Banco.getInstance().depositar(conta, valor);
-        System.out.println("Depósito efetuado no valor de R$ " + valor + " \n");
-        MenuOperacoes.getInstance().exibir(conta);
+        if (valor > 0 ) {
+            Banco.getInstance().depositar(conta, valor);
+            System.out.println("Depósito efetuado no valor de R$ " + valor + " \n");
+            MenuOperacoes.getInstance().exibir(conta);
+        } else {
+            System.out.println("Valor precisa ser maior que 0.");
+            exibir(conta);
+        }
+
     }
 }

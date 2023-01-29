@@ -28,31 +28,40 @@ public class MenuSubtipoPJ implements IMenuSubtipos<IConta, Integer, String> {
         switch (opcaoCliente) {
             case "1":
             case "2":
-                double valorDesejado = requisitarValorTransferencia();
-                IConta contaDestino = Banco.getInstance().getSubTipoConta(numeroContaDestino, opcaoCliente);
-                if (Banco.getInstance().transferir(contaOrigem, valorDesejado, contaDestino)) {
-                    System.out.println("Transferência realizada com sucesso!");
-                } else {
-                    System.out.println("Saldo insuficiente para transferência!");
-                }
-                MenuCliente.getInstance().exibir(contaOrigem.getTitular());
+                requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
                 break;
             default:
                 MenuSubtipoPJ.menuSubtipoPJ.exibir(contaOrigem, numeroContaDestino);
         }
     }
-        public double requisitarValorTransferencia () {
-            try {
-                System.out.println("Digite o valor a ser transferido: ");
-                String valor = sc.next();
-                double valorDesejado = FormataDouble.validaDouble(valor);
-                return valorDesejado;
-            } catch (NumberFormatException e) {
-                System.out.println("Valor inválido! Tente novamente.");
-                requisitarValorTransferencia();
+    public void requisitarValorTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem){
+        try {
+            System.out.println("Digite o valor a ser transferido: ");
+            String valor = sc.next();
+            double valorDesejado = FormataDouble.validaDouble(valor);
+            if (valorDesejado > 0) {
+                validarTransferencia(opcaoCliente, numeroContaDestino, contaOrigem, valorDesejado);
+                MenuCliente.getInstance().exibir(contaOrigem.getTitular());
+            } else {
+                System.out.println("Valor precisa ser maior que 0.");
+                requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
             }
-            return 0.0;
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Tente novamente.");
+            requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
         }
+    }
+
+    public boolean validarTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem, double valorDesejado){
+        IConta contaDestino = Banco.getInstance().getSubTipoConta(numeroContaDestino, opcaoCliente);
+        if (Banco.getInstance().transferir(contaOrigem, valorDesejado, contaDestino)) {
+            System.out.println("Transferência realizada com sucesso!");
+            return true;
+        } else {
+            System.out.println("Saldo insuficiente para transferência!");
+        }
+        return false;
+    }
 
     }
 

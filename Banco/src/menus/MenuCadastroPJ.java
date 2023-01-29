@@ -4,10 +4,7 @@ import banco.Banco;
 import exceptions.ValidatorException;
 import interfaces.ICliente;
 import util.formata.FormataTexto;
-import validator.CPFValidator;
-import validator.CriarLoginValidator;
-import validator.CriarSenhaValidator;
-import validator.NomeValidator;
+import validator.*;
 
 import java.util.Scanner;
 
@@ -30,7 +27,7 @@ public class MenuCadastroPJ {
     public ICliente validaCadastro(String nome, String cnpj, String senha, String tipoCliente ){
         try {
             Banco.getInstance().valida(new NomeValidator(), nome);
-            Banco.getInstance().valida(new CPFValidator(), cnpj);
+            Banco.getInstance().valida(new CNPJValidator(), cnpj);
             Banco.getInstance().valida(new CriarLoginValidator(), cnpj);
             Banco.getInstance().valida(new CriarSenhaValidator(), senha);
 

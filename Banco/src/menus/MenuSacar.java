@@ -14,20 +14,15 @@ public class MenuSacar implements IMenuParametrizado<Double, IConta> {
 
     @Override
     public void exibir(IConta conta) {
-        System.out.println("Qual valor voce deseja sacar?");
-        String valor = sc.next();
-        double valorDesejado = FormataDouble.validaDouble(valor);
-        processarOpcao(valorDesejado,conta);
-    }
-
-    @Override
-    public void processarOpcao(Double valor, IConta conta) {
         try {
-            if (Banco.getInstance().sacar(conta, valor)) {
-                System.out.println("Saque efetuado!");
-                MenuOperacoes.getInstance().exibir(conta);
+            System.out.println("Qual valor voce deseja sacar?");
+            String valor = sc.next();
+            double valorDesejado = FormataDouble.validaDouble(valor);
+            if (valorDesejado > 0) {
+                processarOpcao(valorDesejado, conta);
             } else {
-                System.out.println("Saldo insuficiente!");
+                System.out.println("Valor precisa ser maior que 0.");
+                exibir(conta);
             }
         } catch (NumberFormatException e) {
             System.out.println("Valor inválido! Tente novamente.");
@@ -35,7 +30,19 @@ public class MenuSacar implements IMenuParametrizado<Double, IConta> {
         }
     }
 
-    public static MenuSacar getInstance(){
+    @Override
+    public void processarOpcao(Double valor, IConta conta) {
+
+        if (Banco.getInstance().sacar(conta, valor)) {
+            System.out.println("Saque efetuado!");
+            MenuOperacoes.getInstance().exibir(conta);
+        } else {
+            System.out.println("Saldo insuficiente!");
+        }
+
+    }
+
+    public static MenuSacar getInstance() {
         return menuSaque;
     }
 
