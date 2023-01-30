@@ -57,7 +57,8 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
     private boolean validarTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem, double valorDesejado) {
         IConta contaDestino = Banco.getInstance().getSubTipoConta(numeroContaDestino, opcaoCliente);
         if (Banco.getInstance().transferir(contaOrigem, valorDesejado, contaDestino)) {
-            System.out.println("Transferência realizada com sucesso!");
+            System.out.println("Transferência para a conta " + contaDestino.getNumero() + " - " + contaDestino.getTipoConta() + " - Titular: " + contaDestino.getTitular().getNome()
+                    + " no valor de R$" + valorDesejado + " realizada com sucesso! \n");
             return true;
         } else {
             System.out.println("Saldo insuficiente para transferência! \n");
