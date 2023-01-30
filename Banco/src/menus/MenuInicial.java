@@ -13,6 +13,7 @@ public class MenuInicial implements IMenu<String> {
     }
     @Override
     public void exibir() {
+        System.out.println("================   MENU INICIAL   ==================");
         System.out.println("Digite a operação desejada:\n"
                 + "1 - Acessar sua conta \n"
                 + "2 - Abrir conta \n"
@@ -42,7 +43,7 @@ public class MenuInicial implements IMenu<String> {
     }
 
     private void sair(){
-        System.out.println("ADA BANK agradece sua preferencia.");
+        System.out.println("ADA BANK agradece sua preferência.");
         System.out.println("Esperamos te ver em breve! o/");
         System.exit(0);
     }

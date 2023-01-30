@@ -44,7 +44,7 @@ public class MenuSubtipoPJ implements IMenuSubtipos<IConta, Integer, String> {
                 validarTransferencia(opcaoCliente, numeroContaDestino, contaOrigem, valorDesejado);
                 MenuCliente.getInstance().exibir(contaOrigem.getTitular());
             } else {
-                System.out.println("Valor precisa ser maior que 0.");
+                System.out.println("Valor precisa ser maior que R$0,00");
                 requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
             }
         } catch (NumberFormatException e) {

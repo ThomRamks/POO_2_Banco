@@ -13,8 +13,9 @@ public class MenuCliente implements IMenuParametrizado<IConta, ICliente>{
 
     @Override
     public void exibir(ICliente cliente) {
-        System.out.println("==============    MENU CLIENTE   ================");
+        System.out.println("================    MENU CLIENTE   ==================");
         System.out.println("Seja bem vindo(a) " + cliente.getContasUsuario().get(0).getTitular().getNome());
+        System.out.println("Conta: " + cliente.getContasUsuario().get(0).getNumero() + " \n");
         IConta conta = cliente.getContasUsuario().get(0);
         processarOpcao(conta, cliente);
     }

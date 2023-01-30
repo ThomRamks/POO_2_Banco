@@ -45,11 +45,11 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
                 validarTransferencia(opcaoCliente, numeroContaDestino, contaOrigem, valorDesejado);
                 MenuCliente.getInstance().exibir(contaOrigem.getTitular());
             } else {
-                System.out.println("Valor precisa ser maior que 0.");
+                System.out.println("Valor precisa ser maior que R$0.00 \n");
                 requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
             }
         } catch (NumberFormatException e) {
-            System.out.println("Valor inválido! Tente novamente.");
+            System.out.println("Valor inválido! Tente novamente. \n");
             requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
         }
     }
@@ -60,7 +60,7 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
             System.out.println("Transferência realizada com sucesso!");
             return true;
         } else {
-            System.out.println("Saldo insuficiente para transferência!");
+            System.out.println("Saldo insuficiente para transferência! \n");
         }
         return false;
     }

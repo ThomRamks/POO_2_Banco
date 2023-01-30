@@ -21,7 +21,7 @@ public class MenuTransferir implements IMenuParametrizado<Integer, IConta> {
         int contaDestino = sc.nextInt();
         processarOpcao(contaDestino,conta);
         } catch (InputMismatchException e) {
-            System.out.println("Número de conta inválida! Tente novamente.");
+            System.out.println("Número de conta inválida! Tente novamente. \n");
             sc.nextLine();
         }
     }
@@ -29,14 +29,14 @@ public class MenuTransferir implements IMenuParametrizado<Integer, IConta> {
     @Override
     public void processarOpcao(Integer contaDestino, IConta conta) {
             if (Banco.getInstance().contemConta(contaDestino)) {
-                System.out.println("Para qual tipo conta você deseja transferir?");
+                System.out.println("Para qual tipo de conta você deseja transferir?");
                 if (Banco.getInstance().getTipoPessoa(contaDestino).equals("PF")) {
                     MenuSubtipoPF.getInstance().exibir(conta, contaDestino);
                 } else if (Banco.getInstance().getTipoPessoa(contaDestino).equals("PJ")) {
                     MenuSubtipoPJ.getInstance().exibir(conta, contaDestino);
                 }
             } else {
-                System.out.println("Conta não encontrada. Tente novamente!");
+                System.out.println("Conta não encontrada. Tente novamente! \n");
             }
     }
 }

@@ -16,7 +16,7 @@ public class MenuLogin implements IMenu<String> {
 
     @Override
     public void exibir() {
-        System.out.println("==============    LOGIN   ================");
+        System.out.println("===================    LOGIN   =====================");
         System.out.println("Digite seu documento:");
         String login = sc.nextLine();
         processarOpcao(login);

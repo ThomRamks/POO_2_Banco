@@ -15,11 +15,11 @@ public class MenuAberturaConta implements IMenu<String> {
 
     @Override
     public void exibir() {
-        System.out.println("==============   ABERTURA DE CONTA   ================");
+        System.out.println("==============   ABERTURA DE CONTA   ==============");
         System.out.println(
-                "Qual tipo de conta voce deseja criar:\n"
-                        + "1 - Conta Pessoa Fisica \n"
-                        + "2 - Conta Pessoa Juridica \n"
+                "Qual tipo de conta você deseja criar:\n"
+                        + "1 - Conta Pessoa Física \n"
+                        + "2 - Conta Pessoa Jurídica \n"
                         + "3 - Voltar ao Menu Inicial");
         processarOpcao(sc.next());
     }
@@ -31,14 +31,14 @@ public class MenuAberturaConta implements IMenu<String> {
                 ICliente clientePF = MenuCadastroPF.getInstance().exibir(respostasUsuario);
                 Banco.getInstance().abrirContaPessoaFisica(clientePF);
                 System.out.println("Conta criada com sucesso!");
-                System.out.println("Voce sera redirecionado ao Menu Inicial!");
+                System.out.println("Você será redirecionado ao Menu Inicial!\n");
                 MenuInicial.getInstance().exibir();
                 break;
             case "2":
                 ICliente clientePJ = MenuCadastroPJ.getInstance().exibir(respostasUsuario);
                 Banco.getInstance().abrirContaPessoaJuridica(clientePJ);
                 System.out.println("Conta criada com sucesso!");
-                System.out.println("Voce sera redirecionado ao Menu Inicial!");
+                System.out.println("Você será redirecionado ao Menu Inicial!\n");
                 MenuInicial.getInstance().exibir();
                 break;
             case "3":

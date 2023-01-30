@@ -21,7 +21,7 @@ public class MenuCadastroPF {
         String nome = sc.nextLine();
         System.out.println("Digite seu CPF:");
         String cpf = sc.nextLine();
-        System.out.println("Digite uma senha:");
+        System.out.println("Digite uma senha entre 8 e 32 caracteres, sem espaços:");
         String senha = sc.nextLine();
         return validaCadastro(nome,cpf,senha,tipoCliente);
     }

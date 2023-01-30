@@ -13,7 +13,6 @@ public class Applicacao {
         System.out.println("          Seu dinheiro, nossa renda!                ");
         System.out.println("====================================================\n");
 
-
         MenuInicial.getInstance().exibir();
 
     }
