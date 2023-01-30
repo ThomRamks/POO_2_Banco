@@ -4,8 +4,8 @@ import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
 
-
 public class ContaCorrentePessoaFisica extends Conta {
+
     private String operacao = "1";
 
     public ContaCorrentePessoaFisica(int numero, ICliente titular) {

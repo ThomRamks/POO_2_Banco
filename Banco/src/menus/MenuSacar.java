@@ -2,15 +2,17 @@ package menus;
 
 import banco.Banco;
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 import util.formata.FormataDouble;
-
 import java.util.Scanner;
 
 public class MenuSacar implements IMenuParametrizado<Double, IConta> {
     Scanner sc = new Scanner(System.in);
     private static final MenuSacar menuSaque = new MenuSacar();
+
+    public static MenuSacar getInstance() {
+        return menuSaque;
+    }
 
     @Override
     public void exibir(IConta conta) {
@@ -32,19 +34,11 @@ public class MenuSacar implements IMenuParametrizado<Double, IConta> {
 
     @Override
     public void processarOpcao(Double valor, IConta conta) {
-
         if (Banco.getInstance().sacar(conta, valor)) {
             System.out.println("Saque efetuado!");
             MenuOperacoes.getInstance().exibir(conta);
         } else {
             System.out.println("Saldo insuficiente!");
         }
-
     }
-
-    public static MenuSacar getInstance() {
-        return menuSaque;
-    }
-
-
 }

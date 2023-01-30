@@ -2,9 +2,7 @@ package menus;
 
 import banco.Banco;
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,6 +12,7 @@ public class MenuTransferir implements IMenuParametrizado<Integer, IConta> {
     public static MenuTransferir getInstance(){
         return menuTransferir;
     }
+
     Scanner sc = new Scanner(System.in);
     @Override
     public void exibir(IConta conta) {
@@ -29,7 +28,6 @@ public class MenuTransferir implements IMenuParametrizado<Integer, IConta> {
 
     @Override
     public void processarOpcao(Integer contaDestino, IConta conta) {
-
             if (Banco.getInstance().contemConta(contaDestino)) {
                 System.out.println("Para qual tipo conta você deseja transferir?");
                 if (Banco.getInstance().getTipoPessoa(contaDestino).equals("PF")) {

@@ -1,8 +1,6 @@
 package menus;
 
-import interfaces.ICliente;
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 
 import java.util.Scanner;

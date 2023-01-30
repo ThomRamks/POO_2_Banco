@@ -20,7 +20,7 @@ public class GeraDadosIniciais {
         ICliente alice = new ClientePessoaFisica("Alice Noemi Jorge dos Santos", "123456789", "215.515.516-67");
         banco.abrirContaPessoaFisica(alice);
 
-        ICliente arthur = new ClientePessoaFisica("Arthur Laureano Silva", "123456", "578.179.380-16");
+        ICliente arthur = new ClientePessoaFisica("Arthur Laureano Silva", "123456789", "578.179.380-16");
         banco.abrirContaPessoaFisica(arthur);
 
         ICliente bruno = new ClientePessoaFisica("Bruno Rafael Ribeiro Martins", "123456789", "038.010.176-99");
@@ -37,12 +37,5 @@ public class GeraDadosIniciais {
 
         ICliente sinqia = new ClientePessoaJuridica("SINQIA S.A", "123456789", "04.065.791/0001-99");
         banco.abrirContaPessoaJuridica(sinqia);
-
-
-
-
-
-
-
     }
 }

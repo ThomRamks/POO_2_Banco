@@ -1,7 +1,6 @@
 package menus;
 
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 
 import java.util.*;
@@ -9,6 +8,10 @@ import java.util.*;
 public class MenuOperacoes implements IMenuParametrizado<String, IConta> {
     private static final MenuOperacoes menuOperacoes = new MenuOperacoes();
     Scanner sc = new Scanner(System.in);
+
+    public static MenuOperacoes getInstance(){
+        return menuOperacoes;
+    }
 
     @Override
     public void exibir(IConta conta) {
@@ -48,9 +51,5 @@ public class MenuOperacoes implements IMenuParametrizado<String, IConta> {
                 MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
         }
-    }
-
-    public static MenuOperacoes getInstance(){
-        return menuOperacoes;
     }
 }

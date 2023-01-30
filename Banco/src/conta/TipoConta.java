@@ -5,7 +5,7 @@ public enum TipoConta {
     CONTA_POUPANCA("Conta Poupança"),
     CONTA_INVESTIMENTO("Conta Investimento");
 
-    private String descricao;
+    private final String descricao;
 
     TipoConta(String descricao) {
         this.descricao = descricao;

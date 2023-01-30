@@ -22,6 +22,7 @@ public abstract class Conta implements IConta {
     public int getAgencia() {
         return this.agencia;
     }
+
     public int getNumero() {
         return this.numero;
     }

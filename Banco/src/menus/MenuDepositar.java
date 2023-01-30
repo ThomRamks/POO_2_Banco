@@ -2,7 +2,6 @@ package menus;
 
 import banco.Banco;
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 import util.formata.FormataDouble;
 
@@ -22,7 +21,6 @@ public class MenuDepositar implements IMenuParametrizado<Double, IConta> {
             String valor = sc.next();
             double valorDesejado = FormataDouble.validaDouble(valor);
             processarOpcao(valorDesejado, conta);
-
         } catch (NumberFormatException e) {
             System.out.println("Valor inválido! Tente novamente.");
             MenuDepositar.getInstance().exibir(conta);
@@ -39,6 +37,5 @@ public class MenuDepositar implements IMenuParametrizado<Double, IConta> {
             System.out.println("Valor precisa ser maior que 0.");
             exibir(conta);
         }
-
     }
 }

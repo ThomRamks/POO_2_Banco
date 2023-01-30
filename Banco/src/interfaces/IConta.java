@@ -1,8 +1,5 @@
 package interfaces;
 
-import cliente.Cliente;
-import conta.Conta;
-
 public interface IConta {
     ICliente getTitular();
     String getTipoConta();

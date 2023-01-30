@@ -1,9 +1,7 @@
 package cliente;
 
-
 import interfaces.ICliente;
 import interfaces.IConta;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -4,7 +4,7 @@ import banco.Banco;
 import interfaces.ICliente;
 import interfaces.IConta;
 import interfaces.IContaInvestimento;
-import cliente.ClientePessoaJuridica;
+
 
 public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInvestimento<IConta> {
 
@@ -50,7 +50,6 @@ public class ContaInvestimentoPessoaJuridica extends Conta implements IContaInve
 
     @Override
     public void investir(double valor) {
-        super.saldo +=  (valor * 1.035);
+        super.saldo += (valor * 1.035);
     }
-
 }

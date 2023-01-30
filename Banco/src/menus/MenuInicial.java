@@ -1,7 +1,6 @@
 package menus;
 
 import interfaces.IMenu;
-
 import java.util.Scanner;
 
 public class MenuInicial implements IMenu<String> {

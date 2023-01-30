@@ -5,8 +5,6 @@ import exceptions.ValidatorException;
 import interfaces.IMenu;
 import validator.LoginValidator;
 import validator.SenhaLoginValidator;
-
-import java.awt.*;
 import java.util.Scanner;
 
 public class MenuLogin implements IMenu<String> {
@@ -15,16 +13,16 @@ public class MenuLogin implements IMenu<String> {
     public static MenuLogin getInstance(){
         return menuLogin;
     }
+
     @Override
     public void exibir() {
         System.out.println("==============    LOGIN   ================");
         System.out.println("Digite seu documento:");
         String login = sc.nextLine();
         processarOpcao(login);
-
         System.out.println("Digite sua senha:");
         String senha = sc.nextLine();
-        processarOpcao2(senha);
+        processarSenha(senha);
         System.out.println();
         MenuCliente.getInstance().exibir(Banco.getInstance().getCliente(Banco.getInstance().getClienteLogin()));
     }
@@ -39,7 +37,7 @@ public class MenuLogin implements IMenu<String> {
         }
     }
 
-    public void processarOpcao2(String senha){
+    public void processarSenha(String senha){
         try {
             Banco.getInstance().valida(new SenhaLoginValidator(), senha);
         } catch (ValidatorException e) {
@@ -47,5 +45,4 @@ public class MenuLogin implements IMenu<String> {
             menuLogin.exibir();
         }
     }
-
 }

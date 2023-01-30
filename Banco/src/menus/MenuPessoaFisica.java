@@ -1,19 +1,16 @@
 package menus;
 
 import interfaces.ICliente;
-import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
-
-import java.awt.*;
 import java.util.Scanner;
 
 public class MenuPessoaFisica implements IMenuParametrizado<String, ICliente> {
-    private static MenuPessoaFisica menuPessoaFisica = new MenuPessoaFisica();
+    Scanner sc = new Scanner(System.in);
+    private static final MenuPessoaFisica menuPessoaFisica = new MenuPessoaFisica();
     public static MenuPessoaFisica getInstance(){
         return menuPessoaFisica;
     }
-    Scanner sc = new Scanner(System.in);
+
     @Override
     public void exibir(ICliente cliente) {
         System.out.println("Qual conta voce deseja acessar:\n"

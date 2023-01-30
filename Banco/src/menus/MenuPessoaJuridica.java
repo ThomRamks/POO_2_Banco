@@ -1,19 +1,15 @@
 package menus;
 
 import interfaces.ICliente;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
-
 import java.util.Scanner;
 
 public class MenuPessoaJuridica implements IMenuParametrizado<String, ICliente> {
     Scanner sc = new Scanner(System.in);
     private static final MenuPessoaJuridica menuPessoaJuridica = new MenuPessoaJuridica();
-
     public static MenuPessoaJuridica getInstance(){
         return menuPessoaJuridica;
     }
-
 
     @Override
     public void exibir(ICliente cliente) {
@@ -27,7 +23,6 @@ public class MenuPessoaJuridica implements IMenuParametrizado<String, ICliente> 
 
     @Override
     public void processarOpcao(String opcaoCliente, ICliente cliente) {
-
         switch (opcaoCliente) {
             case "1":
                 MenuOperacoes.getInstance().exibir(cliente.getContasUsuario().get(0));
@@ -35,7 +30,6 @@ public class MenuPessoaJuridica implements IMenuParametrizado<String, ICliente> 
             case "2":
                 MenuOperacoesInvestir.getInstance().exibir(cliente.getContasUsuario().get(1));
                 break;
-
             case "3":
                 MenuInicial.getInstance().exibir();
                 break;

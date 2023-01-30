@@ -2,10 +2,8 @@ package menus;
 
 import banco.Banco;
 import interfaces.IConta;
-import interfaces.IMenu;
 import interfaces.IMenuParametrizado;
 import util.formata.FormataDouble;
-
 import java.util.Scanner;
 
 public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
@@ -24,7 +22,7 @@ public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
             processarOpcao(valorDesejado,conta);
         } catch (NumberFormatException e){
             System.out.println("Valor inválido! Tente novamente.");
-            MenuDepositar.getInstance().exibir(conta);
+            MenuInvestir.getInstance().exibir(conta);
         }
     }
 

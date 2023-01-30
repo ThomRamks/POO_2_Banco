@@ -3,7 +3,6 @@ package validator;
 import exceptions.ValidatorException;
 import interfaces.IValidator;
 import util.formata.FormataDocumento;
-
 import java.util.InputMismatchException;
 
 public class CNPJValidator implements IValidator<String> {

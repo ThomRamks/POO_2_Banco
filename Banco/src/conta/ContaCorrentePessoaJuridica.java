@@ -3,7 +3,6 @@ package conta;
 import interfaces.ICliente;
 import interfaces.IConta;
 import banco.Banco;
-import cliente.ClientePessoaJuridica;
 
 public class ContaCorrentePessoaJuridica extends Conta {
 
