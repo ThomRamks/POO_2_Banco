@@ -38,6 +38,10 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
 
     private void requisitarValorTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem) {
         try {
+            if (numeroContaDestino.equals(contaOrigem.getNumero()) && opcaoCliente.equals(contaOrigem.getOperacao())){
+                System.out.println("Não é possivel transferir para a sua própria conta nesta modalidade");
+                MenuOperacoes.getInstance().exibir(contaOrigem);
+            }
             System.out.println("Digite o valor a ser transferido: ");
             String valor = sc.next();
             double valorDesejado = FormataDouble.validaDouble(valor);
