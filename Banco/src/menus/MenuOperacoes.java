@@ -47,7 +47,7 @@ public class MenuOperacoes implements IMenuParametrizado<String, IConta> {
                 MenuCliente.getInstance().exibir(conta.getTitular());
                 break;
             default:
-                System.out.println("Operação inválida. Tente novamente.");
+                System.out.println("Operação inválida. Tente novamente. \n");
                 MenuOperacoes.menuOperacoes.exibir(conta);
                 break;
         }

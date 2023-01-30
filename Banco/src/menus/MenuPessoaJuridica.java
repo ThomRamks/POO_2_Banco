@@ -34,7 +34,7 @@ public class MenuPessoaJuridica implements IMenuParametrizado<String, ICliente> 
                 MenuInicial.getInstance().exibir();
                 break;
             default:
-                System.out.println("Operação inválida. Tente novamente.");
+                System.out.println("Operação inválida. Tente novamente. \n");
                 MenuPessoaJuridica.getInstance().exibir(cliente);
                 break;
         }

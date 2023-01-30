@@ -22,7 +22,7 @@ public class MenuDepositar implements IMenuParametrizado<Double, IConta> {
             double valorDesejado = FormataDouble.validaDouble(valor);
             processarOpcao(valorDesejado, conta);
         } catch (NumberFormatException e) {
-            System.out.println("Valor inválido! Tente novamente.");
+            System.out.println("Valor inválido. Tente novamente! \n");
             MenuDepositar.getInstance().exibir(conta);
         }
     }
@@ -31,10 +31,10 @@ public class MenuDepositar implements IMenuParametrizado<Double, IConta> {
     public void processarOpcao(Double valor, IConta conta) {
         if (valor > 0 ) {
             Banco.getInstance().depositar(conta, valor);
-            System.out.println("Depósito efetuado no valor de R$ " + valor + " \n");
+            System.out.println("Depósito no valor de R$ " + valor + ", efetuado com sucesso! \n");
             MenuOperacoes.getInstance().exibir(conta);
         } else {
-            System.out.println("Valor precisa ser maior que 0.");
+            System.out.println("Valor precisa ser maior que R$ 0.00. Tente novamente! \n");
             exibir(conta);
         }
     }

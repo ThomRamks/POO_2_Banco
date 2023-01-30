@@ -1,11 +1,11 @@
 package validator;
 
-import exceptions.ValidatorException;
-import interfaces.IValidator;
+import excecoes.ValidadorExcecao;
+import interfaces.IValidador;
 import util.formata.FormataDocumento;
 import java.util.InputMismatchException;
 
-public class CNPJValidator implements IValidator<String> {
+public class CNPJValidador implements IValidador<String> {
     public static boolean isCNPJ(String cnpj) {
 
         cnpj = FormataDocumento.removeCaracteresEspeciais(cnpj);
@@ -66,9 +66,9 @@ public class CNPJValidator implements IValidator<String> {
     }
 
     @Override
-    public void valida(String cnpj) throws ValidatorException {
+    public void valida(String cnpj) throws ValidadorExcecao {
         if (!isCNPJ(cnpj)) {
-            throw new ValidatorException("CNPJ inválido.");
+            throw new ValidadorExcecao("CNPJ inválido.");
         }
     }
 }

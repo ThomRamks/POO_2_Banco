@@ -13,7 +13,7 @@ public class MenuPessoaFisica implements IMenuParametrizado<String, ICliente> {
 
     @Override
     public void exibir(ICliente cliente) {
-        System.out.println("Qual conta voce deseja acessar:\n"
+        System.out.println("Qual conta você deseja acessar:\n"
                 + "1 - Conta Corrente \n"
                 + "2 - Conta Investimento \n"
                 + "3 - Conta Poupança \n"
@@ -38,7 +38,7 @@ public class MenuPessoaFisica implements IMenuParametrizado<String, ICliente> {
                 MenuInicial.getInstance().exibir();
                 break;
             default:
-                System.out.println("Operação inválida. Tente novamente.");
+                System.out.println("Operação inválida. Tente novamente. \n");
                 MenuPessoaFisica.getInstance().exibir(cliente);
                 break;
         }

@@ -1,7 +1,7 @@
 package menus;
 
 import banco.Banco;
-import exceptions.ValidatorException;
+import excecoes.ValidadorExcecao;
 import interfaces.ICliente;
 import util.formata.FormataTexto;
 import validator.*;
@@ -25,11 +25,11 @@ public class MenuCadastroPJ {
     }
     public ICliente validaCadastro(String nome, String cnpj, String senha, String tipoCliente ){
         try {
-            Banco.getInstance().valida(new NomeEmpresaValidator(), nome);
-            Banco.getInstance().valida(new CNPJValidator(), cnpj);
-            Banco.getInstance().valida(new CriarLoginValidator(), cnpj);
-            Banco.getInstance().valida(new CriarSenhaValidator(), senha);
-        } catch (ValidatorException e) {
+            Banco.getInstance().valida(new NomeEmpresaValidador(), nome);
+            Banco.getInstance().valida(new CNPJValidador(), cnpj);
+            Banco.getInstance().valida(new CriarLoginValidador(), cnpj);
+            Banco.getInstance().valida(new CriarSenhaValidador(), senha);
+        } catch (ValidadorExcecao e) {
             System.out.println(e.getMessage());
             MenuInicial.getInstance().exibir();
         }

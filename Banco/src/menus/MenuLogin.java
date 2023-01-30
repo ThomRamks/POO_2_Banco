@@ -1,10 +1,10 @@
 package menus;
 
 import banco.Banco;
-import exceptions.ValidatorException;
+import excecoes.ValidadorExcecao;
 import interfaces.IMenu;
-import validator.LoginValidator;
-import validator.SenhaLoginValidator;
+import validator.LoginValidador;
+import validator.SenhaLoginValidador;
 import java.util.Scanner;
 
 public class MenuLogin implements IMenu<String> {
@@ -16,7 +16,7 @@ public class MenuLogin implements IMenu<String> {
 
     @Override
     public void exibir() {
-        System.out.println("==============    LOGIN   ================");
+        System.out.println("===================    LOGIN   =====================");
         System.out.println("Digite seu documento:");
         String login = sc.nextLine();
         processarOpcao(login);
@@ -30,8 +30,8 @@ public class MenuLogin implements IMenu<String> {
     @Override
     public void processarOpcao(String login) {
         try {
-            Banco.getInstance().valida(new LoginValidator(), login);
-        } catch (ValidatorException e) {
+            Banco.getInstance().valida(new LoginValidador(), login);
+        } catch (ValidadorExcecao e) {
             System.out.println(e.getMessage());
             MenuInicial.getInstance().exibir();
         }
@@ -39,8 +39,8 @@ public class MenuLogin implements IMenu<String> {
 
     public void processarSenha(String senha){
         try {
-            Banco.getInstance().valida(new SenhaLoginValidator(), senha);
-        } catch (ValidatorException e) {
+            Banco.getInstance().valida(new SenhaLoginValidador(), senha);
+        } catch (ValidadorExcecao e) {
             System.out.println(e.getMessage());
             menuLogin.exibir();
         }

@@ -21,7 +21,7 @@ public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
             double valorDesejado = FormataDouble.validaDouble(valor);
             processarOpcao(valorDesejado,conta);
         } catch (NumberFormatException e){
-            System.out.println("Valor inválido! Tente novamente.");
+            System.out.println("Valor inválido!  Tente novamente! \n");
             MenuInvestir.getInstance().exibir(conta);
         }
     }
@@ -29,7 +29,7 @@ public class MenuInvestir implements IMenuParametrizado<Double, IConta> {
     @Override
     public void processarOpcao(Double valorDesejado, IConta conta) {
         Banco.getInstance().depositar(conta, valorDesejado);
-        System.out.println("Investimento efetuado!");
+        System.out.println("Investimento no valor de R$ " + valorDesejado + "efetuado com sucesso!");
         MenuOperacoesInvestir.getInstance().exibir(conta);
     }
 }

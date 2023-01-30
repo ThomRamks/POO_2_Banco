@@ -2,7 +2,7 @@ import menus.MenuInicial;
 import util.GeraDadosIniciais;
 
 
-public class Application {
+public class Applicacao {
 
     public static void main(String[] args) {
         GeraDadosIniciais.getInstance().carregaDadosIniciais();
@@ -12,7 +12,6 @@ public class Application {
         System.out.println("		            ADA BANK                        ");
         System.out.println("          Seu dinheiro, nossa renda!                ");
         System.out.println("====================================================\n");
-
 
         MenuInicial.getInstance().exibir();
 

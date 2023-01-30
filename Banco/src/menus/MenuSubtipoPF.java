@@ -38,6 +38,10 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
 
     private void requisitarValorTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem) {
         try {
+            if (numeroContaDestino.equals(contaOrigem.getNumero()) && opcaoCliente.equals(contaOrigem.getOperacao())){
+                System.out.println("Não é possivel transferir para a sua própria conta nesta modalidade");
+                MenuOperacoes.getInstance().exibir(contaOrigem);
+            }
             System.out.println("Digite o valor a ser transferido: ");
             String valor = sc.next();
             double valorDesejado = FormataDouble.validaDouble(valor);
@@ -45,11 +49,11 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
                 validarTransferencia(opcaoCliente, numeroContaDestino, contaOrigem, valorDesejado);
                 MenuCliente.getInstance().exibir(contaOrigem.getTitular());
             } else {
-                System.out.println("Valor precisa ser maior que 0.");
+                System.out.println("Valor precisa ser maior que R$0.00 \n");
                 requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
             }
         } catch (NumberFormatException e) {
-            System.out.println("Valor inválido! Tente novamente.");
+            System.out.println("Valor inválido! Tente novamente. \n");
             requisitarValorTransferencia(opcaoCliente, numeroContaDestino, contaOrigem);
         }
     }
@@ -57,10 +61,11 @@ public class MenuSubtipoPF implements IMenuSubtipos<IConta, Integer, String> {
     private boolean validarTransferencia(String opcaoCliente, Integer numeroContaDestino, IConta contaOrigem, double valorDesejado) {
         IConta contaDestino = Banco.getInstance().getSubTipoConta(numeroContaDestino, opcaoCliente);
         if (Banco.getInstance().transferir(contaOrigem, valorDesejado, contaDestino)) {
-            System.out.println("Transferência realizada com sucesso!");
+            System.out.println("Transferência para a conta " + contaDestino.getNumero() + " - " + contaDestino.getTipoConta() + " - Titular: " + contaDestino.getTitular().getNome()
+                    + " no valor de R$" + valorDesejado + " realizada com sucesso! \n");
             return true;
         } else {
-            System.out.println("Saldo insuficiente para transferência!");
+            System.out.println("Saldo insuficiente para transferência! \n");
         }
         return false;
     }

@@ -1,12 +1,12 @@
 package menus;
 
 import banco.Banco;
-import exceptions.ValidatorException;
+import excecoes.ValidadorExcecao;
 import interfaces.ICliente;
-import validator.CPFValidator;
-import validator.CriarLoginValidator;
-import validator.CriarSenhaValidator;
-import validator.NomeValidator;
+import validator.CPFValidador;
+import validator.CriarLoginValidador;
+import validator.CriarSenhaValidador;
+import validator.NomeValidador;
 import java.util.Scanner;
 
 public class MenuCadastroPF {
@@ -21,18 +21,18 @@ public class MenuCadastroPF {
         String nome = sc.nextLine();
         System.out.println("Digite seu CPF:");
         String cpf = sc.nextLine();
-        System.out.println("Digite uma senha:");
+        System.out.println("Digite uma senha entre 8 e 32 caracteres, sem espaços:");
         String senha = sc.nextLine();
         return validaCadastro(nome,cpf,senha,tipoCliente);
     }
 
     public ICliente validaCadastro(String nome, String cpf, String senha, String tipoCliente ){
         try {
-            Banco.getInstance().valida(new NomeValidator(), nome);
-            Banco.getInstance().valida(new CPFValidator(), cpf);
-            Banco.getInstance().valida(new CriarLoginValidator(), cpf);
-            Banco.getInstance().valida(new CriarSenhaValidator(), senha);
-        } catch (ValidatorException e) {
+            Banco.getInstance().valida(new NomeValidador(), nome);
+            Banco.getInstance().valida(new CPFValidador(), cpf);
+            Banco.getInstance().valida(new CriarLoginValidador(), cpf);
+            Banco.getInstance().valida(new CriarSenhaValidador(), senha);
+        } catch (ValidadorExcecao e) {
             System.out.println(e.getMessage());
             MenuInicial.getInstance().exibir();
         }
