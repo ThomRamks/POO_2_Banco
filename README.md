@@ -34,13 +34,19 @@ Inicialmente seguimos com um brainstorm para entendermos o fluxo de funcionament
 Utilizamos o [Figma](https://www.figma.com/) para colocar as ideias e seguir com o processo de criação.
 ![](https://github.com/ThomRamks/POO_2_Banco/blob/main/ReadMe/Fluxo2.jpg?raw=true-180x180.png)
 
+#### Preview do código
+![](https://github.com/ThomRamks/POO_2_Banco/blob/main/ReadMe/Flowchart2.png?raw=true-180x180.png)
+
+
 ### Histórico
-- Criação da atividade e grupo ------------------------- 13/01/2023
-- Inserção das ideias no Figma ------------------------- 16/01/2023
-- 1ª Reunião do grupo ---------------------------------- 19/03/2023
-- 1ª Apresentação de idéias ao Prof.-------------------- 20/03/2023
-- Domingão da codagem (muitos bugs)---------------- 22/01/2023
-- Codagem sem limites -------------------------------------------- 23/01/2023
-- Reunião para ajustar a modelagem da aplicação ----------------------- 25/01/2023
-- Reunião para subir a primeira versão pronta da aplicação ------------ 26/01/2023
-- Acertando poucas coisas e tirando duvidas com o Prof.---- 27/01/2023
+- Criação da atividade e grupo ---------------------------------- 13/01/2023
+- Inserção das ideias no Figma ---------------------------------- 16/01/2023
+- 1ª Reunião do grupo ------------------------------------------- 19/03/2023
+- 1ª Apresentação de idéias ao Prof.----------------------------- 20/03/2023
+- Domingão da codagem (muitos bugs)------------------------------------ 22/01/2023
+- Codagem sem limites ----------------------------------------------------- 23/01/2023
+- Reunião para ajustar a modelagem da aplicação ------------------------ 25/01/2023
+- Reunião para subir a primeira versão pronta da aplicação -------------- 26/01/2023
+- Acertando poucas coisas e tirando duvidas com o Prof.----------------- 27/01/2023
+- Domingão da codagem 2 | Pequenas alterações e preparação da apresentação. ------29/01/2023
+- Entrega do trabalho, apresentação e sucesso! -------------------------------------------30/01/2023
