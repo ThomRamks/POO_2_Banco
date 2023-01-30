@@ -4,10 +4,10 @@ import cliente.ClientePessoaFisica;
 import cliente.ClientePessoaJuridica;
 import cliente.TipoPessoa;
 import conta.*;
-import exceptions.ValidatorException;
+import excecoes.ValidadorExcecao;
 import interfaces.ICliente;
 import interfaces.IConta;
-import interfaces.IValidator;
+import interfaces.IValidador;
 import util.formata.FormataDocumento;
 import util.formata.FormataTexto;
 import java.util.Collections;
@@ -152,7 +152,7 @@ public class Banco {
         return conta.sacar(valor);
     }
 
-    public <T> void valida(IValidator<T> validator, T objeto) throws ValidatorException {
+    public <T> void valida(IValidador<T> validator, T objeto) throws ValidadorExcecao {
         validator.valida(objeto);
     }
 }
